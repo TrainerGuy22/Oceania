@@ -3,8 +3,8 @@ package oceania.blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
-import oceania.ItemBlockWithDescription;
 import oceania.Oceania;
+import oceania.items.ItemBlockWithDescription;
 
 public class Blocks
 {
