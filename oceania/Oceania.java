@@ -24,6 +24,7 @@ public class Oceania
 	@SidedProxy(clientSide = "oceania.proxy.ClientProxy", serverSide = "oceania.proxy.CommonProxy")
 	public static CommonProxy PROXY;
 	public static Configuration CONFIG;
+	public static CreativeTabOceania CREATIVE_TAB;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -32,7 +33,7 @@ public class Oceania
 		Oceania.CONFIG.load();
 		
 		/** Begin config loading */
-		
+		Oceania.PROXY.init();
 		/** End config loading */
 		
 		Oceania.CONFIG.save();
