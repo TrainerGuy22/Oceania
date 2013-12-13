@@ -11,10 +11,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.World;
 
-public class BlockNeptuniumDepulsor extends Block
+public class BlockAtlantiumDepulsor extends Block
 {
 
-	public BlockNeptuniumDepulsor(int blockId)
+	public BlockAtlantiumDepulsor(int blockId)
 	{
 		super(blockId, Material.iron);
 		setHardness(1.8f);

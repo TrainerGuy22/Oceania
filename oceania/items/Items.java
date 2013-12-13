@@ -16,7 +16,7 @@ public class Items
 		Configuration cfg = Oceania.CONFIG;
 		
 		/** Set up instances */
-		itemDivingHelmet = new ItemDivingHelmet(cfg.getItem("oreNeptunite", DEFAULT_ID_RANGE).getInt(DEFAULT_ID_RANGE));
+		itemDivingHelmet = new ItemDivingHelmet(cfg.getItem("itemDivingHelmet", DEFAULT_ID_RANGE).getInt(DEFAULT_ID_RANGE));
 		
 		/** Add to registry */
 		GameRegistry.registerItem(itemDivingHelmet, "itemDivingHelmet");

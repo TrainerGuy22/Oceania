@@ -7,16 +7,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class BlockNeptuniteOre extends Block
+public class BlockAtlantiteOre extends Block
 {
 
-	public BlockNeptuniteOre(int blockID)
+	public BlockAtlantiteOre(int blockID)
 	{
 		super(blockID, Material.sand);
 		setHardness(2.8f);
 		setResistance(8f);
 		setStepSound(soundSandFootstep);
-		setUnlocalizedName("blockNeptunium");
+		setUnlocalizedName("blockAtlantite");
 		setCreativeTab(Oceania.CREATIVE_TAB);
 	}
 	
@@ -24,7 +24,7 @@ public class BlockNeptuniteOre extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
-		this.blockIcon = registry.registerIcon(Oceania.MOD_ID + ":oreNeptunite");
+		this.blockIcon = registry.registerIcon(Oceania.MOD_ID + ":oreAtlantite");
 	}
 	
 }

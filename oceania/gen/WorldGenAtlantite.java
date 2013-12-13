@@ -11,12 +11,12 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGenNeptunite implements IWorldGenerator
+public class WorldGenAtlantite implements IWorldGenerator
 {
 	private int _veinSize;
 	private int _veinCount;
 	
-	public WorldGenNeptunite(int veinSize, int veinsPerChunk)
+	public WorldGenAtlantite(int veinSize, int veinsPerChunk)
 	{
 		this._veinSize = veinSize;
 		this._veinCount = veinsPerChunk;
@@ -39,7 +39,7 @@ public class WorldGenNeptunite implements IWorldGenerator
 	
 	private void generateOre(World world, Random random, int chunkBlockX, int chunkBlockZ)
 	{
-		WorldGenMinable gen = new WorldGenMinable(Blocks.blockNeptunite.blockID, this._veinSize, Block.sand.blockID);
+		WorldGenMinable gen = new WorldGenMinable(Blocks.blockAtlantite.blockID, this._veinSize, Block.sand.blockID);
 		
 		for (int count = 0; count < _veinCount; count++)
 		{
