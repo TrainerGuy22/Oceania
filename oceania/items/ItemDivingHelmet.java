@@ -1,14 +1,14 @@
 package oceania.items;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -20,13 +20,13 @@ import oceania.Oceania;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemDivingHelmet extends Item implements ISpecialArmor
-{
+public class ItemDivingHelmet extends ItemArmor implements ISpecialArmor
+{	
 	private ArmorProperties	_armorProperties;
 	
 	public ItemDivingHelmet(int itemID)
 	{
-		super(itemID);
+		super(itemID, EnumArmorMaterial.IRON, 2, 0);
 		setCreativeTab(Oceania.CREATIVE_TAB);
 		setMaxDamage(1024);
 		setMaxStackSize(1);
@@ -105,7 +105,7 @@ public class ItemDivingHelmet extends Item implements ISpecialArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		return Oceania.MOD_ID + ":textures/armor/divingHelmet";
+		return "oceania:textures/models/armor/divingHelmet.png";
 	}
 	
 	/**
