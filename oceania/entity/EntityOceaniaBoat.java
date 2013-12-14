@@ -52,7 +52,7 @@ public class EntityOceaniaBoat extends EntityBoat
 	
 	@Override
     public void setDead() {
-		if(this.getTimeSinceHit() >= 5) 
+		if(this.getTimeSinceHit() >= 0) 
 		{
 	        this.isDead = true;
 		} else 
