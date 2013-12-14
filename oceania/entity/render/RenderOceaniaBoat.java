@@ -17,8 +17,8 @@ public class RenderOceaniaBoat extends RenderBoat
     protected ResourceLocation getEntityTexture(Entity entity) 
 	{
 		EntityOceaniaBoat boat = (EntityOceaniaBoat) entity;
-		if(boat.texture != null)
-			return boat.texture;
+		if(boat.getDataWatcher() != null && boat.getDataWatcher().getWatchableObjectString(10) != null)
+			return new ResourceLocation(boat.getDataWatcher().getWatchableObjectString(10), boat.getDataWatcher().getWatchableObjectString(11));
 		return BoatTypes.WOOD.worldTexture;
 	}
 
