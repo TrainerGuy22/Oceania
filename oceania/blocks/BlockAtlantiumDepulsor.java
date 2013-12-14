@@ -36,21 +36,24 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
+		// TODO: Make the Ender Pearl on the icon act as a percentage bar for how many Ender Pearls there are.
 		this.blockIcon = registry.registerIcon(Oceania.MOD_ID + ":depulsor");
 	}
 	
 	@Override
-    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) 
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		TileEntityAtlantiumDepulsor tileEntity = (TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z);
 		ItemStack pearl = player.inventory.mainInventory[player.inventory.currentItem];
-		if(pearl != null && pearl.itemID == Item.enderPearl.itemID) 
+		if(pearl != null && pearl.itemID == Item.enderPearl.itemID && tileEntity.ENDER_PEARLS != 32) 
 		{
 			tileEntity.ENDER_PEARLS++;
-			player.inventory.mainInventory[player.inventory.currentItem] = pearl.splitStack(1);
+			player.inventory.mainInventory[player.inventory.currentItem].splitStack(1);
 			if(player.inventory.mainInventory[player.inventory.currentItem].stackSize == 0)
 				player.inventory.mainInventory[player.inventory.currentItem] = null;
+			return true;
 		}
+		return false;
 	}
 	
 	@Override
@@ -81,7 +84,7 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		// world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
+		world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
 	}
 	
 	@Override
