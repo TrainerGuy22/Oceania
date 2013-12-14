@@ -43,6 +43,7 @@ public class ItemOceaniaBoat extends ItemBoat
 		}
 	}
 	
+
 	@Override
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 

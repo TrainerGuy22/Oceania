@@ -3,6 +3,8 @@ package oceania.entity;
 import oceania.util.BoatTypes;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -37,13 +39,31 @@ public class EntityOceaniaBoat extends EntityBoat
 	
 	public void setBoatType(BoatTypes type) 
 	{
-		
 		this.getDataWatcher().updateObject(20, type.worldTexture.getResourceDomain());
         this.getDataWatcher().setObjectWatched(20);
 		this.getDataWatcher().updateObject(21, type.worldTexture.getResourcePath());
         this.getDataWatcher().setObjectWatched(21);
 		this.getDataWatcher().updateObject(22, type.strength);
         this.getDataWatcher().setObjectWatched(22);
+	}
+	
+	@Override
+    public void setDead() {
+		super.setDead();
+	}
+	
+	@Override
+    public EntityItem dropItemWithOffset(int id, int count, float y)
+	{
+        double speed = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+		if(this.isCollidedHorizontally && speed > 0.2D) 
+		{
+			return null;
+			// For testing. return super.dropItemWithOffset(Item.diamond.itemID, 64, y);
+		} else 
+		{
+			return super.dropItemWithOffset(id, count, y);
+		}
 	}
 	
 	@Override
@@ -57,7 +77,12 @@ public class EntityOceaniaBoat extends EntityBoat
 	@Override
     public void readEntityFromNBT(NBTTagCompound tag)
     {
-    	
+		this.getDataWatcher().updateObject(20, tag.getString("namespace"));
+        this.getDataWatcher().setObjectWatched(20);
+		this.getDataWatcher().updateObject(21, tag.getString("path"));
+        this.getDataWatcher().setObjectWatched(21);
+		this.getDataWatcher().updateObject(22, tag.getInteger("strength"));
+        this.getDataWatcher().setObjectWatched(22);
     }
 
 }
