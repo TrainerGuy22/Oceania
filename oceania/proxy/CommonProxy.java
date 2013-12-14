@@ -26,7 +26,7 @@ public class CommonProxy
 		Oceania.CREATIVE_TAB = new CreativeTabOceania();
 		Blocks.initBlocks();
 		Items.initItems();
-		Entities.initEntities();
+		// Entities.initEntities();
 		initEntities();
 		initRecipes();
 		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
@@ -45,7 +45,8 @@ public class CommonProxy
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, ItemMultiType.SCREW.ordinal()), "X", "X", 'X', Item.ingotIron);
 		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, ItemMultiType.SCREW.ordinal()), 'A', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 'G', Block.thinGlass);
 		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiteTrident, 1), "I I", "IUI", " U ", 'I', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTITE.ordinal()), 'U', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()));
-					
+		
+		/*
 		List recipies = CraftingManager.getInstance().getRecipeList();
 		for(int count = 0; count < recipies.size(); count++) 
 		{
@@ -62,6 +63,7 @@ public class CommonProxy
 			else
 				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatTypes.values()[count].resourceItem.getItem(), 1, BoatTypes.values()[count].resourceItem.getItemDamage()));
 		}
+		*/
 		
 		/** Furnace recipes */
 		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 0.1F);

@@ -30,7 +30,7 @@ public class Items
 		itemMulti = new ItemMulti(cfg.getItem("itemMulti", DEFAULT_ID_RANGE + 1).getInt(DEFAULT_ID_RANGE + 1));
 		itemAtlantiteTrident = new ItemAtlantiteTrident(cfg.getItem("itemAtlantiumTrident", DEFAULT_ID_RANGE + 2).getInt(DEFAULT_ID_RANGE + 2));
 		
-		Item.itemsList[77] = null;
+		Item.itemsList[333] = null;
 		itemBoat = new ItemOceaniaBoat(77);
 		
 		/** Add to registry */
