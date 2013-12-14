@@ -45,7 +45,7 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	{
 		TileEntityAtlantiumDepulsor tileEntity = (TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z);
 		ItemStack pearl = player.inventory.mainInventory[player.inventory.currentItem];
-		if(pearl != null && pearl.itemID == Item.enderPearl.itemID && tileEntity.ENDER_PEARLS != 32) 
+		if(pearl != null && pearl.itemID == Item.enderPearl.itemID && tileEntity.ENDER_PEARLS != 31) 
 		{
 			tileEntity.ENDER_PEARLS++;
 			player.inventory.mainInventory[player.inventory.currentItem].splitStack(1);

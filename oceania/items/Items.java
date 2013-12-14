@@ -3,11 +3,14 @@ package oceania.items;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import oceania.Oceania;
 
 public class Items
 {
+	// public static final EnumToolMaterial TOOL_MATERIAL_ATLANTIUM = EnumHelper.addToolMaterial("atlantium", 2, 780, efficiency, damage, enchantability)
+	
 	public static final int DEFAULT_ID_RANGE = 3750;
 	
 	public static ItemDivingHelmet itemDivingHelmet;
