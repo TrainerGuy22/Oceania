@@ -38,6 +38,7 @@ public class EntityOceaniaBoat extends EntityBoat
         this.getDataWatcher().addObjectByDataType(20, 4);
         this.getDataWatcher().addObjectByDataType(21, 4);
         this.getDataWatcher().addObjectByDataType(22, 2);
+        this.getDataWatcher().addObjectByDataType(23, 5);
     }
 	
 	public void setBoatType(BoatTypes type) 
@@ -48,6 +49,8 @@ public class EntityOceaniaBoat extends EntityBoat
         this.getDataWatcher().setObjectWatched(21);
 		this.getDataWatcher().updateObject(22, type.strength);
         this.getDataWatcher().setObjectWatched(22);
+		this.getDataWatcher().updateObject(23, type.resourceItem);
+        this.getDataWatcher().setObjectWatched(23);
 	}
 	
 	@Override
@@ -58,8 +61,16 @@ public class EntityOceaniaBoat extends EntityBoat
 		} else 
 		{
 			if(this.getDataWatcher().getWatchableObjectInt(22) == 1)
+			{
+				ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(23);
+				int countFlag = 0;
+				if(this.worldObj.rand.nextBoolean())
+					countFlag = 1;
+				else 
+					countFlag = 2;
+				this.entityDropItem(new ItemStack(stack.itemID, countFlag, stack.getItemDamage()), 0.0F);
 				this.isDead = true;
-			else
+			} else
 			{
 				this.getDataWatcher().updateObject(22, this.getDataWatcher().getWatchableObjectInt(22) - 1);
 			}
@@ -78,7 +89,7 @@ public class EntityOceaniaBoat extends EntityBoat
 				int strength = this.getDataWatcher().getWatchableObjectInt(22);
 				for(int index = 0; index < BoatTypes.values().length; index++) {
 					if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
-						return super.entityDropItem(new ItemStack(Items.itemBoat, 1, index), y);
+						return this.entityDropItem(new ItemStack(Items.itemBoat, 1, index), y);
 					}
 				}
 			} catch(Exception e)
@@ -93,6 +104,9 @@ public class EntityOceaniaBoat extends EntityBoat
 		tag.setString("namespace", this.getDataWatcher().getWatchableObjectString(20));
 		tag.setString("path", this.getDataWatcher().getWatchableObjectString(21));
 		tag.setInteger("strength", this.getDataWatcher().getWatchableObjectInt(22));
+		NBTTagCompound item = new NBTTagCompound();
+		this.getDataWatcher().getWatchableObjectItemStack(23).writeToNBT(item);
+		tag.setCompoundTag("item", item);
     }
     
 	@Override
@@ -104,6 +118,8 @@ public class EntityOceaniaBoat extends EntityBoat
         this.getDataWatcher().setObjectWatched(21);
 		this.getDataWatcher().updateObject(22, tag.getInteger("strength"));
         this.getDataWatcher().setObjectWatched(22);
+		this.getDataWatcher().updateObject(23, ItemStack.loadItemStackFromNBT(tag.getCompoundTag("item")));
+        this.getDataWatcher().setObjectWatched(23);
     }
 
 }
