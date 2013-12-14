@@ -37,6 +37,11 @@ public class ItemOceaniaBoat extends ItemBoat
 	{
 		super(id);
 		setCreativeTab(Oceania.CREATIVE_TAB);
+		this.initLangNames();
+	}
+	
+	public void initLangNames()
+	{
 		for(BoatTypes boat : BoatTypes.values()) 
 		{
 			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
@@ -102,6 +107,11 @@ public class ItemOceaniaBoat extends ItemBoat
 		{
 			descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
 		}
+	}
+	
+	public Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
+	{
+		return new EntityOceaniaBoat(world, boatType, x, y, z);
 	}
 
 }

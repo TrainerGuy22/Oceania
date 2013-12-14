@@ -10,10 +10,12 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import oceania.CreativeTabOceania;
 import oceania.Oceania;
+import oceania.blocks.BlockLimestone;
 import oceania.blocks.Blocks;
 import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 import oceania.entity.Entities;
 import oceania.gen.WorldGenAtlantite;
+import oceania.gen.WorldGenLimestone;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
 import oceania.util.BoatTypes;
@@ -31,7 +33,8 @@ public class CommonProxy
 		initRecipes();
 		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
 		
-		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 6).getInt(), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 2).getInt()));
+		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 3).getInt(3), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 1).getInt(1)));
+		GameRegistry.registerWorldGenerator(new WorldGenLimestone(Oceania.CONFIG.get("oreConfig", "limestoneVeinSize", 16).getInt(16), Oceania.CONFIG.get("oreConfig", "limestoneVeinsPerChunk", 2).getInt(2)));
 	}
 	
 	public void initEntities()
@@ -42,6 +45,9 @@ public class CommonProxy
 	public void initRecipes()
 	{
 		/** Crafting Table recipes */
+		GameRegistry.addRecipe(new ItemStack(Blocks.blockLimestone, 4, BlockLimestone.LimestoneTypes.LIMESTONE_BRICK.ordinal()), "XX", "XX", 'X', new ItemStack(Blocks.blockLimestone, 1, BlockLimestone.LimestoneTypes.LIMESTONE.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(Blocks.blockLimestonePillar, 6), "XX", "XX", "XX", 'X', new ItemStack(Blocks.blockLimestone, 1, BlockLimestone.LimestoneTypes.LIMESTONE.ordinal()));
+		
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, ItemMultiType.SCREW.ordinal()), "X", "X", 'X', Item.ingotIron);
 		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, ItemMultiType.SCREW.ordinal()), 'A', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 'G', Block.thinGlass);
 		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiteTrident, 1), "I I", "IUI", " U ", 'I', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTITE.ordinal()), 'U', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()));
