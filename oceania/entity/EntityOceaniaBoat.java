@@ -2,23 +2,27 @@ package oceania.entity;
 
 import oceania.util.BoatTypes;
 import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityOceaniaBoat extends EntityBoat 
 {
 	
-	public BoatTypes boatType = null;
+	public ResourceLocation texture;
+	public int strength = -1;
 
-	public EntityOceaniaBoat(World world, BoatTypes type) 
+	public EntityOceaniaBoat(World world) 
 	{
 		super(world);
-		this.boatType = type;
 	}
 
-	public EntityOceaniaBoat(World world, BoatTypes type, double x, double y, double z) 
+	public EntityOceaniaBoat(World world, double x, double y, double z) 
 	{
 		super(world, x, y, z);
-		this.boatType = type;
+	}
+	
+	public void setBoatType(BoatTypes type) {
+		// this.getDataWatcher();
 	}
 
 }

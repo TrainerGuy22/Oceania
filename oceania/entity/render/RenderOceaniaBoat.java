@@ -1,6 +1,7 @@
 package oceania.entity.render;
 
 import oceania.entity.EntityOceaniaBoat;
+import oceania.util.BoatTypes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBoat;
@@ -16,7 +17,9 @@ public class RenderOceaniaBoat extends RenderBoat
     protected ResourceLocation getEntityTexture(Entity entity) 
 	{
 		EntityOceaniaBoat boat = (EntityOceaniaBoat) entity;
-		return boat.boatType.worldTexture;
+		if(boat.texture != null)
+			return boat.texture;
+		return BoatTypes.WOOD.worldTexture;
 	}
 
 }
