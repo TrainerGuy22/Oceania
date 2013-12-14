@@ -57,7 +57,12 @@ public class EntityOceaniaBoat extends EntityBoat
 	        this.isDead = true;
 		} else 
 		{
-			this.getDataWatcher().updateObject(22, this.getDataWatcher().getWatchableObjectInt(22) - 1);
+			if(this.getDataWatcher().getWatchableObjectInt(22) == 1)
+				this.isDead = true;
+			else
+			{
+				this.getDataWatcher().updateObject(22, this.getDataWatcher().getWatchableObjectInt(22) - 1);
+			}
 		}
 	}
 	
