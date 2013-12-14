@@ -16,6 +16,7 @@ import oceania.entity.Entities;
 import oceania.gen.WorldGenAtlantite;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
+import oceania.util.BoatTypes;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy
@@ -46,11 +47,20 @@ public class CommonProxy
 		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiteTrident, 1), "I I", "IUI", " U ", 'I', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTITE.ordinal()), 'U', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()));
 					
 		List recipies = CraftingManager.getInstance().getRecipeList();
-		for(int count = 0; count < recipies.size(); count++) {
+		for(int count = 0; count < recipies.size(); count++) 
+		{
 			IRecipe recipe = (IRecipe) recipies.get(count);
 			if(recipe.getRecipeOutput() != null && recipe.getRecipeOutput().itemID == Item.boat.itemID) {
 				recipies.remove(count);
 			}
+		}
+		
+		for(int count = 0; count > BoatTypes.values().length; count++)
+		{
+			if(count == 0)
+				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatTypes.values()[count].resourceItem.getItem(), 1));
+			else
+				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatTypes.values()[count].resourceItem.getItem(), 1, BoatTypes.values()[count].resourceItem.getItemDamage()));
 		}
 		
 		/** Furnace recipes */
