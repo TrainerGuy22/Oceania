@@ -24,7 +24,7 @@ public class Blocks
 		blockPlaceholder = new BlockDepulsorPlaceholder(cfg.getBlock("blockDepulsorPlaceholder", DEFAULT_ID_RANGE, "The block that is used in the depulsor's \"air bubble\"").getInt());
 		
 		/** Add to registry */
-		GameRegistry.registerBlock(blockAtlantite, "blockAtlantite");
+		GameRegistry.registerBlock(blockAtlantite, ItemBlockWithDescription.class, "blockAtlantite");
 		GameRegistry.registerBlock(blockDepulsor, ItemBlockWithDescription.class, "blockDepulsor");
 		GameRegistry.registerBlock(blockPlaceholder, "blockDepulsorPlaceholder");
 		

@@ -3,6 +3,7 @@ package oceania.blocks;
 import java.util.Random;
 
 import oceania.Oceania;
+import oceania.items.ItemBlockWithDescription;
 import oceania.items.Items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +22,8 @@ public class BlockAtlantiteOre extends Block
 		setStepSound(soundSandFootstep);
 		setUnlocalizedName("blockAtlantite");
 		setCreativeTab(Oceania.CREATIVE_TAB);
+		ItemBlockWithDescription.registerDescription(this, "Some sort of naturally occuring\nalloy...");
+
 	}
 	
 	@Override

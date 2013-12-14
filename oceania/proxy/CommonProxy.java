@@ -65,5 +65,6 @@ public class CommonProxy
 		
 		/** Furnace recipes */
 		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 0.1F);
+		GameRegistry.addSmelting(((Block) Blocks.blockAtlantite).blockID, new ItemStack(Items.itemMulti, 1, 0), 1.0F);
 	}
 }
