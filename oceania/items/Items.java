@@ -11,12 +11,14 @@ import oceania.Oceania;
 
 public class Items
 {
-	public static final EnumToolMaterial TOOL_MATERIAL_ATLANTIUM = EnumHelper.addToolMaterial("atlantium", 2, 780, 9.0F, 4.0F, 10);
+	public static final EnumToolMaterial TOOL_MATERIAL_ATLANTIUM = EnumHelper.addToolMaterial("atlantium", 2, 780, 9.0F, 4.5F, 10);
 	
 	public static final int DEFAULT_ID_RANGE = 3750;
 	
 	public static ItemDivingHelmet itemDivingHelmet;
 	public static ItemMulti itemMulti;
+	
+	public static ItemAtlantiumTrident itemAtlantiumTrident;
 	
 	public static void initItems()
 	{
@@ -25,10 +27,12 @@ public class Items
 		/** Set up instances */
 		itemDivingHelmet = new ItemDivingHelmet(cfg.getItem("itemDivingHelmet", DEFAULT_ID_RANGE).getInt(DEFAULT_ID_RANGE));
 		itemMulti = new ItemMulti(cfg.getItem("itemMulti", DEFAULT_ID_RANGE + 1).getInt(DEFAULT_ID_RANGE + 1));
+		itemAtlantiumTrident = new ItemAtlantiumTrident(cfg.getItem("itemAtlantiumTrident", DEFAULT_ID_RANGE + 2).getInt(DEFAULT_ID_RANGE + 2));
 		
 		/** Add to registry */
 		GameRegistry.registerItem(itemDivingHelmet, Oceania.MOD_ID + "itemDivingHelmet");
 		GameRegistry.registerItem(itemMulti, Oceania.MOD_ID + "itemMulti");
+		GameRegistry.registerItem(itemAtlantiumTrident, Oceania.MOD_ID + "itemAtlantiumTrident");
 		
 		TOOL_MATERIAL_ATLANTIUM.customCraftingMaterial = Item.ingotGold;
 		
@@ -37,5 +41,6 @@ public class Items
 		
 		/** Add language */
 		LanguageRegistry.addName(itemDivingHelmet, "Atlantium Helm");
+		LanguageRegistry.addName(itemAtlantiumTrident, "Atlantium Trident");
 	}
 }
