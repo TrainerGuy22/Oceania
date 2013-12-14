@@ -52,8 +52,12 @@ public class EntityOceaniaBoat extends EntityBoat
 	
 	@Override
     public void setDead() {
-		if(this.getDamageTaken() > 40.0F) {
-			super.setDead();
+		if(this.getTimeSinceHit() >= 5) 
+		{
+	        this.isDead = true;
+		} else 
+		{
+			this.getDataWatcher().updateObject(22, this.getDataWatcher().getWatchableObjectInt(22) - 1);
 		}
 	}
 	
