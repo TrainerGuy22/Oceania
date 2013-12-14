@@ -55,7 +55,7 @@ public class EntityOceaniaBoat extends EntityBoat
 	
 	@Override
     public void setDead() {
-		if(this.getTimeSinceHit() >= 0) 
+		if(this.getTimeSinceHit() >= 1) 
 		{
 	        this.isDead = true;
 		} else 
@@ -63,12 +63,12 @@ public class EntityOceaniaBoat extends EntityBoat
 			if(this.getDataWatcher().getWatchableObjectInt(22) == 1)
 			{
 				ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(23);
-				int countFlag = 0;
 				if(this.worldObj.rand.nextBoolean())
-					countFlag = 1;
-				else 
-					countFlag = 2;
-				this.entityDropItem(new ItemStack(stack.itemID, countFlag, stack.getItemDamage()), 0.0F);
+				{
+					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
+					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
+				} else 
+					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
 				this.isDead = true;
 			} else
 			{

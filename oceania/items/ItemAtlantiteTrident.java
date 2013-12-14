@@ -2,8 +2,11 @@ package oceania.items;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import oceania.OUtil;
 import oceania.Oceania;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,8 +28,15 @@ public class ItemAtlantiteTrident extends ItemSword
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoe)
 	{
-		descriptionList.add("Nothing can beat the");
-		descriptionList.add("sharpness of raw Atlantite.");
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+		{
+			descriptionList.add("Nothing can beat the");
+			descriptionList.add("sharpness of raw Atlantite.");
+		}
+		else
+		{
+			descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
+		}
 	}
 	
 	@Override
