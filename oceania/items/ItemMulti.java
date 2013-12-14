@@ -22,7 +22,7 @@ public class ItemMulti extends Item
 {
 	public enum ItemMultiType
 	{
-		ATLANTITE("rawAtlantium", "Atlantite"),
+		ATLANTITE("rawAtlantium", "Raw Atlantite"),
 		ATLANTIUM("atlantium", "Atlantium"),
 		SCREW("screw", "Screw");
 		
@@ -48,8 +48,8 @@ public class ItemMulti extends Item
 	
 	static
 	{
-		descriptions.put(0, "Some sort of naturally occuring\nmineral...");
-		descriptions.put(1, "Refined Atlantite. Much harder\nbut much duller!");
+		descriptions.put(0, "Some sort of naturally occuring\nalloy...");
+		descriptions.put(1, "Refined Atlantite. Much harder,\nbut much duller!");
 		descriptions.put(2, "Holds things together. Hopefully.");
 	}
 	
