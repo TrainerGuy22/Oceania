@@ -72,8 +72,9 @@ public class ItemMulti extends Item
 		if(itemStack.getItemDamage() <= 1) {
 			descriptionList.add("Some kind of naturally");
 			descriptionList.add("occuring alloy...");
+		} else {
+			descriptionList.add("Holds together machines.");
 		}
-
 	}
 
 

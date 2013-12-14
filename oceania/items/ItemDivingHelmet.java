@@ -1,6 +1,9 @@
 package oceania.items;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import oceania.OUtil;
 import oceania.Oceania;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -173,6 +177,21 @@ public class ItemDivingHelmet extends ItemArmor implements ISpecialArmor
 	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
 	{
 		stack.damageItem(damage, entity);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoes)
+	{
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+		{
+			descriptionList.add("Allows the wearer");
+			descriptionList.add("to see underwater.");
+		}
+		else
+		{
+			descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
+		}
 	}
 	
 }

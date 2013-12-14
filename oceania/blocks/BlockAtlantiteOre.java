@@ -24,12 +24,6 @@ public class BlockAtlantiteOre extends Block
 	}
 	
 	@Override
-    public int quantityDropped(Random random) 
-	{
-    	return random.nextInt(1) + 1;
-    }
-	
-	@Override
     public int idDropped(int meta, Random random, int fortune) 
 	{
     	return Items.itemMulti.itemID;

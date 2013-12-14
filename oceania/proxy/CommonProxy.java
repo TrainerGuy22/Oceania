@@ -1,5 +1,6 @@
 package oceania.proxy;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -21,6 +22,9 @@ public class CommonProxy
 		
 		/** Crafting Table recipes. */
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, 2), "X", "X", 'X', Item.ingotIron);
+		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Block.glass);
+		
+		GameRegistry.addRecipe(new ItemStack(Blocks.blockDepulsor, 1), "SAS", "AEA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'E', Item.eyeOfEnder);
 		
 		/** Furnace recipes. */
 		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, 1), 0.1F);
