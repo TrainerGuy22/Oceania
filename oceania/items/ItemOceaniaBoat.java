@@ -10,6 +10,7 @@ import oceania.util.IconRegistry;
 
 import org.lwjgl.input.Keyboard;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,6 +26,10 @@ public class ItemOceaniaBoat extends ItemBoat
 	public ItemOceaniaBoat(int id) 
 	{
 		super(id);
+		for(BoatTypes boat : BoatTypes.values()) 
+		{
+			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
+		}
 	}
 	
 	@Override
@@ -65,14 +70,27 @@ public class ItemOceaniaBoat extends ItemBoat
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoes)
 	{
-			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+		{
+			switch(itemStack.getItemDamage())
 			{
-				
+			case 0:
+				descriptionList.add("A boat made of sturdy planks.");
+				descriptionList.add("Doubt it will last long.");
+				break;
+			case 1:
+				descriptionList.add("A boat made of Iron, should");
+				descriptionList.add("last a while.");
+				break;
+			case 2: 
+				descriptionList.add("Made of purely Atlantium,");
+				descriptionList.add("almost indestructable.");
 			}
-			else
-			{
-				descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
-			}
+		}
+		else
+		{
+			descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
+		}
 	}
 
 }

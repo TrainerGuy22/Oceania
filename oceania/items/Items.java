@@ -17,6 +17,7 @@ public class Items
 	
 	public static ItemDivingHelmet itemDivingHelmet;
 	public static ItemMulti itemMulti;
+	public static ItemOceaniaBoat itemBoat;
 	
 	public static ItemAtlantiteTrident itemAtlantiteTrident;
 	
@@ -29,11 +30,15 @@ public class Items
 		itemMulti = new ItemMulti(cfg.getItem("itemMulti", DEFAULT_ID_RANGE + 1).getInt(DEFAULT_ID_RANGE + 1));
 		itemAtlantiteTrident = new ItemAtlantiteTrident(cfg.getItem("itemAtlantiumTrident", DEFAULT_ID_RANGE + 2).getInt(DEFAULT_ID_RANGE + 2));
 		
+		Item.itemsList[77] = null;
+		itemBoat = new ItemOceaniaBoat(77);
+		
 		/** Add to registry */
 		GameRegistry.registerItem(itemDivingHelmet, Oceania.MOD_ID + "itemDivingHelmet");
 		GameRegistry.registerItem(itemMulti, Oceania.MOD_ID + "itemMulti");
 		GameRegistry.registerItem(itemAtlantiteTrident, Oceania.MOD_ID + "itemAtlantiteTrident");
-		
+		GameRegistry.registerItem(itemBoat, Oceania.MOD_ID + "itemBoat");
+
 		TOOL_MATERIAL_ATLANTIUM.customCraftingMaterial = Item.ingotGold;
 		
 		/** Ore Dictionary support */
