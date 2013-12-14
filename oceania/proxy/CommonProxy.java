@@ -7,6 +7,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import oceania.CreativeTabOceania;
 import oceania.Oceania;
 import oceania.blocks.Blocks;
+import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 import oceania.gen.WorldGenAtlantite;
 import oceania.items.Items;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -19,6 +20,8 @@ public class CommonProxy
 		Blocks.initBlocks();
 		Items.initItems();
 		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Blocks.blockAtlantite));
+		
+		GameRegistry.registerTileEntity(TileEntityAtlantiumDepulsor.class, Oceania.MOD_ID + "atlantiumDepulsor");
 		
 		/** Crafting Table recipes. */
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, 2), "X", "X", 'X', Item.ingotIron);

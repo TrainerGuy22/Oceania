@@ -2,13 +2,15 @@ package oceania.blocks.tile;
 
 import oceania.blocks.Blocks;
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAtlantiumDepulsor extends TileEntity 
 {
 	public int ENDER_PEARLS = 0;
+	
+	// Each Ender Pearl lasts for half a Minecraft day.
 	public int TIME_LEFT = 0;
-	private int TICK_COUNTER = 0;
 	
 	public TileEntityAtlantiumDepulsor()
 	{}
@@ -37,17 +39,28 @@ public class TileEntityAtlantiumDepulsor extends TileEntity
 			if (meta < 15)
 				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, ++meta, 0);
 			// this.worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), 1);
-			TICK_COUNTER++;
-			if(TICK_COUNTER == 20)
-			{
-				TICK_COUNTER = 0;
-				TIME_LEFT--;
-			}
+			TIME_LEFT--;
 		} else if(ENDER_PEARLS != 0) 
 		{
 			ENDER_PEARLS--;
 			TIME_LEFT = 12000;
 		}
 	}
+	
+    @Override
+    public void readFromNBT(NBTTagCompound tag) 
+    {
+            super.readFromNBT(tag);
+            ENDER_PEARLS = tag.getInteger("ENDER_PEARLS");
+            TIME_LEFT = tag.getInteger("TIME_LEFT");
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound tag) 
+    {
+            super.writeToNBT(tag);
+            tag.setInteger("ENDER_PEARLS", ENDER_PEARLS);
+            tag.setInteger("TIME_LEFT", TIME_LEFT);
+    }
 
 }

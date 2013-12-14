@@ -5,14 +5,19 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import oceania.Oceania;
+import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 import oceania.items.ItemBlockWithDescription;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockAtlantiumDepulsor extends Block
+public class BlockAtlantiumDepulsor extends BlockContainer
 {
 	
 	public BlockAtlantiumDepulsor(int blockId)
@@ -32,6 +37,20 @@ public class BlockAtlantiumDepulsor extends Block
 	public void registerIcons(IconRegister registry)
 	{
 		this.blockIcon = registry.registerIcon(Oceania.MOD_ID + ":depulsor");
+	}
+	
+	@Override
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) 
+	{
+		TileEntityAtlantiumDepulsor tileEntity = (TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z);
+		ItemStack pearl = player.inventory.mainInventory[player.inventory.currentItem];
+		if(pearl != null && pearl.itemID == Item.enderPearl.itemID) 
+		{
+			tileEntity.ENDER_PEARLS++;
+			player.inventory.mainInventory[player.inventory.currentItem] = pearl.splitStack(1);
+			if(player.inventory.mainInventory[player.inventory.currentItem].stackSize == 0)
+				player.inventory.mainInventory[player.inventory.currentItem] = null;
+		}
 	}
 	
 	@Override
@@ -89,6 +108,12 @@ public class BlockAtlantiumDepulsor extends Block
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) 
+	{
+		return new TileEntityAtlantiumDepulsor();
 	}
 	
 }
