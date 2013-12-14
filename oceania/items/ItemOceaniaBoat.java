@@ -36,6 +36,7 @@ public class ItemOceaniaBoat extends ItemBoat
 	public ItemOceaniaBoat(int id) 
 	{
 		super(id);
+		setCreativeTab(Oceania.CREATIVE_TAB);
 		for(BoatTypes boat : BoatTypes.values()) 
 		{
 			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
