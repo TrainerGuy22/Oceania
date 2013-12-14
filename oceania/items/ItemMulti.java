@@ -17,7 +17,7 @@ import net.minecraft.util.Icon;
 public class ItemMulti extends Item 
 {
 
-	String[] ITEMS = new String[]{"atlantium", "refinedAtlantium", "screw"};
+	String[] ITEMS = new String[]{"rawAtlantium", "atlantium", "screw"};
 	String[] LANG_NAMES = new String[]{"Raw Atlantium", "Atlantium", "Screw"};
 	
 	public ItemMulti(int par1) 
@@ -69,10 +69,11 @@ public class ItemMulti extends Item
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoe)
 	{
-		if(itemStack.getItemDamage() == 1) {
+		if(itemStack.getItemDamage() <= 1) {
 			descriptionList.add("Some kind of naturally");
 			descriptionList.add("occuring alloy...");
 		}
+
 	}
 
 

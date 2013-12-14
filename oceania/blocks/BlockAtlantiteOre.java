@@ -1,6 +1,9 @@
 package oceania.blocks;
 
+import java.util.Random;
+
 import oceania.Oceania;
+import oceania.items.Items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -18,6 +21,24 @@ public class BlockAtlantiteOre extends Block
 		setStepSound(soundSandFootstep);
 		setUnlocalizedName("blockAtlantite");
 		setCreativeTab(Oceania.CREATIVE_TAB);
+	}
+	
+	@Override
+    public int quantityDropped(Random random) 
+	{
+    	return random.nextInt(1) + 1;
+    }
+	
+	@Override
+    public int idDropped(int meta, Random random, int fortune) 
+	{
+    	return Items.itemMulti.itemID;
+    }
+	
+	@Override
+    public int damageDropped(int meta) 
+	{
+		return 0;
 	}
 	
 	@Override
