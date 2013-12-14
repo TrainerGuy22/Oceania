@@ -20,8 +20,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMulti extends Item 
 {
-	public static final String[] ITEMS = new String[]{"rawAtlantium", "atlantium", "screw"};
-	public static final String[] LANG_NAMES = new String[]{"Atlantite", "Atlantium", "Screw"};
+	public enum ItemMultiType
+	{
+		ATLANTITE("rawAtlantium", "Atlantite"),
+		ATLANTIUM("atlantium", "Atlantium"),
+		SCREW("screw", "Screw");
+		
+		private String _unloc, _loc;
+		private ItemMultiType(String unlocName, String locName)
+		{
+			this._unloc = unlocName;
+			this._loc = locName;
+		}
+		
+		public String getUnlocalizedName()
+		{
+			return this._unloc;
+		}
+		
+		public String getLocalizedName()
+		{
+			return this._loc;
+		}
+	}
 	
 	private static HashMap<Integer, String> descriptions = new HashMap<Integer, String>();
 	
@@ -37,9 +58,9 @@ public class ItemMulti extends Item
 		super(par1);
 		setCreativeTab(Oceania.CREATIVE_TAB);
 		this.hasSubtypes = true;
-		for(int index = 0; index < ITEMS.length; index++) 
+		for(ItemMultiType multiType : ItemMultiType.values()) 
 		{
-			LanguageRegistry.instance().addStringLocalization("item.sub." + ITEMS[index] + ".name", LANG_NAMES[index]);
+			LanguageRegistry.instance().addStringLocalization("item.sub." + multiType.getUnlocalizedName() + ".name", multiType.getLocalizedName());
 		}
 	}
 	
@@ -47,16 +68,16 @@ public class ItemMulti extends Item
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 
 	{
-		return "item.sub." + ITEMS[stack.getItemDamage()];
+		return "item.sub." + ItemMultiType.values()[stack.getItemDamage()].getUnlocalizedName();
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
-		for(int index = 0; index < ITEMS.length; index++) 
+		for(int index = 0; index < ItemMultiType.values().length; index++) 
 		{
-			IconRegistry.setIcon(ITEMS[index], registry.registerIcon(Oceania.MOD_ID + ":" + ITEMS[index]));
+			IconRegistry.setIcon(ItemMultiType.values()[index].getUnlocalizedName(), registry.registerIcon(Oceania.MOD_ID + ":" + ItemMultiType.values()[index].getUnlocalizedName()));
 		}
 	}
 	
@@ -64,14 +85,14 @@ public class ItemMulti extends Item
 	@SideOnly(Side.CLIENT)
     public Icon getIconFromDamage(int meta)
 	{
-		return IconRegistry.getIcon(ITEMS[meta]);
+		return IconRegistry.getIcon(ItemMultiType.values()[meta].getUnlocalizedName());
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
     public void getSubItems(int ID, CreativeTabs tabs, List list) 
 	{
-		for(int index = 0; index < ITEMS.length; index++) 
+		for(int index = 0; index < ItemMultiType.values().length; index++) 
 		{
 			list.add(new ItemStack(ID, 1, index));
 		}

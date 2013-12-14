@@ -9,6 +9,7 @@ import oceania.Oceania;
 import oceania.blocks.Blocks;
 import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 import oceania.gen.WorldGenAtlantite;
+import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -34,13 +35,13 @@ public class CommonProxy
 	public void initRecipes()
 	{
 		/** Crafting Table recipes. */
-		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, 2), "X", "X", 'X', Item.ingotIron);
-		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Block.glass);
-		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiumTrident, 1), "A A", "AGA", " G ", 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Item.ingotGold);
+		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, ItemMultiType.SCREW.ordinal()), "X", "X", 'X', Item.ingotIron);
+		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, ItemMultiType.SCREW.ordinal()), 'A', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 'G', Block.thinGlass);
+		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiumTrident, 1), "I I", "IUI", " U ", 'I', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTITE.ordinal()), 'U', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()));
 		
-		GameRegistry.addRecipe(new ItemStack(Blocks.blockDepulsor, 1), "SAS", "AEA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'E', Item.eyeOfEnder);
+		GameRegistry.addRecipe(new ItemStack(Blocks.blockDepulsor, 1), "SAS", "AEA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, ItemMultiType.SCREW.ordinal()), 'A', new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 'E', Item.enderPearl);
 		
 		/** Furnace recipes. */
-		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, 1), 0.1F);
+		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 0.1F);
 	}
 }
