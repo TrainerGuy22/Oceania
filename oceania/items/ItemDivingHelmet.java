@@ -185,8 +185,7 @@ public class ItemDivingHelmet extends ItemArmor implements ISpecialArmor
 	{
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
-			descriptionList.add("Allows the wearer");
-			descriptionList.add("to see underwater.");
+			descriptionList.add("Allows the wearer to see underwater.");
 		}
 		else
 		{
