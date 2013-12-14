@@ -4,15 +4,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.Configuration;
 import oceania.Oceania;
+import oceania.items.ItemBlockLimestone;
 import oceania.items.ItemBlockWithDescription;
 
 public class Blocks
 {
 	public static final int					DEFAULT_ID_RANGE	= 375;
 	
-	public static BlockAtlantiteOre			blockAtlantite;
+	public static BlockAtlantiteOre		blockAtlantite;
 	public static BlockAtlantiumDepulsor	blockDepulsor;
 	public static BlockDepulsorPlaceholder	blockPlaceholder;
+	public static BlockLimestone			blockLimestone;
 	
 	public static void initBlocks()
 	{
@@ -22,10 +24,12 @@ public class Blocks
 		blockAtlantite = new BlockAtlantiteOre(cfg.getBlock("oreAtlantite", DEFAULT_ID_RANGE).getInt(DEFAULT_ID_RANGE));
 		blockDepulsor = new BlockAtlantiumDepulsor(cfg.getBlock("machineDepulsor", DEFAULT_ID_RANGE).getInt(DEFAULT_ID_RANGE));
 		blockPlaceholder = new BlockDepulsorPlaceholder(cfg.getBlock("blockDepulsorPlaceholder", DEFAULT_ID_RANGE, "The block that is used in the depulsor's \"air bubble\"").getInt());
+		blockLimestone = new BlockLimestone(cfg.getBlock("blockLimestone", DEFAULT_ID_RANGE + 1).getInt(DEFAULT_ID_RANGE + 1));
 		
 		/** Add to registry */
 		GameRegistry.registerBlock(blockAtlantite, ItemBlockWithDescription.class, "blockAtlantite");
 		GameRegistry.registerBlock(blockDepulsor, ItemBlockWithDescription.class, "blockDepulsor");
+		GameRegistry.registerBlock(blockLimestone, ItemBlockLimestone.class, "blockLimestone");
 		GameRegistry.registerBlock(blockPlaceholder, "blockDepulsorPlaceholder");
 		
 		/** Add language */
