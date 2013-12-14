@@ -1,10 +1,13 @@
 package oceania.entity;
 
+import oceania.items.Items;
 import oceania.util.BoatTypes;
+import net.minecraft.block.Block;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -49,21 +52,30 @@ public class EntityOceaniaBoat extends EntityBoat
 	
 	@Override
     public void setDead() {
-		super.setDead();
+		if(this.getDamageTaken() > 40.0F) {
+			super.setDead();
+		}
 	}
 	
 	@Override
     public EntityItem dropItemWithOffset(int id, int count, float y)
 	{
-        double speed = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		if(this.isCollidedHorizontally && speed > 0.2D) 
+		if(id == Item.stick.itemID || id == Block.planks.blockID) 
 		{
 			return null;
-			// For testing. return super.dropItemWithOffset(Item.diamond.itemID, 64, y);
-		} else 
+		} else if(id == Item.boat.itemID) 
 		{
-			return super.dropItemWithOffset(id, count, y);
+			try {
+				int strength = this.getDataWatcher().getWatchableObjectInt(22);
+				for(int index = 0; index < BoatTypes.values().length; index++) {
+					if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
+						return super.entityDropItem(new ItemStack(Items.itemBoat, 1, index), y);
+					}
+				}
+			} catch(Exception e)
+			{}
 		}
+		return super.dropItemWithOffset(id, count, y);
 	}
 	
 	@Override
