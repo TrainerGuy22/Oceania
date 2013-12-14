@@ -42,7 +42,7 @@ public class ItemOceaniaBoat extends ItemBoat
 			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
 		}
 	}
-	
+		
 	@Override
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 
