@@ -5,6 +5,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import oceania.Oceania;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ public class ItemAtlantiteTrident extends ItemSword
 	{
 		super(par1, Items.TOOL_MATERIAL_ATLANTIUM);
 		setCreativeTab(Oceania.CREATIVE_TAB);
-		setUnlocalizedName("itemAtlantiumTrident");
+		setUnlocalizedName("itemAtlantiteTrident");
 	}
 	
 	@Override
@@ -26,6 +27,13 @@ public class ItemAtlantiteTrident extends ItemSword
 	{
 		descriptionList.add("Nothing can beat the");
 		descriptionList.add("sharpness of raw Atlantite.");
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister registry)
+	{
+		this.itemIcon = registry.registerIcon(Oceania.MOD_ID + ":atlantiteTrident");
 	}
 
 }
