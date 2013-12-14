@@ -15,4 +15,10 @@ public class EntityOceaniaBoat extends EntityBoat
 		this.boatType = type;
 	}
 
+	public EntityOceaniaBoat(World world, BoatTypes type, double x, double y, double z) 
+	{
+		super(world, x, y, z);
+		this.boatType = type;
+	}
+
 }
