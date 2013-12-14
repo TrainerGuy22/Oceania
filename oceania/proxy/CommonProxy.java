@@ -8,6 +8,7 @@ import oceania.CreativeTabOceania;
 import oceania.Oceania;
 import oceania.blocks.Blocks;
 import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
+import oceania.entity.Entities;
 import oceania.gen.WorldGenAtlantite;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
@@ -20,6 +21,7 @@ public class CommonProxy
 		Oceania.CREATIVE_TAB = new CreativeTabOceania();
 		Blocks.initBlocks();
 		Items.initItems();
+		Entities.initEntities();
 		initEntities();
 		initRecipes();
 		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
