@@ -45,6 +45,23 @@ public class TileEntityAtlantiumDepulsor extends TileEntity
 		{
 			ENDER_PEARLS--;
 			TIME_LEFT = 12000;
+		} else
+		{
+			int radius = 3;
+			for (int xx = xCoord - radius; xx <= xCoord + radius; xx++)
+			{
+				for (int yy = yCoord - radius; yy <= yCoord + radius; yy++)
+				{
+					for (int zz = zCoord - radius; zz <= zCoord + radius; zz++)
+					{
+						int bID = worldObj.getBlockId(xx, yy, zz);
+						if (bID == Blocks.blockPlaceholder.blockID)
+						{
+							worldObj.setBlockToAir(xx, yy, zz);
+						}
+					}
+				}
+			}
 		}
 	}
 	
