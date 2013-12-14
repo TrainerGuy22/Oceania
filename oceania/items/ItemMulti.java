@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -26,7 +27,7 @@ public class ItemMulti extends Item
 		this.hasSubtypes = true;
 		for(int index = 0; index < ITEMS.length; index++) 
 		{
-			LanguageRegistry.instance().addStringLocalization("item.sub." + ITEMS[index] + "name", LANG_NAMES[index]);
+			LanguageRegistry.instance().addStringLocalization("item.sub." + ITEMS[index] + ".name", LANG_NAMES[index]);
 		}
 	}
 	
@@ -61,6 +62,16 @@ public class ItemMulti extends Item
 		for(int index = 0; index < ITEMS.length; index++) 
 		{
 			list.add(new ItemStack(ID, 1, index));
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoe)
+	{
+		if(itemStack.getItemDamage() == 1) {
+			descriptionList.add("Some kind of naturally");
+			descriptionList.add("occuring alloy...");
 		}
 	}
 
