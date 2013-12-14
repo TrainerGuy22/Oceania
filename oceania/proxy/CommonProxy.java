@@ -19,13 +19,14 @@ public class CommonProxy
 		Oceania.CREATIVE_TAB = new CreativeTabOceania();
 		Blocks.initBlocks();
 		Items.initItems();
-		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Blocks.blockAtlantite));
+		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
 		
 		GameRegistry.registerTileEntity(TileEntityAtlantiumDepulsor.class, Oceania.MOD_ID + "atlantiumDepulsor");
 		
 		/** Crafting Table recipes. */
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, 2), "X", "X", 'X', Item.ingotIron);
 		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Block.glass);
+		GameRegistry.addRecipe(new ItemStack(Items.itemAtlantiumTrident, 1), "A A", "AGA", " G ", 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Item.ingotGold);
 		
 		GameRegistry.addRecipe(new ItemStack(Blocks.blockDepulsor, 1), "SAS", "AEA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'E', Item.eyeOfEnder);
 		

@@ -11,7 +11,7 @@ import oceania.Oceania;
 
 public class Items
 {
-	public static final EnumToolMaterial TOOL_MATERIAL_ATLANTIUM = EnumHelper.addToolMaterial("atlantium", 2, 780, 9.0F, 4.5F, 10);
+	public static final EnumToolMaterial TOOL_MATERIAL_ATLANTIUM = EnumHelper.addToolMaterial("atlantium", 2, 780, 9.0F, 5.0F, 10);
 	
 	public static final int DEFAULT_ID_RANGE = 3750;
 	
