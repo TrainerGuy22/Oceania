@@ -62,7 +62,7 @@ public class BlockAtlantiumDepulsor extends Block
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
+		// world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
 	}
 	
 	@Override
@@ -88,25 +88,7 @@ public class BlockAtlantiumDepulsor extends Block
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		int radius = meta / 4;
-		for (int xx = x - radius; xx <= x + radius; xx++)
-		{
-			for (int yy = y - radius; yy <= y + radius; yy++)
-			{
-				for (int zz = z - radius; zz <= z + radius; zz++)
-				{
-					int bID = world.getBlockId(xx, yy, zz);
-					if (bID == Block.waterMoving.blockID || bID == Block.waterStill.blockID || bID == 0)
-					{
-						world.setBlock(xx, yy, zz, Blocks.blockPlaceholder.blockID);
-					}
-				}
-			}
-		}
-		if (meta < 15)
-			world.setBlockMetadataWithNotify(x, y, z, ++meta, 0);
-		world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
+
 	}
 	
 }
