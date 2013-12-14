@@ -40,7 +40,7 @@ public class Items
 		OreDictionary.registerOre("oceaniaCraftingItems", itemMulti);
 		
 		/** Add language */
-		LanguageRegistry.addName(itemDivingHelmet, "Atlantium Helm");
+		LanguageRegistry.addName(itemDivingHelmet, "Atlantium Helmet");
 		LanguageRegistry.addName(itemAtlantiumTrident, "Atlantium Trident");
 	}
 }

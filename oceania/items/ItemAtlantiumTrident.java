@@ -25,7 +25,7 @@ public class ItemAtlantiumTrident extends ItemSword
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoe)
 	{
 		descriptionList.add("Nothing can beat the");
-		descriptionList.add("sharpness of Raw Atlantium.");
+		descriptionList.add("sharpness of raw Atlantite.");
 	}
 
 }

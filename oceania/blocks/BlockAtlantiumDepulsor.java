@@ -29,7 +29,7 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 		setLightValue(0.2f); // TODO: Make this change depending on how much power it has
 		setUnlocalizedName("blockDepulsor");
 		setCreativeTab(Oceania.CREATIVE_TAB);
-		ItemBlockWithDescription.registerDescription(this, "This block will create a\nbubble of air around itself\nwhen placed in water.");
+		ItemBlockWithDescription.registerDescription(this, "This block will create a bubble\nof air around itself when placed\nin water.");
 	}
 	
 	@Override
@@ -41,15 +41,15 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	}
 	
 	@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		TileEntityAtlantiumDepulsor tileEntity = (TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z);
 		ItemStack pearl = player.inventory.mainInventory[player.inventory.currentItem];
-		if(pearl != null && pearl.itemID == Item.enderPearl.itemID && tileEntity.ENDER_PEARLS != 31) 
+		if (pearl != null && pearl.itemID == Item.enderPearl.itemID && tileEntity.enderPearls != 31)
 		{
-			tileEntity.ENDER_PEARLS++;
+			tileEntity.enderPearls++;
 			player.inventory.mainInventory[player.inventory.currentItem].splitStack(1);
-			if(player.inventory.mainInventory[player.inventory.currentItem].stackSize == 0)
+			if (player.inventory.mainInventory[player.inventory.currentItem].stackSize == 0)
 				player.inventory.mainInventory[player.inventory.currentItem] = null;
 			return true;
 		}
@@ -60,7 +60,8 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
-		if(((TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z)).TIME_LEFT != 0) {
+		if (((TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x, y, z)).TIME_LEFT != 0)
+		{
 			double bX = (double) x + 0.5;
 			double bY = (double) y + 0.5;
 			double bZ = (double) z + 0.5;
@@ -110,7 +111,7 @@ public class BlockAtlantiumDepulsor extends BlockContainer
 	}
 	
 	@Override
-	public TileEntity createNewTileEntity(World world) 
+	public TileEntity createNewTileEntity(World world)
 	{
 		return new TileEntityAtlantiumDepulsor();
 	}

@@ -1,24 +1,36 @@
 package oceania.items;
 
+import java.util.HashMap;
 import java.util.List;
 
-import oceania.Oceania;
-import oceania.util.IconRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import oceania.OUtil;
+import oceania.Oceania;
+import oceania.util.IconRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMulti extends Item 
 {
-
-	String[] ITEMS = new String[]{"rawAtlantium", "atlantium", "screw"};
-	String[] LANG_NAMES = new String[]{"Raw Atlantium", "Atlantium", "Screw"};
+	public static final String[] ITEMS = new String[]{"rawAtlantium", "atlantium", "screw"};
+	public static final String[] LANG_NAMES = new String[]{"Atlantite", "Atlantium", "Screw"};
+	
+	private static HashMap<Integer, String> descriptions = new HashMap<Integer, String>();
+	
+	static
+	{
+		descriptions.put(0, "Some sort of naturally occuring\nmineral...");
+		descriptions.put(1, "Refined Atlantite. Much harder\nbut much duller!");
+		descriptions.put(2, "Holds things together. Hopefully.");
+	}
 	
 	public ItemMulti(int par1) 
 	{
@@ -67,13 +79,22 @@ public class ItemMulti extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoe)
+	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List descriptionList, boolean noClueWhatThisEvenDoes)
 	{
-		if(itemStack.getItemDamage() <= 1) {
-			descriptionList.add("Some kind of naturally");
-			descriptionList.add("occuring alloy...");
-		} else {
-			descriptionList.add("Holds together machines.");
+		if (descriptions.containsKey((Integer) itemStack.getItemDamage()))
+		{
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+			{
+				String[] lines = descriptions.get((Integer) itemStack.getItemDamage()).split("\n");
+				for (String line : lines)
+				{
+					descriptionList.add(line);
+				}
+			}
+			else
+			{
+				descriptionList.add(OUtil.colorString("Hold &&9SHIFT &&7for more information"));
+			}
 		}
 	}
 

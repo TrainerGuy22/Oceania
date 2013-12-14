@@ -58,7 +58,7 @@ public class ItemDivingHelmet extends ItemArmor implements ISpecialArmor
 			}
 			player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 250, 1));
 			int ticksInWater = itemStack.getTagCompound().getInteger("inWater");
-			if (ticksInWater < 20 * 10 /* 10 seconds */)
+			if (ticksInWater < 20 * 10 /* 10 seconds extra breath */)
 			{
 				ticksInWater++;
 				itemStack.getTagCompound().setInteger("inWater", ticksInWater);
@@ -186,6 +186,8 @@ public class ItemDivingHelmet extends ItemArmor implements ISpecialArmor
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
 			descriptionList.add("Allows the wearer to see underwater.");
+			descriptionList.add("Also allows wearer to breathe slightly");
+			descriptionList.add("longer while underwater.");
 		}
 		else
 		{

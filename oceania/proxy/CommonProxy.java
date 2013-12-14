@@ -19,10 +19,20 @@ public class CommonProxy
 		Oceania.CREATIVE_TAB = new CreativeTabOceania();
 		Blocks.initBlocks();
 		Items.initItems();
+		initEntities();
+		initRecipes();
 		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
 		
+		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 6).getInt(), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 2).getInt()));
+	}
+	
+	public void initEntities()
+	{
 		GameRegistry.registerTileEntity(TileEntityAtlantiumDepulsor.class, Oceania.MOD_ID + "atlantiumDepulsor");
-		
+	}
+	
+	public void initRecipes()
+	{
 		/** Crafting Table recipes. */
 		GameRegistry.addRecipe(new ItemStack(Items.itemMulti, 2, 2), "X", "X", 'X', Item.ingotIron);
 		GameRegistry.addRecipe(new ItemStack(Items.itemDivingHelmet, 1), "AAA", "AGA", "SAS", 'S', new ItemStack(Items.itemMulti, 1, 2), 'A', new ItemStack(Items.itemMulti, 1, 1), 'G', Block.glass);
@@ -32,7 +42,5 @@ public class CommonProxy
 		
 		/** Furnace recipes. */
 		FurnaceRecipes.smelting().addSmelting(Items.itemMulti.itemID, 0, new ItemStack(Items.itemMulti, 1, 1), 0.1F);
-		
-		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 6).getInt(), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 2).getInt()));  
 	}
 }

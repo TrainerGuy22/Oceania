@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityAtlantiumDepulsor extends TileEntity 
 {
 	// Holds 32 Ender Pearls at a time, or 2 stacks.
-	public int ENDER_PEARLS = 0;
+	public int enderPearls = 0;
 	
 	// Each Ender Pearl lasts for half a Minecraft day.
 	public int TIME_LEFT = 0;
@@ -41,9 +41,9 @@ public class TileEntityAtlantiumDepulsor extends TileEntity
 				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, ++meta, 0);
 				this.worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), 1);
 			TIME_LEFT--;
-		} else if(ENDER_PEARLS != 0) 
+		} else if(enderPearls != 0) 
 		{
-			ENDER_PEARLS--;
+			enderPearls--;
 			TIME_LEFT = 12000;
 		} else
 		{
@@ -69,7 +69,7 @@ public class TileEntityAtlantiumDepulsor extends TileEntity
     public void readFromNBT(NBTTagCompound tag) 
     {
             super.readFromNBT(tag);
-            ENDER_PEARLS = tag.getInteger("ENDER_PEARLS");
+            enderPearls = tag.getInteger("ENDER_PEARLS");
             TIME_LEFT = tag.getInteger("TIME_LEFT");
     }
     
@@ -77,7 +77,7 @@ public class TileEntityAtlantiumDepulsor extends TileEntity
     public void writeToNBT(NBTTagCompound tag) 
     {
             super.writeToNBT(tag);
-            tag.setInteger("ENDER_PEARLS", ENDER_PEARLS);
+            tag.setInteger("ENDER_PEARLS", enderPearls);
             tag.setInteger("TIME_LEFT", TIME_LEFT);
     }
 
