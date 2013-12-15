@@ -12,7 +12,7 @@ public class ClientProxy extends CommonProxy
 	public void init()
 	{
 		super.init();
-		RenderingRegistry.registerEntityRenderingHandler(EntityOceaniaBoat.class, new RenderOceaniaBoat());
+		RenderingRegistry.registerEntityRenderingHandler(EntityOceaniaBoat.EntityOceaniaBoatNormal.class, new RenderOceaniaBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityOceaniaBoatWithChest.class, new RenderOceaniaBoatWithChest());
 	}
 }

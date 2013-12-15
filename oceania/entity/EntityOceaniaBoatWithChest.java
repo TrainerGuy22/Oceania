@@ -52,10 +52,7 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 		{
 			if(this.chestItems[count] != null && this.chestItems[count].stackSize > 0)
 			{
-				for(int stackCount = 1; stackCount >= this.chestItems[count].stackSize; stackCount++)
-				{
-					this.entityDropItem(new ItemStack(this.chestItems[count].itemID, 1, this.chestItems[count].getItemDamage()), 0.0F);
-				}
+				this.entityDropItem(this.chestItems[count], 0.0F);
 			}
 		}
 	}

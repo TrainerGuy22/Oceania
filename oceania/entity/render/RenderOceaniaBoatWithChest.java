@@ -17,13 +17,14 @@ public class RenderOceaniaBoatWithChest extends RenderBoat
 	public RenderOceaniaBoatWithChest()
 	{
 		super();
-		this.modelBoat = new ModelOceaniaBoatWithChest();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
     protected ResourceLocation getEntityTexture(Entity entity) 
 	{
+		System.out.println("Ohai der!");
+		modelBoat = new ModelOceaniaBoatWithChest();
 		EntityOceaniaBoat boat = (EntityOceaniaBoatWithChest) entity;
 		try 
 		{
