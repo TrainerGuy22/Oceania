@@ -48,7 +48,7 @@ public class BlockLimestone extends Block
 		this.setHardness(1.5F);
 		this.setResistance(10.0F);
 		this.setStepSound(soundStoneFootstep);
-		ItemBlockLimestone.registerDescription(this, "A mineral deposite, good for\ndecoration.");
+		ItemBlockLimestone.registerDescription(this, "A mineral deposit, good for\ndecoration.");
 	}
 	
 	@Override

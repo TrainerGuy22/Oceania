@@ -117,6 +117,10 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
     public void writeEntityToNBT(NBTTagCompound tag)
     {
 		super.writeEntityToNBT(tag);
+		for(int count = 0; count < this.chestItems.length; count++)
+		{
+			
+		}
     }
     
 	@Override

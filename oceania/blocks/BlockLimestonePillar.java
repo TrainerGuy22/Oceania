@@ -25,7 +25,7 @@ public class BlockLimestonePillar extends BlockLog
 		this.setResistance(10.0F);
 		this.setStepSound(soundStoneFootstep);
 		this.setUnlocalizedName("limestonePillar");
-		ItemBlockWithDescription.registerDescription(this, "A mineral deposite, good for\ndecoration.");
+		ItemBlockWithDescription.registerDescription(this, "A mineral deposit, good for\ndecoration.");
 	}
 	
 	@Override
