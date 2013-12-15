@@ -21,6 +21,19 @@ public class TileEntityChestSpawner extends TileEntityChest
 	}
 	
 	@Override
+    public String getInvName()
+    {
+        return "Chest Spawner";
+    }
+
+    @Override
+    public boolean isInvNameLocalized()
+    {
+        return true;
+    }
+
+	
+	@Override
     public void updateEntity() 
     {
     	super.updateEntity();
@@ -33,6 +46,7 @@ public class TileEntityChestSpawner extends TileEntityChest
     	int villagerCount = 0;
     	for(EntityVillager villager : villagers)
     	{
+			System.out.println("Spawn start.");
     		villagerCount++;
     	}
     	if(villagerCount < 4 && cooldown == 0)
@@ -42,23 +56,25 @@ public class TileEntityChestSpawner extends TileEntityChest
     		{
         		for(int zCount = 3; zCount <= 7; zCount++)
         		{
-        			if(this.worldObj.getBlockId(xCoord + 1 + xCount, yCoord - 3, zCoord + zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
+        			if(this.worldObj.getBlockId(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
         			{
+        				System.out.println("Spawn.");
         				triggered = true;
         	    		cooldown = 40;
         	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
         	    		villagerToSpawn.chunkCoordX = xCoord + 1 + xCount;
-        	    		villagerToSpawn.chunkCoordY = yCoord - 3;
+        	    		villagerToSpawn.chunkCoordY = yCoord - 2;
         	    		villagerToSpawn.chunkCoordZ = zCoord + zCount;
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
         			}
-        			if(this.worldObj.getBlockId(xCoord - xCount, yCoord - 3, zCoord - zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
+        			if(this.worldObj.getBlockId(xCoord - xCount, yCoord - 2, zCoord - zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
         			{
+        				System.out.println("Spawn.");
         				triggered = true;
         	    		cooldown = 40;
         	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
         	    		villagerToSpawn.chunkCoordX = xCoord - xCount;
-        	    		villagerToSpawn.chunkCoordY = yCoord - 3;
+        	    		villagerToSpawn.chunkCoordY = yCoord - 2;
         	    		villagerToSpawn.chunkCoordZ = zCoord - zCount;
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
         			}

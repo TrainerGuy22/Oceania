@@ -74,7 +74,6 @@ public class BlockLimestone extends Block
 	@SideOnly(Side.CLIENT)
     public Icon getIcon(int side, int meta)
 	{
-		System.out.println(meta);
 		return IconRegistry.getIcon(LimestoneTypes.values()[meta].getUnlocalizedName());
 	}
 	

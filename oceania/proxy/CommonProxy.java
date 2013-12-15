@@ -13,6 +13,7 @@ import oceania.Oceania;
 import oceania.blocks.BlockLimestone;
 import oceania.blocks.Blocks;
 import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
+import oceania.blocks.tile.TileEntityChestSpawner;
 import oceania.entity.Entities;
 import oceania.gen.WorldGenAtlantite;
 import oceania.gen.WorldGenLimestone;
@@ -40,6 +41,7 @@ public class CommonProxy
 	public void initEntities()
 	{
 		GameRegistry.registerTileEntity(TileEntityAtlantiumDepulsor.class, Oceania.MOD_ID + "AtlantiumDepulsor");
+		GameRegistry.registerTileEntity(TileEntityChestSpawner.class, Oceania.MOD_ID + "ChestSpawner");
 	}
 	
 	public void initRecipes()

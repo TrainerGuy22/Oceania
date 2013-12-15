@@ -25,7 +25,7 @@ public class BlockChestSpawner extends BlockChest
 	protected BlockChestSpawner(int id) 
 	{
 		super(id, 0);
-        // this.setCreativeTab(Oceania.CREATIVE_TAB);
+        this.setCreativeTab(Oceania.CREATIVE_TAB);
         ItemBlockWithDescription.registerDescription(this, "You're not suppose to have\nthis, you cheater! :P");
 	}
 	

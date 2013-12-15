@@ -36,10 +36,12 @@ public class Blocks
 		GameRegistry.registerBlock(blockLimestone, ItemBlockLimestone.class, "blockLimestone");
 		GameRegistry.registerBlock(blockLimestonePillar, ItemBlockWithDescription.class, "blockLimestonePillar");
 		GameRegistry.registerBlock(blockPlaceholder, "blockDepulsorPlaceholder");
+		GameRegistry.registerBlock(blockChestSpawner, ItemBlockWithDescription.class, "blockChestSpawner");
 		
 		/** Add language */
 		LanguageRegistry.addName(blockAtlantite, "Atlantite Ore");
 		LanguageRegistry.addName(blockDepulsor, "Atlantium Depulsor");
 		LanguageRegistry.addName(blockLimestonePillar, "Limestone Pillar");
+		LanguageRegistry.addName(blockChestSpawner, "Chest Spawner");
 	}
 }
