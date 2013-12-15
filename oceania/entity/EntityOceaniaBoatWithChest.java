@@ -8,7 +8,8 @@ import net.minecraft.world.World;
 import oceania.items.Items;
 import oceania.util.BoatTypes;
 
-public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IInventory {
+public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IInventory 
+{
 	
     private ItemStack[] chestItems = new ItemStack[36];
 	
@@ -26,6 +27,34 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	{
 		super(world, x, y, z);
 		this.setBoatType(type);
+	}
+	
+	@Override
+    public boolean interactFirst(EntityPlayer player) 
+	{
+		if(this.riddenByEntity != null && player.isSneaking())
+		{
+			if(!player.worldObj.isRemote)
+			{
+				player.displayGUIChest(this);
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public void dropItemsOnDead() 
+	{
+		for(int count = 0; count < this.chestItems.length; count++)
+		{
+			if(this.chestItems[count] != null && this.chestItems[count].stackSize > 0)
+			{
+				for(int stackCount = 1; stackCount >= this.chestItems[count].stackSize; stackCount++)
+				{
+					this.entityDropItem(new ItemStack(this.chestItems[count].itemID, 1, this.chestItems[count].getItemDamage()), 0.0F);
+				}
+			}
+		}
 	}
 
 	@Override

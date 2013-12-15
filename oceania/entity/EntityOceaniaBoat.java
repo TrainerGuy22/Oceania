@@ -69,6 +69,7 @@ public class EntityOceaniaBoat extends EntityBoat
 					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
 				} else 
 					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
+				this.dropItemsOnDead();
 				this.isDead = true;
 			} else
 			{
@@ -76,6 +77,9 @@ public class EntityOceaniaBoat extends EntityBoat
 			}
 		}
 	}
+	
+	public void dropItemsOnDead() 
+	{}
 	
 	@Override
     public EntityItem dropItemWithOffset(int id, int count, float y)
