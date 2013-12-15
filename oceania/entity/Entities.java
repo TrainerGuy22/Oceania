@@ -10,6 +10,7 @@ public class Entities
 	{
 		EntityRegistry.registerModEntity(EntityOceaniaBoatNormal.class, "OceaniaBoat", 0, Oceania.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityOceaniaBoatWithChest.class, "OceaniaBoatWithChest", 1, Oceania.INSTANCE, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySubmarine.class, "Submarine", 2, Oceania.INSTANCE, 80, 3, true);
 	}
 	
 }

@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -19,6 +20,7 @@ public class Items
 	public static ItemMulti itemMulti;
 	public static ItemOceaniaBoat itemBoat;
 	public static ItemOceaniaBoatWithChest itemBoatWithChest;
+	public static ItemSubmarine itemSubmarine;
 	
 	public static ItemAtlantiteTrident itemAtlantiteTrident;
 	
@@ -31,6 +33,7 @@ public class Items
 		itemMulti = new ItemMulti(cfg.getItem("itemMulti", DEFAULT_ID_RANGE + 1).getInt(DEFAULT_ID_RANGE + 1));
 		itemAtlantiteTrident = new ItemAtlantiteTrident(cfg.getItem("itemAtlantiumTrident", DEFAULT_ID_RANGE + 2).getInt(DEFAULT_ID_RANGE + 2));
 		itemBoatWithChest = new ItemOceaniaBoatWithChest(cfg.getItem("itemBoatWithChest", DEFAULT_ID_RANGE + 3).getInt(DEFAULT_ID_RANGE + 3));
+		itemSubmarine = new ItemSubmarine(cfg.getItem("itemSubmarine", DEFAULT_ID_RANGE + 4).getInt(DEFAULT_ID_RANGE + 4));
 		
 		Item.itemsList[333] = null;
 		itemBoat = new ItemOceaniaBoat(77);
@@ -41,6 +44,7 @@ public class Items
 		GameRegistry.registerItem(itemAtlantiteTrident, Oceania.MOD_ID + "itemAtlantiteTrident");
 		GameRegistry.registerItem(itemBoat, Oceania.MOD_ID + "itemBoat");
 		GameRegistry.registerItem(itemBoatWithChest, Oceania.MOD_ID + "itemBoatWithChest");
+		GameRegistry.registerItem(itemSubmarine, Oceania.MOD_ID + "itemSubmarine");
 
 		TOOL_MATERIAL_ATLANTIUM.customCraftingMaterial = Item.ingotGold;
 		
@@ -50,5 +54,6 @@ public class Items
 		/** Add language */
 		LanguageRegistry.addName(itemDivingHelmet, "Atlantium Helmet");
 		LanguageRegistry.addName(itemAtlantiteTrident, "Atlantite Trident");
+		LanguageRegistry.addName(itemSubmarine, EnumChatFormatting.AQUA + "Submarine");
 	}
 }
