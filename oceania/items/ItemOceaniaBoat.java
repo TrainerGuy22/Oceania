@@ -48,6 +48,8 @@ public class ItemOceaniaBoat extends ItemBoat
 			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
 		}
 	}
+	
+	// TODO: Figure out way to spawn these things that dosen't involve copypasta.
 		
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -28,6 +28,7 @@ public class ModelOceaniaBoatWithChest extends ModelBase
 		GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
+		// TODO: Scale texture to actually fit.
 		try 
 		{
 			int strength = boat.getDataWatcher().getWatchableObjectInt(22);
