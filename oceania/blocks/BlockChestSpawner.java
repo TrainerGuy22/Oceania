@@ -14,7 +14,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 /*
  * Regulates villagers in underwater villages.
@@ -34,6 +36,14 @@ public class BlockChestSpawner extends BlockChest
 	{
     	return Block.chest.blockID;
     }	
+	
+	@Override
+    public void onBlockAdded(World world, int x, int y, int z)
+	{
+		super.onBlockAdded(world, x, y, z);
+		TileEntityChestSpawner tile = (TileEntityChestSpawner) world.getBlockTileEntity(x, y, z);
+		WeightedRandomChestContent.generateChestContents(world.rand, ChestGenHooks.getItems(ChestGenHooks.DUNGEON_CHEST, world.rand), tile, 10);
+	}
 	
     @Override
     public int getExpDrop(World world, int data, int enchantmentLevel)

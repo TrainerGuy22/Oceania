@@ -21,7 +21,7 @@ public class Entities
 		VillagerRegistry.instance().registerVillagerId(VILLAGER_OCEANIA_ID);
 		// TODO: Post ModJam - Have a custom skin for the villager.
 		VillagerRegistry.instance().registerVillagerSkin(VILLAGER_OCEANIA_ID, new ResourceLocation("textures/entity/villager/smith.png"));
-		VillagerRegistry.instance().registerVillageTradeHandler(VILLAGER_OCEANIA_ID, new VillageTradeHandler());
+		//VillagerRegistry.instance().registerVillageTradeHandler(VILLAGER_OCEANIA_ID, new VillageTradeHandler());
 	}
 	
 }

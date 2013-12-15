@@ -24,7 +24,8 @@ public class TileEntityChestSpawner extends TileEntityChest
 	{
 		ATLANTITE(Items.itemMulti.itemID, 0, 3, 5, 0.4f),
 		ATLANTIUM(Items.itemMulti.itemID, 1, 2, 3, 0.2f),
-		SCREW(Items.itemMulti.itemID, 3, 7, 8, 0.7f);
+		SCREW(Items.itemMulti.itemID, 2, 7, 8, 0.7f),
+		TRIDENT(Items.itemAtlantiteTrident.itemID, 0, 1, 1, 0.2f);
 		
 		public int itemID, metadata, min, max;
 		public float chance;
@@ -95,23 +96,6 @@ public class TileEntityChestSpawner extends TileEntityChest
     	}
     	super.updateEntity();
     }
-	
-	public void genChest(World world)
-	{
-		for(int count = 0; count < this.getSizeInventory(); count++)
-		{
-			if(this.worldObj.rand.nextInt(this.getSizeInventory()) < 20)
-			{
-				Loot loot = Loot.values()[this.worldObj.rand.nextInt(Loot.values().length)];
-				int amount = this.worldObj.rand.nextInt(loot.max);
-				while(amount < loot.min)
-				{
-					amount = this.worldObj.rand.nextInt(loot.max);
-				}
-				this.setInventorySlotContents(count, new ItemStack(loot.itemID, amount, loot.metadata));
-			}
-		}
-	}
 	
     @Override
     public void readFromNBT(NBTTagCompound tag) 
