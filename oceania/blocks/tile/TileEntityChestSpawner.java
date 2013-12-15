@@ -3,6 +3,8 @@ package oceania.blocks.tile;
 import java.util.List;
 import java.util.Random;
 
+import oceania.blocks.Blocks;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.passive.EntityVillager;
@@ -42,13 +44,18 @@ public class TileEntityChestSpawner extends TileEntityChest
 
         			int x = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
         			int z = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
+        			while(x > (minRange * -1) - 1 && z < minRange + 1 && z < (minRange * -1) - 1 && z < minRange + 1)
+        			{
+            			x = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
+            			z = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
+        			}
         			if(this.worldObj.rand.nextInt(4) == 3 && !triggered)
         			{
         				boolean valid = false;
         				if(x <= 0)
-        					valid =  this.worldObj.getBlockId(xCoord + 1 + x, yCoord - 2, zCoord + z) == 0;
+        					valid =  this.worldObj.getBlockId(xCoord + 1 + x, yCoord - 2, zCoord + z) == 0 || this.worldObj.getBlockId(xCoord + 1 + x, yCoord - 2, zCoord + z) == Blocks.blockPlaceholder.blockID;
         				else 
-        					valid =  this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z) == 0;
+        					valid =  this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z) == 0 || this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z)  == Blocks.blockPlaceholder.blockID;
         				if(valid)
         				{
         					System.out.println("Spawn.");
