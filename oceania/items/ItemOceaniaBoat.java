@@ -5,6 +5,7 @@ import java.util.List;
 import oceania.OUtil;
 import oceania.Oceania;
 import oceania.entity.EntityOceaniaBoat;
+import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.util.BoatTypes;
 import oceania.util.IconRegistry;
@@ -48,6 +49,8 @@ public class ItemOceaniaBoat extends ItemBoat
 		}
 	}
 	
+
+		
 	@Override
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 
@@ -109,9 +112,9 @@ public class ItemOceaniaBoat extends ItemBoat
 		}
 	}
 	
-	public Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
+	protected static Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
 	{
-		return new EntityOceaniaBoat(world, boatType, x, y, z);
+		return new EntityOceaniaBoatNormal(world, boatType, x, y, z);
 	}
 
 }

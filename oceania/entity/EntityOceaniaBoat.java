@@ -14,25 +14,6 @@ import net.minecraft.world.World;
 
 public class EntityOceaniaBoat extends EntityBoat 
 {
-	
-	public class EntityOceaniaBoatNormal extends EntityOceaniaBoat
-	{
-		public EntityOceaniaBoatNormal(World world) 
-		{
-			super(world);
-		}
-		
-		public EntityOceaniaBoatNormal(World world, double x, double y, double z) 
-		{
-			super(world, x, y, z);
-		}
-		
-
-		public EntityOceaniaBoatNormal(World world, BoatTypes type, double x, double y, double z) 
-		{
-			super(world, type, x, y, z);
-		}
-	}
 
 	public EntityOceaniaBoat(World world) 
 	{

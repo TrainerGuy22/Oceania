@@ -55,7 +55,7 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 	}
 	
 	@Override
-	public Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
+	protected static Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
 	{
 		return new EntityOceaniaBoatWithChest(world, boatType, x, y, z);
 	}
