@@ -13,7 +13,10 @@ import oceania.util.IconRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class BlockLimestone extends Block 
 {
@@ -52,6 +55,12 @@ public class BlockLimestone extends Block
 	}
 	
 	@Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) 
+	{
+		world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 3);
+	}
+	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
@@ -65,6 +74,7 @@ public class BlockLimestone extends Block
 	@SideOnly(Side.CLIENT)
     public Icon getIcon(int side, int meta)
 	{
+		System.out.println(meta);
 		return IconRegistry.getIcon(LimestoneTypes.values()[meta].getUnlocalizedName());
 	}
 	
