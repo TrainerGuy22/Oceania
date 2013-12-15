@@ -32,12 +32,15 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
     public boolean interactFirst(EntityPlayer player) 
 	{
-		if(this.riddenByEntity != null && player.isSneaking())
+		if(this.riddenByEntity == null && player.isSneaking())
 		{
 			if(!player.worldObj.isRemote)
 			{
 				player.displayGUIChest(this);
 			}
+		} else
+		{
+			return super.interactFirst(player);
 		}
 		return true;
 	}

@@ -89,6 +89,7 @@ public class EntityOceaniaBoat extends EntityBoat
 			return null;
 		} else if(id == Item.boat.itemID) 
 		{
+			this.dropItemsOnDead();
 			try {
 				int strength = this.getDataWatcher().getWatchableObjectInt(22);
 				for(int index = 0; index < BoatTypes.values().length; index++) {
