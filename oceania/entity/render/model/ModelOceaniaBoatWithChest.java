@@ -27,19 +27,6 @@ public class ModelOceaniaBoatWithChest extends ModelBase
 	{
 		GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
-		// TODO: Scale texture to actually fit.
-		try 
-		{
-			int strength = boat.getDataWatcher().getWatchableObjectInt(22);
-			for(int index = 0; index < BoatTypes.values().length; index++) {
-				if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
-					System.out.println("textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
-					Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png"));
-				}
-			}
-		} catch(Exception e) 
-		{}
 		GL11.glScalef(par7, par7, par7);
 		model.renderAll();
 		GL11.glPopMatrix();

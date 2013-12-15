@@ -25,6 +25,21 @@ public class RenderOceaniaBoatWithChest extends RenderBoat
 	{
 		if(this.modelBoat instanceof ModelBoat)
 			modelBoat = new ModelOceaniaBoatWithChest();
+		// TODO: Scale texture to actually fit.
+		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
+		try 
+		{
+			int strength = boat.getDataWatcher().getWatchableObjectInt(22);
+			for(int index = 0; index < BoatTypes.values().length; index++) {
+				if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
+					System.out.println("textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
+					return new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
+				}
+			}
+		} catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
 		return new ResourceLocation("oceania", "/textures/entity/ironBoatChest.png");
 	}
 

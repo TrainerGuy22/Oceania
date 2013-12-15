@@ -21,7 +21,9 @@ public class RenderOceaniaBoat extends RenderBoat
 		{
 			return new ResourceLocation(boat.getDataWatcher().getWatchableObjectString(20), boat.getDataWatcher().getWatchableObjectString(21));
 		} catch(Exception e) 
-		{}
+		{
+			e.printStackTrace();
+		}
 		return BoatTypes.WOOD.worldTexture;
 	}
 
