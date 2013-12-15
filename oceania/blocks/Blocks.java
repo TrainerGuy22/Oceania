@@ -38,5 +38,6 @@ public class Blocks
 		/** Add language */
 		LanguageRegistry.addName(blockAtlantite, "Atlantite Ore");
 		LanguageRegistry.addName(blockDepulsor, "Atlantium Depulsor");
+		LanguageRegistry.addName(blockLimestonePillar, "Limestone Pillar");
 	}
 }

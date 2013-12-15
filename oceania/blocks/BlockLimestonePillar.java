@@ -1,5 +1,6 @@
 package oceania.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
@@ -11,6 +12,8 @@ import oceania.items.Items;
 import oceania.util.IconRegistry;
 import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
@@ -63,6 +66,13 @@ public class BlockLimestonePillar extends BlockLog
 		IconRegistry.setIcon("limestonePillar0", registry.registerIcon(Oceania.MOD_ID + ":limestonePillar0"));
 		IconRegistry.setIcon("limestonePillar1", registry.registerIcon(Oceania.MOD_ID + ":limestonePillar1"));
 	}
+	
+	@Override
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        par3List.add(new ItemStack(par1, 1, 0));
+    }
+
 	
     @Override
     public boolean canSustainLeaves(World world, int x, int y, int z)
