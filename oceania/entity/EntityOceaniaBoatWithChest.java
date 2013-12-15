@@ -3,7 +3,9 @@ package oceania.entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import oceania.items.Items;
 import oceania.util.BoatTypes;
 
 public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IInventory {
@@ -41,6 +43,23 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) 
 	{
+		ItemStack returnStack;
+		if(this.chestItems[slot] != null)
+		{
+			if(this.chestItems[slot].stackSize < amount)
+			{
+				returnStack = this.chestItems[slot];
+				this.setInventorySlotContents(slot, null);
+				return returnStack;
+			} else
+			{
+				returnStack = this.chestItems[slot].splitStack(amount);
+				
+				if(this.chestItems[slot].stackSize == 0)
+					this.setInventorySlotContents(slot, null);
+				return returnStack;
+			}
+		}
 		return null;
 	}
 
@@ -62,6 +81,12 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
 	public String getInvName() 
 	{
+		int strength = this.getDataWatcher().getWatchableObjectInt(22);
+		for(int index = 0; index < BoatTypes.values().length; index++) {
+			if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
+				return BoatTypes.values()[index]._loc + " with Chest";
+			}
+		}
 		return "";
 	}
 
@@ -87,6 +112,18 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	{
 		return true;
 	}
+	
+	@Override
+    public void writeEntityToNBT(NBTTagCompound tag)
+    {
+		super.writeEntityToNBT(tag);
+    }
+    
+	@Override
+    public void readEntityFromNBT(NBTTagCompound tag)
+    {
+		super.readEntityFromNBT(tag);
+    }
 	
 	@Override
 	public void onInventoryChanged() 

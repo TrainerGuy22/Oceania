@@ -31,7 +31,7 @@ public class ItemAtlantiteTrident extends ItemSword
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
 			descriptionList.add("Nothing can beat the");
-			descriptionList.add("sharpness of raw Atlantite.");
+			descriptionList.add("sharpness of Atlantite.");
 		}
 		else
 		{
