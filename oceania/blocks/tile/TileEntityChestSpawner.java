@@ -51,20 +51,21 @@ public class TileEntityChestSpawner extends TileEntityChest
     	{
     		villagerCount++;
     	}
-    	if(villagerCount < 4 && cooldown == 0)
+    	if(villagerCount < 4 && cooldown == 0 && !this.worldObj.isRemote)
     	{
+			System.out.println("Server!");
     		boolean triggered = false;
     		for(int xCount = 3; xCount <= 7; xCount++)
     		{
         		for(int zCount = 3; zCount <= 7; zCount++)
         		{
-        			if(this.worldObj.getBlockId(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
+        			if(this.worldObj.getBlockId(xCoord + xCount, yCoord - 2, zCoord + zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
         			{
         				System.out.println("Spawn.");
         				triggered = true;
         	    		cooldown = 40;
         	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
-        	    		villagerToSpawn.setLocationAndAngles(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount, 0.0F, 0.0F);
+        	    		villagerToSpawn.setLocationAndAngles(xCoord + 1.5 + xCount, yCoord - 2, zCoord + zCount, 0.0F, 0.0F);
         	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
         	    		villagerToSpawn.setProfession(3);
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
@@ -75,7 +76,7 @@ public class TileEntityChestSpawner extends TileEntityChest
         				triggered = true;
         	    		cooldown = 40;
         	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
-        	    		villagerToSpawn.setLocationAndAngles(xCoord - xCount, yCoord - 2, zCoord - zCount, 0.0F, 0.0F);
+        	    		villagerToSpawn.setLocationAndAngles(xCoord - 0.5 - xCount, yCoord - 2, zCoord - zCount, 0.0F, 0.0F);
         	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
         	    		villagerToSpawn.setProfession(3);
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
