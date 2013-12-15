@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import oceania.entity.EntityOceaniaBoat;
+import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.entity.EntityOceaniaBoatWithChest;
 import oceania.util.BoatTypes;
 import oceania.util.IconRegistry;
@@ -54,7 +55,6 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 		return "item." + BoatTypes.values()[stack.getItemDamage()]._unloc + ".chest";
 	}
 	
-	@Override
 	protected static Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
 	{
 		return new EntityOceaniaBoatWithChest(world, boatType, x, y, z);
