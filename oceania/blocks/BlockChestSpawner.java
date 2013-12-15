@@ -3,12 +3,16 @@ package oceania.blocks;
 import java.util.Random;
 
 import oceania.Oceania;
+import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 import oceania.blocks.tile.TileEntityChestSpawner;
 import oceania.items.ItemBlockWithDescription;
 import oceania.items.Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -29,7 +33,7 @@ public class BlockChestSpawner extends BlockChest
     public int idDropped(int meta, Random random, int fortune) 
 	{
     	return Block.chest.blockID;
-    }
+    }	
 	
     @Override
     public int getExpDrop(World world, int data, int enchantmentLevel)
