@@ -11,7 +11,8 @@ import net.minecraftforge.common.ForgeDirection;
 public class TileEntityChestSpawner extends TileEntityChest 
 {
 	
-	private static int range = 7;
+	private static final int minRange = 3;
+	private static final int maxRange = 7;
 	private int cooldown = 0;
 	
 	public TileEntityChestSpawner()
@@ -28,7 +29,7 @@ public class TileEntityChestSpawner extends TileEntityChest
     	{
     		this.onRandomUpdate();
     	}
-    	List<EntityVillager> villagers = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - 1 - range, zCoord - range, xCoord + 1 + range, yCoord + 1 + range, zCoord + range));
+    	List<EntityVillager> villagers = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, AxisAlignedBB.getBoundingBox(xCoord - maxRange, yCoord - 1 - maxRange, zCoord - maxRange, xCoord + 1 + maxRange, yCoord + 1 + maxRange, zCoord + maxRange));
     	int villagerCount = 0;
     	for(EntityVillager villager : villagers)
     	{
@@ -36,7 +37,33 @@ public class TileEntityChestSpawner extends TileEntityChest
     	}
     	if(villagerCount < 4 && cooldown == 0)
     	{
-    		cooldown = 40;
+    		boolean triggered = false;
+    		for(int xCount = 3; xCount <= 7; xCount++)
+    		{
+        		for(int zCount = 3; zCount <= 7; zCount++)
+        		{
+        			if(this.worldObj.getBlockId(xCoord + 1 + xCount, yCoord - 3, zCoord + zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
+        			{
+        				triggered = true;
+        	    		cooldown = 40;
+        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
+        	    		villagerToSpawn.chunkCoordX = xCoord + 1 + xCount;
+        	    		villagerToSpawn.chunkCoordY = yCoord - 3;
+        	    		villagerToSpawn.chunkCoordZ = zCoord + zCount;
+        	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
+        			}
+        			if(this.worldObj.getBlockId(xCoord - xCount, yCoord - 3, zCoord - zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
+        			{
+        				triggered = true;
+        	    		cooldown = 40;
+        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
+        	    		villagerToSpawn.chunkCoordX = xCoord - xCount;
+        	    		villagerToSpawn.chunkCoordY = yCoord - 3;
+        	    		villagerToSpawn.chunkCoordZ = zCoord - zCount;
+        	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
+        			}
+        		}
+    		}
     	}
     }
 	
