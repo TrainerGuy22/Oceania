@@ -117,16 +117,31 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
     public void writeEntityToNBT(NBTTagCompound tag)
     {
 		super.writeEntityToNBT(tag);
+		NBTTagCompound chestItemsTag = new NBTTagCompound();
 		for(int count = 0; count < this.chestItems.length; count++)
 		{
-			
+			if(this.chestItems[count] != null)
+			{
+				NBTTagCompound itemTag = new NBTTagCompound();
+				this.chestItems[count].writeToNBT(itemTag);
+				chestItemsTag.setCompoundTag("item" + String.valueOf(count), itemTag);
+			}
 		}
+		tag.setCompoundTag("chestItems", chestItemsTag);
     }
     
 	@Override
     public void readEntityFromNBT(NBTTagCompound tag)
     {
 		super.readEntityFromNBT(tag);
+		NBTTagCompound chestItemsTag = tag.getCompoundTag("chestItems");
+		for(int count = 0; count < this.chestItems.length; count++)
+		{
+			if(chestItemsTag.hasKey("item" + String.valueOf(count)))
+			{
+				this.setInventorySlotContents(count, ItemStack.loadItemStackFromNBT(chestItemsTag.getCompoundTag("item" + String.valueOf(count))));
+			}
+		}
     }
 	
 	@Override
