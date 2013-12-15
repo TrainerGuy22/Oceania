@@ -25,7 +25,7 @@ public class ModelOceaniaBoatWithChest extends ModelBase
 	@Override
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		GL11.glScalef(par7, par7, par7);
+		GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
 		try 
@@ -39,7 +39,9 @@ public class ModelOceaniaBoatWithChest extends ModelBase
 			}
 		} catch(Exception e) 
 		{}
+		GL11.glScalef(par7, par7, par7);
 		model.renderAll();
+		GL11.glPopMatrix();
 	}
 
 }
