@@ -24,6 +24,18 @@ public class ModelOceaniaBoatWithChest extends ModelBase
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		GL11.glScalef(par7, par7, par7);
+		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
+		try 
+		{
+			int strength = boat.getDataWatcher().getWatchableObjectInt(22);
+			for(int index = 0; index < BoatTypes.values().length; index++) {
+				if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
+					System.out.println("textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
+					Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png"));
+				}
+			}
+		} catch(Exception e) 
+		{}
 		model.renderAll();
 	}
 
