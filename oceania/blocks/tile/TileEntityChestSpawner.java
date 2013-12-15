@@ -24,19 +24,6 @@ public class TileEntityChestSpawner extends TileEntityChest
 	}
 	
 	@Override
-    public String getInvName()
-    {
-        return "Chest Spawner";
-    }
-
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return true;
-    }
-
-	
-	@Override
     public void updateEntity() 
     {
     	if(cooldown != 0 && !worldObj.isRemote)
@@ -52,33 +39,30 @@ public class TileEntityChestSpawner extends TileEntityChest
     	if(villagerCount < 4 && cooldown < 1 && !this.worldObj.isRemote)
     	{
     		boolean triggered = false;
-    		for(int xCount = 3; xCount <= 7; xCount++)
-    		{
-        		for(int zCount = 3; zCount <= 7; zCount++)
-        		{
-        			if(this.worldObj.getBlockId(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount) == 0 && !triggered)
+
+        			int x = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
+        			int z = this.worldObj.rand.nextInt(maxRange * 2) - maxRange;
+        			if(this.worldObj.rand.nextInt(4) == 3 && !triggered)
         			{
-        				System.out.println("Spawn.");
-        				triggered = true;
-        	    		cooldown = 40;
-        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
-        	    		villagerToSpawn.setLocationAndAngles(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount, 0.0F, 0.0F);
-        	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
-        	    		villagerToSpawn.setProfession(3);
-        	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
-        			}
-        			if(this.worldObj.getBlockId(xCoord - xCount, yCoord - 2, zCoord - zCount) == 0 && !triggered)
-        			{
-        				System.out.println("Spawn.");
-        				triggered = true;
-        	    		cooldown = 40;
-        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
-        	    		villagerToSpawn.setLocationAndAngles(xCoord - xCount, yCoord - 2, zCoord - zCount, 0.0F, 0.0F);
-        	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
-        	    		villagerToSpawn.setProfession(3);
-        	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
-        			}
-        		}
+        				boolean valid = false;
+        				if(x <= 0)
+        					valid =  this.worldObj.getBlockId(xCoord + 1 + x, yCoord - 2, zCoord + z) == 0;
+        				else 
+        					valid =  this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z) == 0;
+        				if(valid)
+        				{
+        					System.out.println("Spawn.");
+        					triggered = true;
+        					cooldown = 40;
+        					EntityVillager villagerToSpawn = new EntityVillager(worldObj);
+            				if(x <= 0)
+            					villagerToSpawn.setLocationAndAngles(xCoord + 1 + x, yCoord - 2, zCoord + z, 0.0F, 0.0F);
+            				else 
+            					villagerToSpawn.setLocationAndAngles(xCoord + x, yCoord - 2, zCoord + z, 0.0F, 0.0F);
+            				((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
+        					villagerToSpawn.setProfession(3);
+        					this.worldObj.spawnEntityInWorld(villagerToSpawn);
+        				}
     		}
     	}
     	super.updateEntity();
