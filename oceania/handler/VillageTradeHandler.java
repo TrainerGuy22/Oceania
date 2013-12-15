@@ -7,6 +7,8 @@ import oceania.items.Items;
 
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
@@ -17,9 +19,30 @@ public class VillageTradeHandler implements IVillageTradeHandler
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList list, Random random) 
 	{
-		VillagerRegistry.instance().addEmeraldSellRecipe(villager, list, random, Items.itemMulti, 0.6f, 2, 4);
-		VillagerRegistry.instance().addEmeraldBuyRecipe(villager, list, random, Items.itemMulti, 0.2f, 3, 4);
-		VillagerRegistry.instance().addEmeraldSellRecipe(villager, list, random, Items.itemAtlantiteTrident, 0.2f, 1, 1);
+		for(int count = 0; count < 5; count++)
+		{
+			if(random.nextInt(7) == 2)
+			{
+				switch(count)
+				{
+				case 0:
+					list.addToListWithCheck(new MerchantRecipe(new ItemStack(Item.emerald, 5), new ItemStack(Items.itemAtlantiteTrident, 1)));
+					break;
+				case 1:
+					list.addToListWithCheck(new MerchantRecipe(new ItemStack(Item.emerald, 3), new ItemStack(Blocks.blockLimestone, 16, 0)));
+					break;
+				case 2:
+					list.addToListWithCheck(new MerchantRecipe(new ItemStack(Item.emerald, 6), new ItemStack(Items.itemMulti, 5, 0)));
+					break;
+				case 3:
+					list.addToListWithCheck(new MerchantRecipe(new ItemStack(Item.emerald, 2), new ItemStack(Items.itemMulti, 8, 2)));
+					break;
+				case 4:
+					list.addToListWithCheck(new MerchantRecipe(new ItemStack(Item.emerald, 7), new ItemStack(Items.itemDivingHelmet, 1)));
+					break;
+				}
+			}
+		}
 	}
 
 }
