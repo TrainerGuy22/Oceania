@@ -1,11 +1,11 @@
 package oceania.util;
 
 public enum DataWatcherTypes {
-	Byte,
-	Short,
-	Integer,
-	Float,
-	String,
-	ItemStack,
-	ChunkCoordinates;
+	BYTE,
+	SHORT,
+	INTEGER,
+	FLOAT,
+	STRING,
+	ITEMSTACK,
+	CHUNKCOORDINATES;
 }

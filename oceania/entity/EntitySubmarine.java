@@ -1,5 +1,6 @@
 package oceania.entity;
 
+import oceania.util.DataWatcherTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -32,19 +33,29 @@ public class EntitySubmarine extends Entity
 	@Override
 	protected void entityInit() 
 	{
-		
+		/* 
+		Init your entity and DataWatcher variables here. The index, first variable in 
+		'this.getDataWatcher().addObjectByDataType()', starts at 17. All below are used by
+		the Entity itself. For the second variable, use the DataWatcherTypes enum. 
+		 */
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound tag) 
 	{
-		
+		/*
+		You need to save all of your DataWatcher variables to NBT. 
+		See EntityOceaniaBoat for an example.
+		*/
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tag) 
 	{
-		
+		/*
+		You need to reconstruct all of your DataWatcher variables here from NBT. 
+		See EntityOceaniaBoat for an example.
+		*/
 	}
 
 }

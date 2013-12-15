@@ -2,6 +2,7 @@ package oceania.entity;
 
 import oceania.items.Items;
 import oceania.util.BoatTypes;
+import oceania.util.DataWatcherTypes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.item.EntityBoat;
@@ -35,10 +36,14 @@ public class EntityOceaniaBoat extends EntityBoat
     protected void entityInit()
     {
 		super.entityInit();
-        this.getDataWatcher().addObjectByDataType(20, 4);
-        this.getDataWatcher().addObjectByDataType(21, 4);
-        this.getDataWatcher().addObjectByDataType(22, 2);
-        this.getDataWatcher().addObjectByDataType(23, 5);
+		
+		/* The first parameter is a index. It's no more of a 'magic number' than something
+		 * in an array.
+		 */
+        this.getDataWatcher().addObjectByDataType(20, DataWatcherTypes.STRING.ordinal());
+        this.getDataWatcher().addObjectByDataType(21, DataWatcherTypes.STRING.ordinal());
+        this.getDataWatcher().addObjectByDataType(22, DataWatcherTypes.INTEGER.ordinal());
+        this.getDataWatcher().addObjectByDataType(23, DataWatcherTypes.ITEMSTACK.ordinal());
     }
 	
 	public void setBoatType(BoatTypes type) 

@@ -49,7 +49,11 @@ public class ItemOceaniaBoat extends ItemBoat
 		}
 	}
 	
-	// TODO: Figure out way to spawn these things that dosen't involve copypasta.
+	// TODO: Figure out way to spawn these things that dosen't involve copypasta. (Boat)
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+    	return stack;
+    }
 		
 	@Override
 	@SideOnly(Side.CLIENT)
