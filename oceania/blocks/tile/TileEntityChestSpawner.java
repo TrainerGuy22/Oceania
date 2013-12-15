@@ -4,17 +4,40 @@ import java.util.List;
 import java.util.Random;
 
 import oceania.blocks.Blocks;
+import oceania.entity.Entities;
+import oceania.items.Items;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityChestSpawner extends TileEntityChest 
 {
+	
+	public enum Loot
+	{
+		ATLANTITE(Items.itemMulti.itemID, 0, 3, 5, 0.4f),
+		ATLANTIUM(Items.itemMulti.itemID, 1, 2, 3, 0.2f),
+		SCREW(Items.itemMulti.itemID, 3, 7, 8, 0.7f);
+		
+		public int itemID, metadata, min, max;
+		public float chance;
+		private Loot(int itemID, int metadata, int min, int max, float chance)
+		{
+			this.itemID = itemID;
+			this.metadata = metadata;
+			this.min = min;
+			this.max = max;
+			this.chance = chance;
+		}
+		
+	}
 	
 	private static final int minRange = 3;
 	private static final int maxRange = 7;
@@ -30,8 +53,6 @@ public class TileEntityChestSpawner extends TileEntityChest
     {
     	if(cooldown != 0 && !worldObj.isRemote)
     		cooldown--;
-    	if(this.worldObj.rand.nextInt(6) == 3 && worldObj.isRemote)
-    		this.onRandomUpdate();
     	List<EntityVillager> villagers = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, AxisAlignedBB.getBoundingBox(xCoord - maxRange, yCoord - 1 - maxRange, zCoord - maxRange, xCoord + 1 + maxRange, yCoord + 1 + maxRange, zCoord + maxRange));
     	int villagerCount = 0;
     	for(EntityVillager villager : villagers)
@@ -67,7 +88,7 @@ public class TileEntityChestSpawner extends TileEntityChest
             				else 
             					villagerToSpawn.setLocationAndAngles(xCoord + x, yCoord - 2, zCoord + z, 0.0F, 0.0F);
             				((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
-        					villagerToSpawn.setProfession(3);
+        					villagerToSpawn.setProfession(Entities.VILLAGER_OCEANIA_ID);
         					this.worldObj.spawnEntityInWorld(villagerToSpawn);
         				}
     		}
@@ -75,26 +96,20 @@ public class TileEntityChestSpawner extends TileEntityChest
     	super.updateEntity();
     }
 	
-	private void onRandomUpdate()
+	public void genChest(World world)
 	{
-		Random random = this.worldObj.rand;
-		double bX = (double) xCoord + 0.5;
-		double bY = (double) yCoord + 0.5;
-		double bZ = (double) zCoord + 0.5;
-		
-		int side = random.nextInt(6);
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
-		double pX = bX + ((double) dir.offsetX / 1.5);
-		double pY = bY + ((double) dir.offsetY / 1.5);
-		double pZ = bZ + ((double) dir.offsetZ / 1.5);
-		
-		for (int i = 0; i < 10; i++)
+		for(int count = 0; count < this.getSizeInventory(); count++)
 		{
-			pX += (random.nextDouble() * 0.25) - 0.125f;
-			pY += (random.nextDouble() * 0.25) - 0.125f;
-			pZ += (random.nextDouble() * 0.25) - 0.125f;
-			
-			worldObj.spawnParticle("flame", pX, pY, pZ, (double) dir.offsetX * 0.5, (double) dir.offsetY * 0.5, (double) dir.offsetZ * 0.5);
+			if(this.worldObj.rand.nextInt(this.getSizeInventory()) < 20)
+			{
+				Loot loot = Loot.values()[this.worldObj.rand.nextInt(Loot.values().length)];
+				int amount = this.worldObj.rand.nextInt(loot.max);
+				while(amount < loot.min)
+				{
+					amount = this.worldObj.rand.nextInt(loot.max);
+				}
+				this.setInventorySlotContents(count, new ItemStack(loot.itemID, amount, loot.metadata));
+			}
 		}
 	}
 	
