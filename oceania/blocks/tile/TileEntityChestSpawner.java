@@ -3,6 +3,8 @@ package oceania.blocks.tile;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
@@ -37,7 +39,8 @@ public class TileEntityChestSpawner extends TileEntityChest
     public void updateEntity() 
     {
     	super.updateEntity();
-    	cooldown--;
+    	if(cooldown != 0)
+    		cooldown--;
     	if(this.worldObj.rand.nextInt(6) == 3)
     	{
     		this.onRandomUpdate();
@@ -46,7 +49,6 @@ public class TileEntityChestSpawner extends TileEntityChest
     	int villagerCount = 0;
     	for(EntityVillager villager : villagers)
     	{
-			System.out.println("Spawn start.");
     		villagerCount++;
     	}
     	if(villagerCount < 4 && cooldown == 0)
@@ -61,10 +63,10 @@ public class TileEntityChestSpawner extends TileEntityChest
         				System.out.println("Spawn.");
         				triggered = true;
         	    		cooldown = 40;
-        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
-        	    		villagerToSpawn.chunkCoordX = xCoord + 1 + xCount;
-        	    		villagerToSpawn.chunkCoordY = yCoord - 2;
-        	    		villagerToSpawn.chunkCoordZ = zCoord + zCount;
+        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
+        	    		villagerToSpawn.setLocationAndAngles(xCoord + 1 + xCount, yCoord - 2, zCoord + zCount, 0.0F, 0.0F);
+        	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
+        	    		villagerToSpawn.setProfession(3);
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
         			}
         			if(this.worldObj.getBlockId(xCoord - xCount, yCoord - 2, zCoord - zCount) == 0 && this.worldObj.rand.nextInt(6) == 3 && !triggered)
@@ -72,10 +74,10 @@ public class TileEntityChestSpawner extends TileEntityChest
         				System.out.println("Spawn.");
         				triggered = true;
         	    		cooldown = 40;
-        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj, 3);
-        	    		villagerToSpawn.chunkCoordX = xCoord - xCount;
-        	    		villagerToSpawn.chunkCoordY = yCoord - 2;
-        	    		villagerToSpawn.chunkCoordZ = zCoord - zCount;
+        	    		EntityVillager villagerToSpawn = new EntityVillager(worldObj);
+        	    		villagerToSpawn.setLocationAndAngles(xCoord - xCount, yCoord - 2, zCoord - zCount, 0.0F, 0.0F);
+        	    		((EntityLiving) villagerToSpawn).onSpawnWithEgg((EntityLivingData) null);
+        	    		villagerToSpawn.setProfession(3);
         	    		this.worldObj.spawnEntityInWorld(villagerToSpawn);
         			}
         		}
