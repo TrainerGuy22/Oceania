@@ -16,7 +16,6 @@ public class RenderOceaniaBoat extends RenderBoat
 	@SideOnly(Side.CLIENT)
     protected ResourceLocation getEntityTexture(Entity entity) 
 	{
-		System.out.println("Ohai der, guten tag!");
 		EntityOceaniaBoat boat = (EntityOceaniaBoat) entity;
 		try 
 		{
