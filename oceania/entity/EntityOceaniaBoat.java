@@ -1,21 +1,19 @@
 package oceania.entity;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import oceania.items.Items;
 import oceania.util.BoatType;
 import oceania.util.DataWatcherTypes;
 
-public abstract class EntityOceaniaBoat extends EntityBoat
+public abstract class EntityOceaniaBoat extends Entity
 {
-	public static final float	ENT_WIDTH		= 1.5f;
-	public static final float	ENT_LENGTH		= 1.5f;
-	public static final float	ENT_HEIGHT		= 0.2f;
-	
 	public static final int		INDEX_BOAT_TYPE	= 20;
 	private static final int	INDEX_HEALTH	= 21;
 	private static final int	INDEX_OWNER		= 22;
@@ -26,6 +24,9 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 	{
 		super(world);
 		this.yOffset = 0.875f;
+		this.motionX = 0.0f;
+		this.motionY = 0.0f;
+		this.motionZ = 0.0f;
 	}
 	
 	public EntityOceaniaBoat(World world, double x, double y, double z)
@@ -60,6 +61,8 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 	
 	public abstract float getMaxSpeed();
 	
+	public abstract void dropItemsOnDeath();
+	
 	public int getMaxHealth()
 	{
 		return getBoatType().strength;
@@ -86,10 +89,50 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 	}
 	
 	@Override
+	public boolean interactFirst(EntityPlayer player)
+	{
+		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != player)
+		{
+			return true;
+		}
+		else
+		{
+			if (!this.worldObj.isRemote)
+			{
+				player.mountEntity(this);
+			}
+			
+			return true;
+		}
+	}
+	
+	@Override
+	public AxisAlignedBB getCollisionBox(Entity other)
+	{
+		return other.boundingBox;
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox()
+	{
+		return this.boundingBox;
+	}
+	
+	@Override
+	public boolean canBePushed()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean canBeCollidedWith()
+	{
+		return !this.isDead;
+	}
+	
+	@Override
 	protected void entityInit()
 	{
-		super.entityInit();
-		
 		this.dataWatcher.addObjectByDataType(INDEX_BOAT_TYPE, DataWatcherTypes.BYTE.ordinal());
 		this.dataWatcher.addObjectByDataType(INDEX_HEALTH, DataWatcherTypes.INTEGER.ordinal());
 		this.dataWatcher.addObjectByDataType(INDEX_OWNER, DataWatcherTypes.STRING.ordinal());
@@ -112,8 +155,7 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 				ItemStack hand = player.getCurrentEquippedItem();
 				if (hand == null) // Empty hand
 				{
-					if (!player.capabilities.isCreativeMode)
-						this.dropItem(Items.itemSubmarine.itemID, 1);
+					this.dropItemsOnDeath();
 					this.setDead();
 				}
 			}
