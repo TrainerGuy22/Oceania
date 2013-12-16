@@ -9,24 +9,23 @@ import net.minecraft.world.World;
 public class EntitySubmarine extends Entity 
 {
 	private static final int INDEX_HEALTH = 17;
-	private static final int INDEX_TIME_SINCE_HIT = 18;
 
 	public EntitySubmarine(World world) 
 	{
 		super(world);
+		this.boundingBox.maxX = this.boundingBox.minX + 3.0f;
+		this.boundingBox.maxY = this.boundingBox.minY + 2.35f;
+		this.boundingBox.maxZ = this.boundingBox.minZ + 4.0f;
 	}
 	
 	public EntitySubmarine(World world, double x, double y, double z) 
 	{
-		super(world);
+		this(world);
 		this.setPosition(x, y + (double) yOffset, z);
 		this.setPreviousPosition(x, y, z);
 		this.motionX = 0;
 		this.motionY = 0;
 		this.motionZ = 0;
-		this.boundingBox.maxX = this.boundingBox.minX + 3.0f;
-		this.boundingBox.maxY = this.boundingBox.minY + 2.35f;
-		this.boundingBox.maxZ = this.boundingBox.minZ + 4.0f;
 	}
 	
 	public void setPreviousPosition(double x, double y, double z) 
@@ -34,6 +33,18 @@ public class EntitySubmarine extends Entity
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
+	}
+	
+	public int getHealth()
+	{
+		return this.dataWatcher.getWatchableObjectInt(INDEX_HEALTH);
+	}
+	
+	public void setHealth(int health)
+	{
+		if (health < 0 || health > 20)
+			return;
+		this.dataWatcher.updateObject(INDEX_HEALTH, (Integer) health);
 	}
 	
 	/**
@@ -52,29 +63,37 @@ public class EntitySubmarine extends Entity
     {
         return this.boundingBox;
     }
+    
+    @Override
+    public void onUpdate()
+    {
+    	super.onUpdate();
+    	
+    	if (this.getHealth() < 0)
+    		this.setDead();
+    	
+    	if (this.getHealth() > 20)
+    		this.setHealth(20);
+    }
 
 	@Override
 	protected void entityInit() 
 	{
+		this.dataWatcher.addObjectByDataType(INDEX_HEALTH, DataWatcherTypes.INTEGER.ordinal());
 		
+		setHealth(20);
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound tag) 
 	{
-		/*
-		You need to save all of your DataWatcher variables to NBT. 
-		See EntityOceaniaBoat for an example.
-		*/
+		setHealth(tag.getInteger("subHealth"));
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound tag) 
 	{
-		/*
-		You need to reconstruct all of your DataWatcher variables here from NBT. 
-		See EntityOceaniaBoat for an example.
-		*/
+		tag.setInteger("subHealth", getHealth());
 	}
 
 }
