@@ -24,6 +24,7 @@ public class RenderOceaniaBoat extends RenderBoat
 		{
 			e.printStackTrace();
 		}
+		
 		return BoatTypes.WOOD.worldTexture;
 	}
 
