@@ -2,23 +2,29 @@ package oceania.items;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import oceania.OUtil;
-import oceania.Oceania;
-import oceania.util.BoatTypes;
-import oceania.util.IconRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import oceania.Oceania;
+import oceania.entity.EntitySubmarine;
+import oceania.util.OUtil;
+
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSubmarine extends Item 
 {
+	private static final float PI_OVER_180 = (float) Math.PI / 180.0f;
 	
 	public ItemSubmarine(int itemID) 
 	{
@@ -27,9 +33,50 @@ public class ItemSubmarine extends Item
 		this.setUnlocalizedName("itemSubmarine");
 	}
 
-	// TODO: Figure out way to spawn these things that dosen't involve copypasta. (Submarine)
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
+        float pitch = player.rotationPitch;
+        float yaw = player.rotationYaw;
+        double pX = player.posX;
+        double pY = player.posY;
+        double pZ = player.posZ;
+        Vec3 playerPos = world.getWorldVec3Pool().getVecFromPool(pX, pY, pZ);
+        float yawOffZ = MathHelper.cos((-yaw * PI_OVER_180) - (float) Math.PI);
+        float yawOffX = MathHelper.sin((-yaw * PI_OVER_180) - (float) Math.PI);
+        float pitchOffZ = -MathHelper.cos((-pitch) * PI_OVER_180);
+        float pitchOffY = MathHelper.sin((-pitch) * PI_OVER_180);
+        float offsetX = yawOffX * pitchOffZ;
+        float offsetZ = yawOffZ * pitchOffZ;
+        double radius = 5.0;
+        Vec3 offset = playerPos.addVector((double)offsetX * radius, (double)pitchOffY * radius, (double)offsetZ * radius);
+        MovingObjectPosition hitPos = world.clip(playerPos, offset, true);
+
+        if (hitPos == null)
+        {
+            return stack;
+        }
+        else if (hitPos.typeOfHit == EnumMovingObjectType.TILE)
+        {
+        	int bX = hitPos.blockX;
+        	int bY = hitPos.blockY;
+        	int bZ = hitPos.blockZ;
+        	int bID = world.getBlockId(bX, bY, bZ);
+        	
+        	if (bID == Block.waterStill.blockID || bID == Block.waterMoving.blockID)
+        	{
+        		EntitySubmarine sub = new EntitySubmarine(world, bX + 0.5, bY + 1.0, bZ + 0.5);
+                sub.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0f / 360.0f) + 0.5) & 3) - 1) * 90);
+                sub.setOwner(player.getEntityName());
+                
+        		if (!world.getCollidingBoundingBoxes(sub, sub.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
+                    return stack;
+        		if (!world.isRemote)
+        			world.spawnEntityInWorld(sub);
+        		if (!player.capabilities.isCreativeMode)
+        			stack.stackSize--;
+        	}
+        }
+    	
     	return stack;
     }
     

@@ -14,12 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import oceania.OUtil;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.entity.EntityOceaniaBoatWithChest;
 import oceania.util.BoatTypes;
 import oceania.util.IconRegistry;
+import oceania.util.OUtil;
 
 public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat 
 {

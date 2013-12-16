@@ -2,13 +2,13 @@ package oceania.items;
 
 import java.util.List;
 
-import oceania.OUtil;
 import oceania.Oceania;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.util.BoatTypes;
 import oceania.util.IconRegistry;
+import oceania.util.OUtil;
 
 import org.lwjgl.input.Keyboard;
 

@@ -1,4 +1,4 @@
-package oceania;
+package oceania.util;
 
 public class OUtil
 {

@@ -35,14 +35,14 @@ public class Items
 		itemBoatWithChest = new ItemOceaniaBoatWithChest(cfg.getItem("itemBoatWithChest", DEFAULT_ID_RANGE + 3).getInt(DEFAULT_ID_RANGE + 3));
 		itemSubmarine = new ItemSubmarine(cfg.getItem("itemSubmarine", DEFAULT_ID_RANGE + 4).getInt(DEFAULT_ID_RANGE + 4));
 		
-		Item.itemsList[333] = null;
-		itemBoat = new ItemOceaniaBoat(77);
+		//Item.itemsList[Item.boat.itemID + 256] = null;
+		//itemBoat = new ItemOceaniaBoat(Item.boat.itemID);
 		
 		/** Add to registry */
 		GameRegistry.registerItem(itemDivingHelmet, Oceania.MOD_ID + "itemDivingHelmet");
 		GameRegistry.registerItem(itemMulti, Oceania.MOD_ID + "itemMulti");
 		GameRegistry.registerItem(itemAtlantiteTrident, Oceania.MOD_ID + "itemAtlantiteTrident");
-		GameRegistry.registerItem(itemBoat, Oceania.MOD_ID + "itemBoat");
+		//GameRegistry.registerItem(itemBoat, Oceania.MOD_ID + "itemBoat");
 		GameRegistry.registerItem(itemBoatWithChest, Oceania.MOD_ID + "itemBoatWithChest");
 		GameRegistry.registerItem(itemSubmarine, Oceania.MOD_ID + "itemSubmarine");
 
