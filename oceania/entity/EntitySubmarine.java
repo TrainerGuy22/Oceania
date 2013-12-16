@@ -3,6 +3,7 @@ package oceania.entity;
 import oceania.util.DataWatcherTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntitySubmarine extends Entity 
@@ -21,6 +22,9 @@ public class EntitySubmarine extends Entity
 		this.motionX = 0;
 		this.motionY = 0;
 		this.motionZ = 0;
+		this.boundingBox.maxX = this.boundingBox.minX + 3.0f;
+		this.boundingBox.maxY = this.boundingBox.minY + 2.35f;
+		this.boundingBox.maxZ = this.boundingBox.minZ + 4.0f;
 	}
 	
 	public void setPreviousPosition(double x, double y, double z) 
@@ -29,6 +33,23 @@ public class EntitySubmarine extends Entity
 		this.prevPosY = y;
 		this.prevPosZ = z;
 	}
+	
+	/**
+     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
+     * pushable on contact, like boats or minecarts.
+     */
+    public AxisAlignedBB getCollisionBox(Entity other)
+    {
+        return other.boundingBox;
+    }
+
+    /**
+     * returns the bounding box for this entity
+     */
+    public AxisAlignedBB getBoundingBox()
+    {
+        return this.boundingBox;
+    }
 
 	@Override
 	protected void entityInit() 
