@@ -3,7 +3,11 @@
 */
 
 package oceania.gen;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import oceania.blocks.Blocks;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -14,17 +18,36 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGenUnderwaterVillage implements IWorldGenerator
 {
-	protected int[] GetValidSpawnBlocks() {
-		return new int[] {
-		};
-	}
 
-	public boolean LocationIsValidSpawn(World world, int i, int j, int k){
+	public boolean LocationIsValidSpawn(World world, int x, int y, int z)
+	{
+		List<Integer> validIDs = new ArrayList<Integer>();
+		validIDs.add(world.getBlockId(x + 8, y + 6, z + 8));
+		validIDs.add(world.getBlockId(x, y + 6, z));
+		validIDs.add(world.getBlockId(x + 17, y + 6, z + 8));
+		validIDs.add(world.getBlockId(x + 8, y + 6, z + 17));
+		validIDs.add(world.getBlockId(x + 17, y + 6, z + 17));
+		
+		validIDs.add(world.getBlockId(x + 8, y + 6, z + 8));
+		validIDs.add(world.getBlockId(x, y + 6, z));
+		validIDs.add(world.getBlockId(x + 17, y + 6, z + 8));
+		validIDs.add(world.getBlockId(x + 8, y + 6, z + 17));
+		validIDs.add(world.getBlockId(x + 17, y + 6, z + 17));
+		
+		if(world.rand.nextInt(100) != 1)
+			return false;
+		for(int validID : validIDs)
+		{
+			if(!(validID == Block.waterStill.blockID || validID == Block.waterMoving.blockID))
+				return false;
+		}
+		
 		return true;
 	}
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
 		
 	    int i = (chunkX * 16) + random.nextInt(16); // x
 	    int j = 0; // y
@@ -35,6 +58,8 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	    	int blockAboveID = world.getBlockId(i, count + 1, k);
 	    	if((blockID == Block.sand.blockID || blockID == Block.dirt.blockID) && (blockAboveID == Block.waterStill.blockID || blockAboveID == Block.waterMoving.blockID))
 	    	{
+	    		j = count;
+	    		break;
 	    	}
 	    }
 
@@ -404,7 +429,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 8, j + 3, k + 8, Block.blockGold.blockID);
 		world.setBlock(i + 8, j + 3, k + 16, Block.glass.blockID);
 		world.setBlock(i + 8, j + 4, k + 1, Block.glass.blockID);
-		world.setBlockAndMetadata(i + 8, j + 4, k + 8, Block.chest.blockID, 4);
+		world.setBlockMetadataWithNotify(i + 8, j + 4, k + 8, Blocks.blockChestSpawner.blockID, 3);
 		world.setBlock(i + 8, j + 4, k + 15, Block.glass.blockID);
 		world.setBlock(i + 8, j + 5, k + 2, Block.glass.blockID);
 		world.setBlock(i + 8, j + 5, k + 14, Block.glass.blockID);
@@ -859,15 +884,15 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlockWithNotify(i + 7, j + 1, k + 1, Block.sand.blockID);
 		world.setBlockWithNotify(i + 7, j + 1, k + 2, Block.sand.blockID);
 		world.setBlockWithNotify(i + 7, j + 1, k + 3, Block.sand.blockID);
-		world.setBlockAndMetadataWithNotify(i + 7, j + 1, k + 7, Block.waterStill.blockID, 9);
-		world.setBlockAndMetadataWithNotify(i + 7, j + 1, k + 8, Block.waterStill.blockID, 8);
-		world.setBlockAndMetadataWithNotify(i + 7, j + 1, k + 9, Block.waterStill.blockID, 9);
+		world.setBlockMetadataWithNotify(i + 7, j + 1, k + 7, Block.waterStill.blockID, 9);
+		world.setBlockMetadataWithNotify(i + 7, j + 1, k + 8, Block.waterStill.blockID, 8);
+		world.setBlockMetadataWithNotify(i + 7, j + 1, k + 9, Block.waterStill.blockID, 9);
 		world.setBlockWithNotify(i + 7, j + 1, k + 13, Block.sand.blockID);
 		world.setBlockWithNotify(i + 7, j + 1, k + 14, Block.sand.blockID);
 		world.setBlockWithNotify(i + 7, j + 1, k + 15, Block.sand.blockID);
-		world.setBlockAndMetadataWithNotify(i + 7, j + 2, k + 7, Block.waterStill.blockID, 1);
+		world.setBlockMetadataWithNotify(i + 7, j + 2, k + 7, Block.waterStill.blockID, 1);
 		world.setBlockWithNotify(i + 7, j + 2, k + 8, Block.waterStill.blockID);
-		world.setBlockAndMetadataWithNotify(i + 7, j + 2, k + 9, Block.waterStill.blockID, 1);
+		world.setBlockMetadataWithNotify(i + 7, j + 2, k + 9, Block.waterStill.blockID, 1);
 		world.setBlockWithNotify(i + 8, j + 1, k + 1, Block.sand.blockID);
 		world.setBlockWithNotify(i + 8, j + 1, k + 2, Block.sand.blockID);
 		world.setBlockWithNotify(i + 8, j + 1, k + 3, Block.sand.blockID);
