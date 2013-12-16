@@ -34,8 +34,8 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
     {
         if (this.riddenByEntity != null)
         {
-            double xOffset = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-            double yOffset = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.8D;
+            double xOffset = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * -0.4D;
+            double yOffset = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * -0.4D;
             this.riddenByEntity.setPosition(this.posX + xOffset, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + yOffset);
         }
     }

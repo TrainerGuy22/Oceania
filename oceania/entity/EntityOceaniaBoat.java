@@ -1,5 +1,6 @@
 package oceania.entity;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import oceania.items.Items;
 import oceania.util.BoatTypes;
 import oceania.util.DataWatcherTypes;
@@ -79,6 +80,7 @@ public class EntityOceaniaBoat extends EntityBoat
 			if (BoatTypes.values()[index].equals(type))
 			{
 				this.getDataWatcher().updateObject(this.INDEX_BOAT_TYPE, (Byte) (byte) index);
+				ReflectionHelper.setPrivateValue(EntityBoat.class, this, 0.07 * (2.0 * (index + 1)), "speedMultiplier", "field_70276_b");
 			}
 		}
 		this.getDataWatcher().updateObject(this.INDEX_DAMAGE, type.strength);

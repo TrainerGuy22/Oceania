@@ -128,19 +128,19 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 	{
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 		{
-			descriptionList.add(EnumChatFormatting.LIGHT_PURPLE + "Steve not included.");
+			descriptionList.add(OUtil.colorString("&&dSteve not included.&&7"));
 			switch(itemStack.getItemDamage())
 			{
 			case 0:
-				descriptionList.add("A boat made of sturdy planks.");
+				descriptionList.add(OUtil.colorString("A boat made of &&esturdy planks&&7."));
 				descriptionList.add("Doubt it will last long.");
 				break;
 			case 1:
-				descriptionList.add("A boat made of Iron, should");
+				descriptionList.add(OUtil.colorString("A boat made of &&fIron&&7, should"));
 				descriptionList.add("last a while.");
 				break;
 			case 2: 
-				descriptionList.add("Made of purely Atlantium,");
+				descriptionList.add(OUtil.colorString("Made of purely &&6Atlantium&&7,"));
 				descriptionList.add("almost indestructable.");
 			}
 		}

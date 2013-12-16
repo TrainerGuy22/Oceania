@@ -1,5 +1,6 @@
 package oceania.entity.render.model;
 
+import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -431,7 +432,6 @@ public class ModelSubmarine extends ModelBase
 	public void render(float scale)
 	{
 		Bottom.render(scale);
-		FrontGlass.render(scale);
 		ChairBase.render(scale);
 		ChairHeadRod1.render(scale);
 		ChairHandRight.render(scale);
@@ -441,12 +441,19 @@ public class ModelSubmarine extends ModelBase
 		ChairHead.render(scale);
 		ChairHeadRod.render(scale);
 		ChairBaseRod.render(scale);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GlassBack.render(scale);
 		GlassRight.render(scale);
 		GlassTopRight.render(scale);
 		GlassTopLeft.render(scale);
 		GlassTopBack.render(scale);
 		GlassTopFront.render(scale);
+		GlassLeft.render(scale);
+		FrontGlass.render(scale);
+		glDisable(GL_BLEND);
+		
 		TopLid.render(scale);
 		BottomLid.render(scale);
 		BottomBaseRight.render(scale);
@@ -462,7 +469,6 @@ public class ModelSubmarine extends ModelBase
 		AdvancedMachinePart2.render(scale);
 		TopLidIronTop.render(scale);
 		TopMachinePartRight.render(scale);
-		GlassLeft.render(scale);
 		MahcinePartConnection.render(scale);
 		TopMachinePartLeft.render(scale);
 		AdvancedMachinePartBack.render(scale);
