@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatWithChest;
 import oceania.entity.render.model.ModelBoatWithChest;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 import oceania.util.OUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,7 +49,7 @@ public class RenderOceaniaBoatWithChest extends Render
 		try
 		{
 			//System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-			String boatName = BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)]._unloc;
+			String boatName = BoatType.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)].unloc;
 			if (!this.texCache.containsKey(boatName))
 				this.texCache.put(boatName, new ResourceLocation("oceania", "textures/models/" + boatName + "Chest.png"));
 			return this.texCache.get(boatName);

@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.entity.EntityOceaniaBoatWithChest;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 import oceania.util.IconRegistry;
 import oceania.util.OUtil;
 
@@ -67,7 +67,7 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
         	{
         		EntityOceaniaBoatWithChest boat = new EntityOceaniaBoatWithChest(world, bX + 0.5, bY + 1.0, bZ + 0.5);
                 boat.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0f / 360.0f) + 0.5) & 3) - 1) * 90);
-                boat.setBoatType(BoatTypes.values()[stack.getItemDamage()]);
+                boat.setBoatType(BoatType.values()[stack.getItemDamage()]);
                 //boat.setOwner(player.getEntityName());
                 
         		if (!world.getCollidingBoundingBoxes(boat, boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
@@ -87,9 +87,9 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 	@Override
 	public void initLangNames()
 	{
-		for(BoatTypes boat : BoatTypes.values()) 
+		for(BoatType boat : BoatType.values()) 
 		{
-			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".chest.name", boat._loc + " with Chest");
+			LanguageRegistry.instance().addStringLocalization("item." + boat.unloc + ".chest.name", boat.loc + " with Chest");
 		}
 	}
 	
@@ -97,9 +97,9 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
-		for(int index = 0; index < BoatTypes.values().length; index++) 
+		for(int index = 0; index < BoatType.values().length; index++) 
 		{
-			IconRegistry.setIcon(BoatTypes.values()[index]._unloc + "Chest", registry.registerIcon("oceania:" + BoatTypes.values()[index]._unloc + "Chest"));
+			IconRegistry.setIcon(BoatType.values()[index].unloc + "Chest", registry.registerIcon("oceania:" + BoatType.values()[index].unloc + "Chest"));
 		}
 	}
 	
@@ -107,17 +107,17 @@ public class ItemOceaniaBoatWithChest extends ItemOceaniaBoat
 	@SideOnly(Side.CLIENT)
     public Icon getIconFromDamage(int meta)
 	{
-		return IconRegistry.getIcon(BoatTypes.values()[meta]._unloc + "Chest");
+		return IconRegistry.getIcon(BoatType.values()[meta].unloc + "Chest");
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 
 	{
-		return "item." + BoatTypes.values()[stack.getItemDamage()]._unloc + ".chest";
+		return "item." + BoatType.values()[stack.getItemDamage()].unloc + ".chest";
 	}
 	
-	protected static Entity createBoat(World world, BoatTypes boatType, double x, double y, double z)
+	protected static Entity createBoat(World world, BoatType boatType, double x, double y, double z)
 	{
 		return new EntityOceaniaBoatWithChest(world, boatType, x, y, z);
 	}

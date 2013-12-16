@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.techne.TechneModel;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatNormal;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -39,7 +39,7 @@ public class RenderOceaniaBoat extends RenderBoat
 		try
 		{
 			//System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-			return BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)].worldTexture;
+			return BoatType.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)].worldTexture;
 		}
 		catch (Exception e)
 		{

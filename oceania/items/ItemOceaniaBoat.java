@@ -7,7 +7,7 @@ import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatNormal;
 import oceania.entity.EntitySubmarine;
 import oceania.items.ItemMulti.ItemMultiType;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 import oceania.util.IconRegistry;
 import oceania.util.OUtil;
 
@@ -44,9 +44,9 @@ public class ItemOceaniaBoat extends ItemBoat
 	
 	public void initLangNames()
 	{
-		for(BoatTypes boat : BoatTypes.values()) 
+		for(BoatType boat : BoatType.values()) 
 		{
-			LanguageRegistry.instance().addStringLocalization("item." + boat._unloc + ".name", boat._loc);
+			LanguageRegistry.instance().addStringLocalization("item." + boat.unloc + ".name", boat.loc);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class ItemOceaniaBoat extends ItemBoat
         	{
         		EntityOceaniaBoatNormal boat = new EntityOceaniaBoatNormal(world, bX + 0.5, bY + 1.0, bZ + 0.5);
                 boat.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0f / 360.0f) + 0.5) & 3) - 1) * 90);
-                boat.setBoatType(BoatTypes.values()[stack.getItemDamage()]);
+                boat.setBoatType(BoatType.values()[stack.getItemDamage()]);
                 //boat.setOwner(player.getEntityName());
                 
         		if (!world.getCollidingBoundingBoxes(boat, boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
@@ -104,16 +104,16 @@ public class ItemOceaniaBoat extends ItemBoat
 	@SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) 
 	{
-		return "item." + BoatTypes.values()[stack.getItemDamage()]._unloc;
+		return "item." + BoatType.values()[stack.getItemDamage()].unloc;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister registry)
 	{
-		for(int index = 0; index < BoatTypes.values().length; index++) 
+		for(int index = 0; index < BoatType.values().length; index++) 
 		{
-			IconRegistry.setIcon(BoatTypes.values()[index]._unloc, registry.registerIcon(BoatTypes.values()[index].namespace + ":" + BoatTypes.values()[index]._unloc));
+			IconRegistry.setIcon(BoatType.values()[index].unloc, registry.registerIcon(BoatType.values()[index].namespace + ":" + BoatType.values()[index].unloc));
 		}
 	}
 	
@@ -121,14 +121,14 @@ public class ItemOceaniaBoat extends ItemBoat
 	@SideOnly(Side.CLIENT)
     public Icon getIconFromDamage(int meta)
 	{
-		return IconRegistry.getIcon(BoatTypes.values()[meta]._unloc);
+		return IconRegistry.getIcon(BoatType.values()[meta].unloc);
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
     public void getSubItems(int ID, CreativeTabs tabs, List list) 
 	{
-		for(int index = 0; index < BoatTypes.values().length; index++) 
+		for(int index = 0; index < BoatType.values().length; index++) 
 		{
 			list.add(new ItemStack(ID, 1, index));
 		}
