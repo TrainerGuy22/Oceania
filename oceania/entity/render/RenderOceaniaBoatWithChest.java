@@ -1,41 +1,62 @@
 package oceania.entity.render;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import java.util.HashMap;
+
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.techne.TechneModel;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatWithChest;
-import oceania.entity.render.model.ModelOceaniaBoatWithChest;
-import oceania.items.Items;
 import oceania.util.BoatTypes;
+import oceania.util.OUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBoat;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderBoat;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class RenderOceaniaBoatWithChest extends RenderBoat
+public class RenderOceaniaBoatWithChest extends Render
 {
+	private TechneModel model;
+	private HashMap<String, ResourceLocation> texCache;
+	
+	public RenderOceaniaBoatWithChest()
+	{
+		this.model = (TechneModel) AdvancedModelLoader.loadModel("/assets/oceania/models/boatWithChest.tcn");
+		this.texCache = new HashMap<String, ResourceLocation>();
+	}
+
+	@Override
+	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
+	{
+		glPushMatrix();
+		glTranslated(x, y, z);
+		glScalef(1.0f / 16.0f, 1.0f / 16.0f, 1.0f / 16.0f);
+		OUtil.bindTexture(this.getEntityTexture(entity));
+		model.renderAll();
+		glPopMatrix();
+	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    protected ResourceLocation getEntityTexture(Entity entity) 
+	protected ResourceLocation getEntityTexture(Entity entity)
 	{
-		if(this.modelBoat instanceof ModelBoat)
-			modelBoat = new ModelOceaniaBoatWithChest();
-		// TODO: Scale texture to actually fit.
 		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
-		try 
+		try
 		{
-				System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-				return new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-		} catch(Exception e) 
+			//System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
+			String boatName = BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)]._unloc;
+			if (!this.texCache.containsKey(boatName))
+				this.texCache.put(boatName, new ResourceLocation("oceania", "textures/models/" + boatName + "Chest.png"));
+			return this.texCache.get(boatName);
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 		return new ResourceLocation("oceania", "/textures/entity/ironBoatChest.png");
 	}
-
+	
 }

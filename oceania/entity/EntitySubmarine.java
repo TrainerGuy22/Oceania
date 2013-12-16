@@ -12,9 +12,10 @@ import oceania.util.DataWatcherTypes;
 
 public class EntitySubmarine extends Entity
 {
-	private static final float	ENT_WIDTH		= 3.0f;
-	private static final float	ENT_LENGTH		= 4.0f;
-	private static final float	ENT_HEIGHT		= 2.35f;
+	public static final float	ENT_WIDTH		= 3.0f;
+	public static final float	ENT_LENGTH		= 4.0f;
+	public static final float	ENT_HEIGHT		= 2.35f;
+	
 	private static final int	INDEX_HEALTH	= 17;
 	private static final int	INDEX_OWNER		= 18;
 	private static final int	MAX_HEALTH		= 300;
@@ -28,6 +29,7 @@ public class EntitySubmarine extends Entity
 		this.boundingBox.maxY = this.boundingBox.minY + 2.35f;
 		this.boundingBox.maxZ = this.boundingBox.minZ + 4.0f;
 		this.ticksUntilHeal = 0;
+		this.ignoreFrustumCheck = true;
 	}
 	
 	public EntitySubmarine(World world, double x, double y, double z)
@@ -71,7 +73,8 @@ public class EntitySubmarine extends Entity
 				ItemStack hand = player.getCurrentEquippedItem();
 				if (hand == null) // Empty hand
 				{
-					this.dropItem(Items.itemSubmarine.itemID, 1);
+					if (!player.capabilities.isCreativeMode)
+						this.dropItem(Items.itemSubmarine.itemID, 1);
 					this.setDead();
 				}
 			}

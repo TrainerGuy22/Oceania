@@ -23,9 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSubmarine extends Item 
-{
-	private static final float PI_OVER_180 = (float) Math.PI / 180.0f;
-	
+{	
 	public ItemSubmarine(int itemID) 
 	{
 		super(itemID);
@@ -41,10 +39,10 @@ public class ItemSubmarine extends Item
         double pY = player.posY;
         double pZ = player.posZ;
         Vec3 playerPos = world.getWorldVec3Pool().getVecFromPool(pX, pY, pZ);
-        float yawOffZ = MathHelper.cos((-yaw * PI_OVER_180) - (float) Math.PI);
-        float yawOffX = MathHelper.sin((-yaw * PI_OVER_180) - (float) Math.PI);
-        float pitchOffZ = -MathHelper.cos((-pitch) * PI_OVER_180);
-        float pitchOffY = MathHelper.sin((-pitch) * PI_OVER_180);
+        float yawOffZ = MathHelper.cos((-yaw * OUtil.PI_OVER_180) - (float) Math.PI);
+        float yawOffX = MathHelper.sin((-yaw * OUtil.PI_OVER_180) - (float) Math.PI);
+        float pitchOffZ = -MathHelper.cos((-pitch) * OUtil.PI_OVER_180);
+        float pitchOffY = MathHelper.sin((-pitch) * OUtil.PI_OVER_180);
         float offsetX = yawOffX * pitchOffZ;
         float offsetZ = yawOffZ * pitchOffZ;
         double radius = 5.0;
