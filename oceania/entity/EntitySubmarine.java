@@ -1,21 +1,15 @@
 package oceania.entity;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import oceania.items.Items;
+import oceania.net.NetworkHandler;
 import oceania.util.DataWatcherTypes;
 import oceania.util.OUtil;
 
@@ -25,16 +19,17 @@ public class EntitySubmarine extends Entity
 	public static final float	ENT_LENGTH		= 4.0f;
 	public static final float	ENT_HEIGHT		= 2.35f;
 	
-	private static final float	GRAVITY			= -0.04f;
-	private static final float	ACCELERATION	= 0.0125f;
-	private static final float	TURN_SPEED		= 0.5f;
+	private static final float	GRAVITY			= 0.04f;
+	private static final float	ACCELERATION	= 1.0f / 2048.0f;
+	private static final float	MAX_SPEED		= 5.0f;
+	private static final float	TURN_SPEED		= 1.25f;
 	private static final int	INDEX_HEALTH	= 20;
 	private static final int	INDEX_OWNER		= 21;
 	private static final int	MAX_HEALTH		= 300;
 	
 	private int					ticksUntilHeal;
-	private float				velForward;
-	private float				velTurning;
+	public float				velForward;
+	public float				velTurning;
 	
 	public EntitySubmarine(World world)
 	{
@@ -98,12 +93,12 @@ public class EntitySubmarine extends Entity
 		return true;
 	}
 	
-	public int getHealth()
+	public int getBoatHealth()
 	{
 		return this.dataWatcher.getWatchableObjectInt(INDEX_HEALTH);
 	}
 	
-	public void setHealth(int health)
+	public void setBoatHealth(int health)
 	{
 		if (health < 0 || health > MAX_HEALTH)
 			return;
@@ -149,66 +144,76 @@ public class EntitySubmarine extends Entity
 	{
 		super.onUpdate();
 		
-		if (this.getHealth() < 0)
+		if (this.getBoatHealth() < 0)
 			this.setDead();
 		
-		if (this.getHealth() > MAX_HEALTH)
-			this.setHealth(MAX_HEALTH);
+		if (this.getBoatHealth() > MAX_HEALTH)
+			this.setBoatHealth(MAX_HEALTH);
 		
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 		
-		if (worldObj.isAABBInMaterial(this.boundingBox, Material.water))
+		if (!this.worldObj.isRemote)
 		{
-			motionX *= 0.98;
-			motionY *= 0.98;
-			motionZ *= 0.98;
 			
-			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
+			if (worldObj.isAABBInMaterial(this.boundingBox, Material.water))
 			{
-				velForward = 0.0f;
-				velTurning = 0.0f;
-				EntityPlayer player = (EntityPlayer) this.riddenByEntity;
-				if (player.moveForward < -0.0001f)
+				motionX *= 0.98;
+				motionY *= 0.98;
+				motionZ *= 0.98;
+				if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
 				{
-					velForward += ACCELERATION;
+					EntityPlayer player = (EntityPlayer) this.riddenByEntity;
+					if (player.moveForward < -0.0001f)
+					{
+						velForward += ACCELERATION;
+					}
+					else if (player.moveForward > 0.0001f)
+					{
+						velForward -= ACCELERATION;
+					}
+					if (player.moveStrafing < -0.0001f)
+					{
+						velTurning = TURN_SPEED;
+					}
+					else if (player.moveStrafing > 0.0001f)
+					{
+						velTurning = -TURN_SPEED;
+					}
+					else
+					{
+						velTurning = 0.0f;
+					}
+					
+					velForward = Math.min(Math.max(velForward, -MAX_SPEED), MAX_SPEED);
+					
+					float cos = (float) Math.cos(this.rotationYaw * OUtil.PI_OVER_180);
+					float sin = (float) Math.sin(this.rotationYaw * OUtil.PI_OVER_180);
+					
+					this.motionX += cos * velForward;
+					this.motionZ += sin * velForward;
 				}
-				else if (player.moveForward > 0.0001f)
-				{
-					velForward -= ACCELERATION;
-				}
-				if (player.moveStrafing < -0.0001f)
-				{
-					velTurning = TURN_SPEED;
-				}
-				else if (player.moveStrafing > 0.0001f)
-				{
-					velTurning = -TURN_SPEED;
-				}
-				else
-				{
-					velTurning = 0.0f;
-				}
-				
-				this.rotationYaw += velTurning;
-				
-				float cos = (float) Math.cos(this.rotationYaw * OUtil.PI_OVER_180);
-				float sin = (float) Math.sin(this.rotationYaw * OUtil.PI_OVER_180);
-				
-				this.motionX += cos * velForward;
-				this.motionZ += sin * velForward;
 			}
+			else
+			{
+				motionY -= GRAVITY;
+				motionX *= 0.5;
+				motionY *= 0.5;
+				motionZ *= 0.5;
+			}
+			
+			this.moveEntity(motionX, motionY, motionZ);
+			
+			NetworkHandler.INSTANCE.sendSubmarineVelocity(this.entityId, motionX, motionY, motionZ, velTurning);
 		}
 		else
 		{
-			motionY += GRAVITY;
-			motionX *= 0.5;
-			motionY *= 0.5;
-			motionZ *= 0.5;
+			this.setPosition(posX + motionX, posY + motionY, posZ + motionZ);
 		}
 		
-		this.setPosition(posX + motionX, posY + motionY, posZ + motionZ);
+		this.rotationYaw += velTurning;
+		this.setRotation(rotationYaw, rotationPitch);
 	}
 	
 	@Override
@@ -252,21 +257,21 @@ public class EntitySubmarine extends Entity
 		this.dataWatcher.addObjectByDataType(INDEX_HEALTH, DataWatcherTypes.INTEGER.ordinal());
 		this.dataWatcher.addObjectByDataType(INDEX_OWNER, DataWatcherTypes.STRING.ordinal());
 		
-		setHealth(MAX_HEALTH);
+		setBoatHealth(MAX_HEALTH);
 		setOwner("");
 	}
 	
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound tag)
+	public void readEntityFromNBT(NBTTagCompound tag)
 	{
-		setHealth(tag.getInteger("subHealth"));
+		setBoatHealth(tag.getInteger("subHealth"));
 		setOwner(tag.getString("subOwner"));
 	}
 	
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound tag)
+	public void writeEntityToNBT(NBTTagCompound tag)
 	{
-		tag.setInteger("subHealth", getHealth());
+		tag.setInteger("subHealth", getBoatHealth());
 		tag.setString("subOwner", getOwner());
 	}
 	
