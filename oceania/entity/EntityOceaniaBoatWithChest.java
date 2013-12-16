@@ -111,15 +111,7 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
 	public String getInvName()
 	{
-		int strength = this.getDataWatcher().getWatchableObjectInt(22);
-		for (int index = 0; index < BoatTypes.values().length; index++)
-		{
-			if (((Integer) BoatTypes.values()[index].strength).equals(strength))
-			{
-				return BoatTypes.values()[index]._loc + " with Chest";
-			}
-		}
-		return "";
+		return BoatTypes.values()[this.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)]._loc + " with Chest";
 	}
 	
 	@Override
