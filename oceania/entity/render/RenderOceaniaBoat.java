@@ -19,11 +19,12 @@ public class RenderOceaniaBoat extends RenderBoat
 		EntityOceaniaBoat boat = (EntityOceaniaBoat) entity;
 		try 
 		{
-			return new ResourceLocation(boat.getDataWatcher().getWatchableObjectString(20), boat.getDataWatcher().getWatchableObjectString(21));
+			return BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)].worldTexture;
 		} catch(Exception e) 
 		{
 			e.printStackTrace();
 		}
+		
 		return BoatTypes.WOOD.worldTexture;
 	}
 

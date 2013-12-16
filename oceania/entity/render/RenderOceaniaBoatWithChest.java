@@ -29,13 +29,8 @@ public class RenderOceaniaBoatWithChest extends RenderBoat
 		EntityOceaniaBoatWithChest boat = (EntityOceaniaBoatWithChest) entity;
 		try 
 		{
-			int strength = boat.getDataWatcher().getWatchableObjectInt(22);
-			for(int index = 0; index < BoatTypes.values().length; index++) {
-				if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
-					System.out.println("textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
-					return new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[index]._unloc + "Chest.png");
-				}
-			}
+				System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
+				return new ResourceLocation("oceania", "textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
 		} catch(Exception e) 
 		{
 			e.printStackTrace();
