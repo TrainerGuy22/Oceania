@@ -40,19 +40,15 @@ public class EntityOceaniaBoat extends EntityBoat
     {
 		super.entityInit();
 		
-<<<<<<< HEAD
-		
         this.getDataWatcher().addObjectByDataType(20, DataWatcherTypes.STRING.ordinal());
         this.getDataWatcher().addObjectByDataType(21, DataWatcherTypes.STRING.ordinal());
         this.getDataWatcher().addObjectByDataType(22, DataWatcherTypes.INTEGER.ordinal());
         this.getDataWatcher().addObjectByDataType(23, DataWatcherTypes.ITEMSTACK.ordinal());
-=======
 		/* The first parameter is a index. It's no more of a 'magic number' than something
 		 * in an array.
 		 */
         this.getDataWatcher().addObjectByDataType(this.BYTE_BOAT_TYPE, DataWatcherTypes.BYTE.ordinal());
         this.getDataWatcher().addObjectByDataType(this.INT_DAMAGE, DataWatcherTypes.INTEGER.ordinal());
->>>>>>> 7f356bf2e73eec42f7ee62aa1c0d7ed3dc1d9a11
     }
 	
 	public void setBoatType(BoatTypes type) 

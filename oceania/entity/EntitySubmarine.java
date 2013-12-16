@@ -8,6 +8,8 @@ import net.minecraft.world.World;
 
 public class EntitySubmarine extends Entity 
 {
+	private static final int INDEX_HEALTH = 17;
+	private static final int INDEX_TIME_SINCE_HIT = 18;
 
 	public EntitySubmarine(World world) 
 	{
@@ -54,11 +56,7 @@ public class EntitySubmarine extends Entity
 	@Override
 	protected void entityInit() 
 	{
-		/* 
-		Init your entity and DataWatcher variables here. The index, first variable in 
-		'this.getDataWatcher().addObjectByDataType()', starts at 17. All below are used by
-		the Entity itself. For the second variable, use the DataWatcherTypes enum. 
-		 */
+		
 	}
 
 	@Override
