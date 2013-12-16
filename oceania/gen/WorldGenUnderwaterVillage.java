@@ -9,6 +9,8 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGenUnderwaterVillage implements IWorldGenerator
 {
@@ -18,43 +20,26 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	}
 
 	public boolean LocationIsValidSpawn(World world, int i, int j, int k){
-		int distanceToAir = 0;
-		int checkID = world.getBlockId(i, j, k);
-
-		while (checkID != 0){
-			distanceToAir++;
-			checkID = world.getBlockId(i, j + distanceToAir, k);
-		}
-
-		if (distanceToAir > 3){
-			return false;
-		}
-		j += distanceToAir - 1;
-
-		int blockID = world.getBlockId(i, j, k);
-		int blockIDAbove = world.getBlockId(i, j+1, k);
-		int blockIDBelow = world.getBlockId(i, j-1, k);
-		for (int x : GetValidSpawnBlocks()){
-			if (blockIDAbove != 0){
-				return false;
-			}
-			if (blockID == x){
-				return true;
-			}else if (blockID == Block.snow.blockID && blockIDBelow == x){
-				return true;
-			}
-		}
-		return false;
+		return true;
 	}
 
-	public UnderwaterVillage() { }
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		
+	    int i = (chunkX * 16) + random.nextInt(16); // x
+	    int j = 0; // y
+	    int k = (chunkZ * 16) + random.nextInt(16); // z
+	    
+	    for(int count = 20; count <= 55; count++) {
+	    	int blockID = world.getBlockId(i, count, k);
+	    	int blockAboveID = world.getBlockId(i, count + 1, k);
+	    	if((blockID == Block.sand.blockID || blockID == Block.dirt.blockID) && (blockAboveID == Block.waterStill.blockID || blockAboveID == Block.waterMoving.blockID))
+	    	{
+	    	}
+	    }
 
-	public boolean generate(World world, Random rand, int i, int j, int k) {
-		//check that each corner is one of the valid spawn blocks
-		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 17, j, k) || !LocationIsValidSpawn(world, i + 17, j, k + 17) || !LocationIsValidSpawn(world, i, j, k + 17))
-		{
-			return false;
-		}
+	    if(!LocationIsValidSpawn(world, i, j, k) || world.getBiomeGenForCoords(chunkX, chunkZ) != BiomeGenBase.ocean || j == 0)
+			return;
 
 		world.setBlock(i + 0, j + 0, k + 0, Block.dirt.blockID);
 		world.setBlock(i + 0, j + 0, k + 1, Block.dirt.blockID);
@@ -993,4 +978,5 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 
 		return true;
 	}
+
 }
