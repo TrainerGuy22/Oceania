@@ -19,7 +19,7 @@ import oceania.gen.WorldGenAtlantite;
 import oceania.gen.WorldGenLimestone;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy
@@ -63,12 +63,12 @@ public class CommonProxy
 			}
 		}
 		
-		for(int count = 0; count > BoatTypes.values().length; count++)
+		for(int count = 0; count > BoatType.values().length; count++)
 		{
 			if(count == 0)
-				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatTypes.values()[count].resourceItem.getItem(), 1));
+				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatType.values()[count].resourceItem.getItem(), 1));
 			else
-				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatTypes.values()[count].resourceItem.getItem(), 1, BoatTypes.values()[count].resourceItem.getItemDamage()));
+				GameRegistry.addRecipe(new ItemStack(Items.itemBoat, 1, count), "X X", "XXX", 'X', new ItemStack(BoatType.values()[count].resourceItem.getItem(), 1, BoatType.values()[count].resourceItem.getItemDamage()));
 		}
 		
 		/** Furnace recipes */

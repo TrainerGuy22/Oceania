@@ -1,7 +1,7 @@
 package oceania.entity;
 
 import net.minecraft.world.World;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 
 public class EntityOceaniaBoatNormal extends EntityOceaniaBoat
 {

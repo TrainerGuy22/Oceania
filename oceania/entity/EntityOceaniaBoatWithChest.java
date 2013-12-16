@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import oceania.items.Items;
-import oceania.util.BoatTypes;
+import oceania.util.BoatType;
 
 public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IInventory
 {
@@ -23,7 +23,7 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 		super(world, x, y, z);
 	}
 	
-	public EntityOceaniaBoatWithChest(World world, BoatTypes type, double x, double y, double z)
+	public EntityOceaniaBoatWithChest(World world, BoatType type, double x, double y, double z)
 	{
 		super(world, x, y, z);
 		this.setBoatType(type);
@@ -112,11 +112,11 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	public String getInvName()
 	{
 		int strength = this.getDataWatcher().getWatchableObjectInt(22);
-		for (int index = 0; index < BoatTypes.values().length; index++)
+		for (int index = 0; index < BoatType.values().length; index++)
 		{
-			if (((Integer) BoatTypes.values()[index].strength).equals(strength))
+			if (((Integer) BoatType.values()[index].strength).equals(strength))
 			{
-				return BoatTypes.values()[index]._loc + " with Chest";
+				return BoatType.values()[index].loc + " with Chest";
 			}
 		}
 		return "";
