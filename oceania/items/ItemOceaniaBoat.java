@@ -83,12 +83,15 @@ public class ItemOceaniaBoat extends ItemBoat
         	{
         		EntityOceaniaBoatNormal boat = new EntityOceaniaBoatNormal(world, bX + 0.5, bY + 1.0, bZ + 0.5);
                 boat.rotationYaw = (float)(((MathHelper.floor_double((double)(player.rotationYaw * 4.0f / 360.0f) + 0.5) & 3) - 1) * 90);
+                boat.setBoatType(BoatTypes.values()[stack.getItemDamage()]);
                 //boat.setOwner(player.getEntityName());
                 
         		if (!world.getCollidingBoundingBoxes(boat, boat.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty())
                     return stack;
         		if (!world.isRemote)
+        		{
         			world.spawnEntityInWorld(boat);
+        		}
         		if (!player.capabilities.isCreativeMode)
         			stack.stackSize--;
         	}

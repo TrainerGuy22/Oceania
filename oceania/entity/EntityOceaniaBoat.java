@@ -15,18 +15,41 @@ import net.minecraft.world.World;
 
 public class EntityOceaniaBoat extends EntityBoat
 {
+	public static final float	ENT_WIDTH		= 1.5f;
+	public static final float	ENT_LENGTH		= 1.5f;
+	public static final float	ENT_HEIGHT		= 0.2f;
 	
-	public static final int	INDEX_BOAT_TYPE	= 20;
-	public static final int	INDEX_DAMAGE	= 21;
+	public static final int		INDEX_BOAT_TYPE	= 20;
+	public static final int		INDEX_DAMAGE	= 21;
 	
 	public EntityOceaniaBoat(World world)
 	{
 		super(world);
+		this.yOffset = 0.875f;
 	}
 	
 	public EntityOceaniaBoat(World world, double x, double y, double z)
 	{
-		super(world, x, y, z);
+		this(world);
+		this.setPosition(x, y, z);
+	}
+	
+	@Override
+	public void setPosition(double x, double y, double z)
+	{
+		this.posX = x;
+		this.posY = y;
+		this.posZ = z;
+		float hWidth = ENT_WIDTH / 2.0f;
+		float hLength = ENT_LENGTH / 2.0f;
+		this.boundingBox.setBounds(x - hWidth, y - this.yOffset + ENT_HEIGHT, z - hLength, x + hWidth, y - this.yOffset + ENT_HEIGHT + this.height, z + hLength);
+	}
+	
+	public void setPreviousPosition(double x, double y, double z)
+	{
+		this.prevPosX = x;
+		this.prevPosY = y;
+		this.prevPosZ = z;
 	}
 	
 	@Override
@@ -37,8 +60,16 @@ public class EntityOceaniaBoat extends EntityBoat
 		this.dataWatcher.addObjectByDataType(INDEX_BOAT_TYPE, DataWatcherTypes.BYTE.ordinal());
 		this.dataWatcher.addObjectByDataType(INDEX_DAMAGE, DataWatcherTypes.INTEGER.ordinal());
 		
-		this.dataWatcher.updateObject(INDEX_BOAT_TYPE, 0);
+		this.dataWatcher.updateObject(INDEX_BOAT_TYPE, (Byte) (byte) 0);
 		this.dataWatcher.updateObject(INDEX_DAMAGE, 0);
+	}
+	
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		
+		//this.setDead();
 	}
 	
 	public void setBoatType(BoatTypes type)
@@ -47,74 +78,16 @@ public class EntityOceaniaBoat extends EntityBoat
 		{
 			if (BoatTypes.values()[index].equals(type))
 			{
-				this.getDataWatcher().updateObject(this.INDEX_BOAT_TYPE, (byte) index);
+				this.getDataWatcher().updateObject(this.INDEX_BOAT_TYPE, (Byte) (byte) index);
 			}
 		}
 		this.getDataWatcher().updateObject(this.INDEX_DAMAGE, type.strength);
 	}
 	
-	/*
-	 * @Override
-	 * public void setDead()
-	 * {
-	 * if (this.getTimeSinceHit() >= 1)
-	 * {
-	 * this.isDead = true;
-	 * }
-	 * else
-	 * {
-	 * if (this.getDataWatcher().getWatchableObjectInt(this.INDEX_DAMAGE) == 1)
-	 * {
-	 * ItemStack stack = BoatTypes.values()[this.getDataWatcher().getWatchableObjectByte(INDEX_BOAT_TYPE)].resourceItem;
-	 * if (this.worldObj.rand.nextBoolean())
-	 * {
-	 * this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
-	 * this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
-	 * }
-	 * else
-	 * this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
-	 * this.dropItemsOnDead();
-	 * this.isDead = true;
-	 * }
-	 * else
-	 * {
-	 * this.getDataWatcher().updateObject(this.INDEX_DAMAGE, this.getDataWatcher().getWatchableObjectInt(22) - 1);
-	 * }
-	 * }
-	 * }
-	 */
-	
-	public void dropItemsOnDead()
-	{
-	}
-	
-	@Override
-	public EntityItem dropItemWithOffset(int id, int count, float y)
-	{
-		if (id == Item.stick.itemID || id == Block.planks.blockID)
-		{
-			return null;
-		}
-		else if (id == Item.boat.itemID)
-		{
-			this.dropItemsOnDead();
-			try
-			{
-				
-				return this.entityDropItem(new ItemStack(Items.itemBoat, 1, this.dataWatcher.getWatchableObjectByte(this.INDEX_BOAT_TYPE)), y);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return super.dropItemWithOffset(id, count, y);
-	}
-	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag)
 	{
-		tag.setByte("index", (byte) this.getDataWatcher().getWatchableObjectInt(this.INDEX_BOAT_TYPE));
+		tag.setByte("index", this.getDataWatcher().getWatchableObjectByte(this.INDEX_BOAT_TYPE));
 		tag.setInteger("strength", this.getDataWatcher().getWatchableObjectInt(this.INDEX_DAMAGE));
 	}
 	
@@ -122,9 +95,7 @@ public class EntityOceaniaBoat extends EntityBoat
 	public void readEntityFromNBT(NBTTagCompound tag)
 	{
 		this.getDataWatcher().updateObject(this.INDEX_BOAT_TYPE, tag.getByte("index"));
-		this.getDataWatcher().setObjectWatched(this.INDEX_BOAT_TYPE);
 		this.getDataWatcher().updateObject(this.INDEX_DAMAGE, tag.getInteger("strength"));
-		this.getDataWatcher().setObjectWatched(this.INDEX_DAMAGE);
 		
 	}
 	

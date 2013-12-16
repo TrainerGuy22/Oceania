@@ -7,10 +7,9 @@ import java.util.HashMap;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.techne.TechneModel;
 import oceania.entity.EntityOceaniaBoat;
 import oceania.entity.EntityOceaniaBoatWithChest;
+import oceania.entity.render.model.ModelBoatWithChest;
 import oceania.util.BoatTypes;
 import oceania.util.OUtil;
 import cpw.mods.fml.relauncher.Side;
@@ -19,12 +18,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderOceaniaBoatWithChest extends Render
 {
-	private TechneModel model;
+	private ModelBoatWithChest model;
 	private HashMap<String, ResourceLocation> texCache;
 	
 	public RenderOceaniaBoatWithChest()
 	{
-		this.model = (TechneModel) AdvancedModelLoader.loadModel("/assets/oceania/models/boatWithChest.tcn");
+		//this.model = (TechneModel) AdvancedModelLoader.loadModel("/assets/oceania/models/boatWithChest.tcn");
+		this.model = new ModelBoatWithChest();
 		this.texCache = new HashMap<String, ResourceLocation>();
 	}
 
@@ -32,10 +32,12 @@ public class RenderOceaniaBoatWithChest extends Render
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
 	{
 		glPushMatrix();
-		glTranslated(x, y, z);
-		glScalef(1.0f / 16.0f, 1.0f / 16.0f, 1.0f / 16.0f);
+		glTranslated(x, y + entity.yOffset, z);
+		//glScalef(1.0f / 16.0f, 1.0f / 16.0f, 1.0f / 16.0f);
+		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+		glRotatef(yaw + 90f, 0.0f, 1.0f, 0.0f);
 		OUtil.bindTexture(this.getEntityTexture(entity));
-		model.renderAll();
+		model.render(1.0f / 16.0f);
 		glPopMatrix();
 	}
 	

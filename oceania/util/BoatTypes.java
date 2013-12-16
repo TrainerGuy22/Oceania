@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 public enum BoatTypes 
 {
 	WOOD("minecraft", "boat", "Wooden Boat", new ResourceLocation("textures/entity/boat.png"), new ItemStack(Item.stick), 5),
-	IRON("oceania", "ironBoat", "Iron Boat", new ResourceLocation("oceania", "textures/entity/ironBoat.png"), new ItemStack(Item.ingotIron), 25),
-	ATLANTIUM("oceania", "atlantiumBoat", "Atlantium Boat", new ResourceLocation("oceania", "textures/entity/atlantiumBoat.png"), new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 150);
+	IRON("oceania", "ironBoat", "Iron Boat", new ResourceLocation("oceania", "textures/models/ironBoat.png"), new ItemStack(Item.ingotIron), 25),
+	ATLANTIUM("oceania", "atlantiumBoat", "Atlantium Boat", new ResourceLocation("oceania", "textures/models/atlantiumBoat.png"), new ItemStack(Items.itemMulti, 1, ItemMultiType.ATLANTIUM.ordinal()), 150);
 	
 	public String namespace, _unloc, _loc;
 	public int strength;

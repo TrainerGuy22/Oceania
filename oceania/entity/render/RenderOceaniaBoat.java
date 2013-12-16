@@ -19,6 +19,12 @@ public class RenderOceaniaBoat extends RenderBoat
 {
 	private HashMap<String, ResourceLocation>	texCache;
 	
+	public RenderOceaniaBoat()
+	{
+		super();
+		this.texCache = new HashMap<String, ResourceLocation>();
+	}
+	
 	@Override
 	public void renderBoat(EntityBoat boat, double x, double y, double z, float yaw, float partialTicks)
 	{
@@ -33,10 +39,7 @@ public class RenderOceaniaBoat extends RenderBoat
 		try
 		{
 			//System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-			String boatName = BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)]._unloc;
-			if (!this.texCache.containsKey(boatName))
-				this.texCache.put(boatName, new ResourceLocation("oceania", "textures/models/" + boatName + ".png"));
-			return this.texCache.get(boatName);
+			return BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)].worldTexture;
 		}
 		catch (Exception e)
 		{
