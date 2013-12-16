@@ -15,6 +15,9 @@ import net.minecraft.world.World;
 
 public class EntityOceaniaBoat extends EntityBoat 
 {
+	
+	public static final int BYTE_BOAT_TYPE = 20;
+	public static final int INT_DAMAGE = 21;
 
 	public EntityOceaniaBoat(World world) 
 	{
@@ -40,22 +43,20 @@ public class EntityOceaniaBoat extends EntityBoat
 		/* The first parameter is a index. It's no more of a 'magic number' than something
 		 * in an array.
 		 */
-        this.getDataWatcher().addObjectByDataType(20, DataWatcherTypes.STRING.ordinal());
-        this.getDataWatcher().addObjectByDataType(21, DataWatcherTypes.STRING.ordinal());
-        this.getDataWatcher().addObjectByDataType(22, DataWatcherTypes.INTEGER.ordinal());
-        this.getDataWatcher().addObjectByDataType(23, DataWatcherTypes.ITEMSTACK.ordinal());
+        this.getDataWatcher().addObjectByDataType(this.BYTE_BOAT_TYPE, DataWatcherTypes.BYTE.ordinal());
+        this.getDataWatcher().addObjectByDataType(this.INT_DAMAGE, DataWatcherTypes.INTEGER.ordinal());
     }
 	
 	public void setBoatType(BoatTypes type) 
 	{
-		this.getDataWatcher().updateObject(20, type.worldTexture.getResourceDomain());
-        this.getDataWatcher().setObjectWatched(20);
-		this.getDataWatcher().updateObject(21, type.worldTexture.getResourcePath());
+		for(int index = 0; index < BoatTypes.values().length; index++) {
+			if(BoatTypes.values()[index].equals(type)) {
+				this.getDataWatcher().updateObject(this.BYTE_BOAT_TYPE, (byte) index);
+		        this.getDataWatcher().setObjectWatched(20);
+		    }
+		}
+		this.getDataWatcher().updateObject(this.INT_DAMAGE, type.strength);
         this.getDataWatcher().setObjectWatched(21);
-		this.getDataWatcher().updateObject(22, type.strength);
-        this.getDataWatcher().setObjectWatched(22);
-		this.getDataWatcher().updateObject(23, type.resourceItem);
-        this.getDataWatcher().setObjectWatched(23);
 	}
 	
 	@Override
@@ -65,9 +66,9 @@ public class EntityOceaniaBoat extends EntityBoat
 	        this.isDead = true;
 		} else 
 		{
-			if(this.getDataWatcher().getWatchableObjectInt(22) == 1)
+			if(this.getDataWatcher().getWatchableObjectInt(this.INT_DAMAGE) == 1)
 			{
-				ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(23);
+				ItemStack stack = BoatTypes.values()[this.getDataWatcher().getWatchableObjectByte(BYTE_BOAT_TYPE)].resourceItem;
 				if(this.worldObj.rand.nextBoolean())
 				{
 					this.entityDropItem(new ItemStack(stack.itemID, 1, stack.getItemDamage()), 0.0F);
@@ -78,7 +79,7 @@ public class EntityOceaniaBoat extends EntityBoat
 				this.isDead = true;
 			} else
 			{
-				this.getDataWatcher().updateObject(22, this.getDataWatcher().getWatchableObjectInt(22) - 1);
+				this.getDataWatcher().updateObject(this.INT_DAMAGE, this.getDataWatcher().getWatchableObjectInt(22) - 1);
 			}
 		}
 	}
@@ -96,14 +97,12 @@ public class EntityOceaniaBoat extends EntityBoat
 		{
 			this.dropItemsOnDead();
 			try {
-				int strength = this.getDataWatcher().getWatchableObjectInt(22);
-				for(int index = 0; index < BoatTypes.values().length; index++) {
-					if(((Integer) BoatTypes.values()[index].strength).equals(strength)) {
-						return this.entityDropItem(new ItemStack(Items.itemBoat, 1, index), y);
-					}
-				}
+
+					return this.entityDropItem(new ItemStack(Items.itemBoat, 1, this.dataWatcher.getWatchableObjectByte(this.BYTE_BOAT_TYPE)), y);
 			} catch(Exception e)
-			{}
+			{
+				e.printStackTrace();
+			}
 		}
 		return super.dropItemWithOffset(id, count, y);
 	}
@@ -111,25 +110,18 @@ public class EntityOceaniaBoat extends EntityBoat
 	@Override
     public void writeEntityToNBT(NBTTagCompound tag)
     {
-		tag.setString("namespace", this.getDataWatcher().getWatchableObjectString(20));
-		tag.setString("path", this.getDataWatcher().getWatchableObjectString(21));
-		tag.setInteger("strength", this.getDataWatcher().getWatchableObjectInt(22));
-		NBTTagCompound item = new NBTTagCompound();
-		this.getDataWatcher().getWatchableObjectItemStack(23).writeToNBT(item);
-		tag.setCompoundTag("item", item);
+		tag.setByte("index", this.getDataWatcher().getWatchableObjectByte(this.BYTE_BOAT_TYPE));
+		tag.setInteger("strength", this.getDataWatcher().getWatchableObjectInt(this.INT_DAMAGE));
     }
     
 	@Override
     public void readEntityFromNBT(NBTTagCompound tag)
     {
-		this.getDataWatcher().updateObject(20, tag.getString("namespace"));
-        this.getDataWatcher().setObjectWatched(20);
-		this.getDataWatcher().updateObject(21, tag.getString("path"));
-        this.getDataWatcher().setObjectWatched(21);
-		this.getDataWatcher().updateObject(22, tag.getInteger("strength"));
-        this.getDataWatcher().setObjectWatched(22);
-		this.getDataWatcher().updateObject(23, ItemStack.loadItemStackFromNBT(tag.getCompoundTag("item")));
-        this.getDataWatcher().setObjectWatched(23);
+		this.getDataWatcher().updateObject(this.BYTE_BOAT_TYPE, tag.getByte("index"));
+        this.getDataWatcher().setObjectWatched(this.BYTE_BOAT_TYPE);
+		this.getDataWatcher().updateObject(this.INT_DAMAGE, tag.getInteger("strength"));
+        this.getDataWatcher().setObjectWatched(this.INT_DAMAGE);
+
     }
 
 }
