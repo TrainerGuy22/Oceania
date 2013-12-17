@@ -74,7 +74,8 @@ public class BlockLimestone extends Block
 	@SideOnly(Side.CLIENT)
     public Icon getIcon(int side, int meta)
 	{
-		return IconRegistry.getIcon(LimestoneTypes.values()[meta].getUnlocalizedName());
+		// Why do I have to put a modulus here? o_O
+		return IconRegistry.getIcon(LimestoneTypes.values()[meta % LimestoneTypes.values().length].getUnlocalizedName());
 	}
 	
 	@Override

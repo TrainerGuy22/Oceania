@@ -80,7 +80,6 @@ public class TileEntityChestSpawner extends TileEntityChest
         					valid =  this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z) == 0 || this.worldObj.getBlockId(xCoord + x, yCoord - 2, zCoord + z)  == Blocks.blockPlaceholder.blockID;
         				if(valid)
         				{
-        					System.out.println("Spawn.");
         					triggered = true;
         					cooldown = 40;
         					EntityVillager villagerToSpawn = new EntityVillager(worldObj);
