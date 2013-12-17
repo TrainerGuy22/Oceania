@@ -47,15 +47,12 @@ public class NetworkHandler implements IPacketHandler
 				case PACKET_BOAT_POSITION:
 				{
 					int entID = in.readInt();
-					float velX, velY, velZ, posX, posY, posZ, yaw;
-					velX = in.readFloat();
-					velY = in.readFloat();
-					velZ = in.readFloat();
+					float posX, posY, posZ, yaw;
 					posX = in.readFloat();
 					posY = in.readFloat();
 					posZ = in.readFloat();
 					yaw = in.readFloat();
-					onBoatPosition(ePlayer.worldObj, entID, velX, velY, velZ, posX, posY, posZ, yaw);
+					onBoatPosition(ePlayer.worldObj, entID, posX, posY, posZ, yaw);
 					break;
 				}
 			}
@@ -89,7 +86,7 @@ public class NetworkHandler implements IPacketHandler
 		}
 	}
 	
-	public void sendBoatPosition(int entityID, double velX, double velY, double velZ, double posX, double posY, double posZ, float yaw)
+	public void sendBoatPosition(int entityID, double posX, double posY, double posZ, float yaw)
 	{
 		if (OUtil.getSide() != Side.SERVER)
 			return;
@@ -101,9 +98,6 @@ public class NetworkHandler implements IPacketHandler
 		{
 			out.writeInt(PACKET_BOAT_POSITION); // Packet ID
 			out.writeInt(entityID);
-			out.writeFloat((float) velX);
-			out.writeFloat((float) velY);
-			out.writeFloat((float) velZ);
 			out.writeFloat((float) posX);
 			out.writeFloat((float) posY);
 			out.writeFloat((float) posZ);
@@ -117,14 +111,13 @@ public class NetworkHandler implements IPacketHandler
 		}
 	}
 	
-	private void onBoatPosition(World world, int entityID, float velX, float velY, float velZ, float posX, float posY, float posZ, float yaw)
+	private void onBoatPosition(World world, int entityID, float posX, float posY, float posZ, float yaw)
 	{
 		Entity ent = world.getEntityByID(entityID);
 		if (ent instanceof EntityOceaniaBoat)
 		{
 			EntityOceaniaBoat boat = (EntityOceaniaBoat) ent;
-			//boat.setVelocity(velX, velY, velX);
-			//boat.setPosition(posX, posY, posZ);
+			boat.setPosition(posX, posY, posZ);
 			boat.rotationYaw = yaw;
 		}
 	}

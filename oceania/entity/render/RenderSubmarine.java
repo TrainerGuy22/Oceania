@@ -13,8 +13,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderSubmarine extends Render
 {
-	private static final float X_OFFSET = 0.25f;
-	private static final float Z_OFFSET = 0.5f;
+	private static final float X_OFFSET = -0.4f;
+	private static final float Y_OFFSET = -0.75f;
+	private static final float Z_OFFSET = -0.3f;
 	
 	private ModelSubmarine		model;
 	private ResourceLocation	texLoc;
@@ -29,10 +30,12 @@ public class RenderSubmarine extends Render
 	@SideOnly(Side.CLIENT)
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
 	{
+		float fSpeed = (float) (entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
 		glPushMatrix();
-		glTranslatef((float) x + X_OFFSET, (float) y + EntitySubmarine.ENT_HEIGHT, (float) z + Z_OFFSET);
+		glTranslatef((float) x, (float) y + EntitySubmarine.ENT_HEIGHT, (float) z);
 		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
 		glRotatef(yaw - 90f, 0.0f, 1.0f, 0.0f);
+		glTranslatef(X_OFFSET, Y_OFFSET, Z_OFFSET * (fSpeed / 0.85f));
 		if (this.texLoc == null)
 			this.texLoc = this.getEntityTexture(entity);
 		OUtil.bindTexture(this.texLoc);

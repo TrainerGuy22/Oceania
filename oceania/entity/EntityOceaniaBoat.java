@@ -19,6 +19,7 @@ import oceania.items.Items;
 import oceania.net.NetworkHandler;
 import oceania.util.BoatType;
 import oceania.util.DataWatcherTypes;
+import oceania.util.OUtil;
 
 public abstract class EntityOceaniaBoat extends EntityBoat
 {
@@ -200,7 +201,8 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 		
 		updateBoat();
 		
-		NetworkHandler.INSTANCE.sendBoatPosition(this.entityId, this.motionX, this.motionY, this.motionZ, this.posX, this.posY, this.posZ, this.rotationYaw);
+		// if (worldObj.getWorldTime() % 120 == 0)
+		NetworkHandler.INSTANCE.sendBoatPosition(this.entityId, this.posX, this.posY, this.posZ, this.rotationYaw);
 	}
 	
 	public void updateBoat()
@@ -211,15 +213,18 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 		int waterDelta = 5;
 		double waterLevel = 0.0;
 		
-		for (int i = 0; i < waterDelta; i++)
+		if (!this.worldObj.isRemote)
 		{
-			double waterMin = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) i / (double) waterDelta - waterOffset;
-			double waterMax = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 1) / (double) waterDelta - waterOffset;
-			AxisAlignedBB aabb = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, waterMin, this.boundingBox.minZ, this.boundingBox.maxX, waterMax, this.boundingBox.maxZ);
-			
-			if (this.worldObj.isAABBInMaterial(aabb, Material.water))
+			for (int i = 0; i < waterDelta; i++)
 			{
-				waterLevel += 1.0 / (double) waterDelta;
+				double waterMin = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) i / (double) waterDelta - waterOffset;
+				double waterMax = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 1) / (double) waterDelta - waterOffset;
+				AxisAlignedBB aabb = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, waterMin, this.boundingBox.minZ, this.boundingBox.maxX, waterMax, this.boundingBox.maxZ);
+				
+				if (this.worldObj.isAABBInMaterial(aabb, Material.water))
+				{
+					waterLevel += 1.0 / (double) waterDelta;
+				}
 			}
 		}
 		
@@ -259,7 +264,7 @@ public abstract class EntityOceaniaBoat extends EntityBoat
 			newPosX = this.posX + this.motionX;
 			newPosY = this.posY + this.motionY;
 			newPosZ = this.posZ + this.motionZ;
-			this.setPosition(newPosX, newPosY, newPosZ);
+			//this.setPosition(newPosX, newPosY, newPosZ);
 			
 			if (this.onGround)
 			{

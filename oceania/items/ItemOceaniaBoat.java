@@ -128,7 +128,7 @@ public class ItemOceaniaBoat extends ItemBoat
 	@SideOnly(Side.CLIENT)
     public void getSubItems(int ID, CreativeTabs tabs, List list) 
 	{
-		for(int index = 0; index < BoatType.values().length; index++) 
+		for(int index = 0; index < BoatType.values().length - 1 /* Don't include the submarine */; index++) 
 		{
 			list.add(new ItemStack(ID, 1, index));
 		}
