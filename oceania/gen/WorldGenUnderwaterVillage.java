@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import oceania.blocks.Blocks;
+import oceania.blocks.tile.TileEntityAtlantiumDepulsor;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -77,7 +78,6 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 			return;
 		}
 		
-		System.out.println("New Underwater Village at " + x + " " + y + " " + z + " ");
 		world.setBlock(x + 0, y + 0, z + 0, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 1, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 2, Block.dirt.blockID);
@@ -101,19 +101,10 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 0, y + 1, z + 9, Block.stoneBrick.blockID);
 		world.setBlock(x + 0, y + 1, z + 10, Block.stoneBrick.blockID);
 		world.setBlock(x + 0, y + 2, z + 6, 155, 2, 3);
-		world.setBlock(x + 0, y + 2, z + 7, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 2, z + 8, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 2, z + 9, Blocks.blockPlaceholder.blockID);
 		world.setBlock(x + 0, y + 2, z + 10, 155, 2, 3);
 		world.setBlock(x + 0, y + 3, z + 6, 155, 2, 3);
-		world.setBlock(x + 0, y + 3, z + 7, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 3, z + 8, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 3, z + 9, Blocks.blockPlaceholder.blockID);
 		world.setBlock(x + 0, y + 3, z + 10, 155, 2, 3);
 		world.setBlock(x + 0, y + 4, z + 6, 155, 2, 3);
-		world.setBlock(x + 0, y + 4, z + 7, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 4, z + 8, Blocks.blockPlaceholder.blockID);
-		world.setBlock(x + 0, y + 4, z + 9, Blocks.blockPlaceholder.blockID);
 		world.setBlock(x + 0, y + 4, z + 10, 155, 2, 3);		
 		world.setBlock(x + 0, y + 5, z + 6, Block.stoneBrick.blockID);
 		world.setBlock(x + 0, y + 5, z + 7, Blocks.blockLimestone.blockID, 1, 3);
@@ -205,6 +196,8 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 3, y + 0, z + 16, Block.dirt.blockID);
 		world.setBlock(x + 3, y + 1, z + 2, Block.stoneBrick.blockID);
 		world.setBlock(x + 3, y + 1, z + 8, Blocks.blockDepulsor.blockID);
+		TileEntityAtlantiumDepulsor tile = (TileEntityAtlantiumDepulsor) world.getBlockTileEntity(x + 3, y + 1, z + 8);
+		tile.enderPearls = 32;
 		world.setBlock(x + 3, y + 1, z + 14, Block.stoneBrick.blockID);
 		world.setBlock(x + 3, y + 2, z + 2, Block.glass.blockID);
 		world.setBlock(x + 3, y + 2, z + 14, Block.glass.blockID);
@@ -759,7 +752,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 1, y + 1, z + 6, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 1, y + 1, z + 7, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 1, y + 1, z + 8, Block.sand.blockID, 0, 3);
-		world.setBlock(x + 1, y + 1, z + 9, Block.sand.blockID, 0, 3);
+		world.setBlock(x + 1, y + 1, z + 8, Block.glowStone.blockID, 0, 3);
 		world.setBlock(x + 1, y + 1, z + 10, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 1, y + 1, z + 13, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 1, y + 1, z + 14, Block.sand.blockID, 0, 3);
@@ -833,10 +826,10 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 8, y + 1, z + 1, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 2, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 3, Block.sand.blockID, 0, 3);
+		world.setBlock(x + 7, y + 2, z + 8, Blocks.blockLimestone.blockID, 0, 3);
 		world.setBlock(x + 8, y + 2, z + 7, Blocks.blockLimestone.blockID, 0, 3);
-		world.setBlock(x + 10, y + 2, z + 7, Blocks.blockLimestone.blockID, 0, 3);
 		world.setBlock(x + 8, y + 2, z + 9, Blocks.blockLimestone.blockID, 0, 3);
-		world.setBlock(x + 10, y + 2, z + 9, Blocks.blockLimestone.blockID, 0, 3);
+		world.setBlock(x + 9, y + 2, z + 8, Blocks.blockLimestone.blockID, 0, 3);
 		world.setBlock(x + 9, y + 2, z + 7, Block.glowStone.blockID);
 		world.setBlock(x + 7, y + 2, z + 7, Block.glowStone.blockID);
 		world.setBlock(x + 7, y + 2, z + 9, Block.glowStone.blockID);
@@ -1414,9 +1407,9 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 10, y + 1, z + 4, 0);
 		world.setBlock(x + 10, y + 1, z + 5, 0);
 		world.setBlock(x + 10, y + 1, z + 6, 0);
-		// world.setBlock(x + 10, y + 1, z + 7, 0);
+		world.setBlock(x + 10, y + 1, z + 7, 0);
 		world.setBlock(x + 10, y + 1, z + 8, 0);
-		// world.setBlock(x + 10, y + 1, z + 9, 0);
+		world.setBlock(x + 10, y + 1, z + 9, 0);
 		world.setBlock(x + 10, y + 1, z + 10, 0);
 		world.setBlock(x + 10, y + 1, z + 11, 0);
 		world.setBlock(x + 10, y + 1, z + 12, 0);
