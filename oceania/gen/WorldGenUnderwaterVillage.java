@@ -36,7 +36,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		validDirt.add(world.getBlockId(x + 8, y + 1, z + 16));
 		validDirt.add(world.getBlockId(x + 16, y + 1, z + 16));
 		
-		if (world.rand.nextInt(10) != 1)
+		if (world.rand.nextInt(50) != 1)
 			return false;
 		
 		for (int validID : validWater)
@@ -77,6 +77,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 			return;
 		}
 		
+		System.out.println("New Underwater Village at " + x + " " + y + " " + z + " ");
 		world.setBlock(x + 0, y + 0, z + 0, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 1, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 2, Block.dirt.blockID);
@@ -825,37 +826,29 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(x + 7, y + 1, z + 1, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 7, y + 1, z + 2, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 7, y + 1, z + 3, Block.sand.blockID, 0, 3);
-		world.setBlockMetadataWithNotify(x + 7, y + 1, z + 7, Block.waterStill.blockID, 9);
-		world.setBlockMetadataWithNotify(x + 7, y + 1, z + 8, Block.waterStill.blockID, 8);
-		world.setBlockMetadataWithNotify(x + 7, y + 1, z + 9, Block.waterStill.blockID, 9);
 		world.setBlock(x + 7, y + 1, z + 13, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 7, y + 1, z + 14, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 7, y + 1, z + 15, Block.sand.blockID, 0, 3);
-		world.setBlockMetadataWithNotify(x + 7, y + 2, z + 7, Block.waterStill.blockID, 3);
-		world.setBlock(x + 7, y + 2, z + 8, Block.waterStill.blockID);
-		world.setBlockMetadataWithNotify(x + 7, y + 2, z + 9, Block.waterStill.blockID, 3);
 		world.setBlock(x + 8, y + 1, z + 1, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 2, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 3, Block.sand.blockID, 0, 3);
-		world.setBlock(x + 8, y + 1, z + 7, Block.waterStill.blockID, 8, 3);
-		world.setBlock(x + 8, y + 1, z + 9, Block.waterStill.blockID, 8, 3);
+		world.setBlock(x + 8, y + 2, z + 7, Blocks.blockLimestone.blockID, 0, 3);
+		world.setBlock(x + 10, y + 2, z + 7, Blocks.blockLimestone.blockID, 0, 3);
+		world.setBlock(x + 8, y + 2, z + 9, Blocks.blockLimestone.blockID, 0, 3);
+		world.setBlock(x + 10, y + 2, z + 9, Blocks.blockLimestone.blockID, 0, 3);
+		world.setBlock(x + 9, y + 2, z + 7, Block.glowStone.blockID);
+		world.setBlock(x + 8, y + 2, z + 8, Block.glowStone.blockID);
+		world.setBlock(x + 10, y + 2, z + 8, Block.glowStone.blockID);
+		world.setBlock(x + 9, y + 2, z + 9, Block.glowStone.blockID);
 		world.setBlock(x + 8, y + 1, z + 13, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 14, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 8, y + 1, z + 15, Block.sand.blockID, 0, 3);
-		world.setBlock(x + 8, y + 2, z + 7, Block.waterStill.blockID);
-		world.setBlock(x + 8, y + 2, z + 9, Block.waterStill.blockID);
 		world.setBlock(x + 9, y + 1, z + 1, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 2, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 3, Block.sand.blockID, 0, 3);
-		world.setBlock(x + 9, y + 1, z + 7, Block.waterStill.blockID, 9, 3);
-		world.setBlock(x + 9, y + 1, z + 8, Block.waterStill.blockID, 8, 3);
-		world.setBlock(x + 9, y + 1, z + 9, Block.waterStill.blockID, 9, 3);
 		world.setBlock(x + 9, y + 1, z + 13, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 14, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 15, Block.sand.blockID, 0, 3);
-		world.setBlock(x + 9, y + 2, z + 7, Block.waterStill.blockID, 1, 3);
-		world.setBlock(x + 9, y + 2, z + 8, Block.waterStill.blockID);
-		world.setBlock(x + 9, y + 2, z + 9, Block.waterStill.blockID, 1, 3);
 		world.setBlock(x + 10, y + 1, z + 1, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 10, y + 1, z + 2, Block.sand.blockID, 0, 3);
 		world.setBlock(x + 10, y + 1, z + 3, Block.sand.blockID, 0, 3);
