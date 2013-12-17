@@ -88,6 +88,7 @@ public class EntitySubmarine extends EntityOceaniaBoat
 			if (this.riddenByEntity instanceof EntityPlayer)
 			{
 				Minecraft.getMinecraft().gameSettings.gammaSetting = 10.0f;
+				((EntityPlayer) this.riddenByEntity).setAir(300);
 			}
 			else if (this.riddenByEntity == null && this.lastRidingEntity != null)
 			{

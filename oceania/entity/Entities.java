@@ -3,8 +3,10 @@ package oceania.entity;
 import net.minecraft.util.ResourceLocation;
 import oceania.Oceania;
 import oceania.handler.VillageTradeHandler;
+import oceania.util.OUtil;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class Entities 
 {
@@ -20,7 +22,8 @@ public class Entities
 		VILLAGER_OCEANIA_ID = VillagerRegistry.getRegisteredVillagers().size();
 		VillagerRegistry.instance().registerVillagerId(VILLAGER_OCEANIA_ID);
 		// TODO: Post ModJam - Have a custom skin for the villager.
-		VillagerRegistry.instance().registerVillagerSkin(VILLAGER_OCEANIA_ID, new ResourceLocation("textures/entity/villager/smith.png"));
+		if (OUtil.getSide() == Side.CLIENT)
+			VillagerRegistry.instance().registerVillagerSkin(VILLAGER_OCEANIA_ID, new ResourceLocation("textures/entity/villager/smith.png"));
 		VillagerRegistry.instance().registerVillageTradeHandler(VILLAGER_OCEANIA_ID, new VillageTradeHandler());
 	}
 	
