@@ -48,7 +48,6 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		
 	    int i = (chunkX * 16) + random.nextInt(16); // x
 	    int j = 0; // y
 	    int k = (chunkZ * 16) + random.nextInt(16); // z
@@ -66,6 +65,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	    if(!LocationIsValidSpawn(world, i, j, k) || world.getBiomeGenForCoords(chunkX, chunkZ) != BiomeGenBase.ocean || j == 0)
 			return;
 
+        System.out.println("New Underwater Village at "+i+" "+j+" "+k+" ");
 		world.setBlock(i + 0, j + 0, k + 0, Block.dirt.blockID);
 		world.setBlock(i + 0, j + 0, k + 1, Block.dirt.blockID);
 		world.setBlock(i + 0, j + 0, k + 2, Block.dirt.blockID);
@@ -90,24 +90,24 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 0, j + 1, k + 9, Block.stoneBrick.blockID);
 		world.setBlock(i + 0, j + 1, k + 10, Block.stoneBrick.blockID);
 		world.setBlock(i + 0, j + 1, k + 17, Block.grass.blockID);
-		world.setBlock(i + 0, j + 2, k + 7, -123);
-		world.setBlock(i + 0, j + 2, k + 8, -123);
-		world.setBlock(i + 0, j + 2, k + 9, -123);
-		world.setBlockAndMetadata(i + 0, j + 2, k + 10, -101, 2);
-		world.setBlockAndMetadata(i + 0, j + 3, k + 6, -101, 2);
-		world.setBlock(i + 0, j + 3, k + 7, -123);
-		world.setBlock(i + 0, j + 3, k + 8, -123);
-		world.setBlock(i + 0, j + 3, k + 9, -123);
-		world.setBlockAndMetadata(i + 0, j + 3, k + 10, -101, 2);
-		world.setBlockAndMetadata(i + 0, j + 4, k + 6, -101, 2);
-		world.setBlockAndMetadata(i + 0, j + 4, k + 7, -100, 7);
-		world.setBlock(i + 0, j + 4, k + 8, -123);
-		world.setBlockAndMetadata(i + 0, j + 4, k + 9, -100, 6);
-		world.setBlockAndMetadata(i + 0, j + 4, k + 10, -101, 2);
+		//world.setBlock(i + 0, j + 2, k + 7, -123);
+		//world.setBlock(i + 0, j + 2, k + 8, -123);
+		//world.setBlock(i + 0, j + 2, k + 9, -123);
+		//world.setBlock(i + 0, j + 2, k + 10, -101, 2, 1);
+		//world.setBlock(i + 0, j + 3, k + 6, -101, 2, 1);
+		//world.setBlock(i + 0, j + 3, k + 10, -101, 2, 1);
+		//world.setBlock(i + 0, j + 3, k + 7, -123);
+		//world.setBlock(i + 0, j + 3, k + 8, -123);
+		//world.setBlock(i + 0, j + 3, k + 9, -123);
+		//world.setBlock(i + 0, j + 4, k + 8, -123);
+		//world.setBlockAndMetadata(i + 0, j + 4, k + 6, -101, 2);
+		//world.setBlockAndMetadata(i + 0, j + 4, k + 7, -100, 7);
+		//world.setBlockAndMetadata(i + 0, j + 4, k + 9, -100, 6);
+		//world.setBlockAndMetadata(i + 0, j + 4, k + 10, -101, 2);
 		world.setBlock(i + 0, j + 5, k + 6, Block.stoneBrick.blockID);
-		world.setBlock(i + 0, j + 5, k + 7, Block.blockGold.blockID);
-		world.setBlock(i + 0, j + 5, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 0, j + 5, k + 9, Block.blockGold.blockID);
+		world.setBlock(i + 0, j + 5, k + 7, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 0, j + 5, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 0, j + 5, k + 9, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 0, j + 5, k + 10, Block.stoneBrick.blockID);
 		world.setBlock(i + 1, j + 0, k + 0, Block.dirt.blockID);
 		world.setBlock(i + 1, j + 0, k + 1, Block.dirt.blockID);
@@ -198,7 +198,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 3, j + 0, k + 16, Block.dirt.blockID);
 		world.setBlock(i + 3, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 3, j + 1, k + 2, Block.stoneBrick.blockID);
-		world.setBlock(i + 3, j + 1, k + 8, Block.blockDiamond.blockID);
+		world.setBlock(i + 3, j + 1, k + 8, Blocks.blockDepulsor.blockID);
 		world.setBlock(i + 3, j + 1, k + 14, Block.stoneBrick.blockID);
 		world.setBlock(i + 3, j + 1, k + 17, Block.grass.blockID);
 		world.setBlock(i + 3, j + 2, k + 2, Block.glass.blockID);
@@ -277,9 +277,9 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 5, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 5, j + 1, k + 1, Block.stoneBrick.blockID);
 		world.setBlock(i + 5, j + 1, k + 6, Block.stoneBrick.blockID);
-		world.setBlock(i + 5, j + 1, k + 7, Block.blockGold.blockID);
-		world.setBlock(i + 5, j + 1, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 5, j + 1, k + 9, Block.blockGold.blockID);
+		world.setBlock(i + 5, j + 1, k + 7, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 5, j + 1, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 5, j + 1, k + 9, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 5, j + 1, k + 10, Block.stoneBrick.blockID);
 		world.setBlock(i + 5, j + 1, k + 15, Block.stoneBrick.blockID);
 		world.setBlock(i + 5, j + 1, k + 17, Block.grass.blockID);
@@ -320,11 +320,11 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 6, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 6, j + 1, k + 0, Block.stoneBrick.blockID);
 		world.setBlock(i + 6, j + 1, k + 5, Block.stoneBrick.blockID);
-		world.setBlock(i + 6, j + 1, k + 6, Block.blockGold.blockID);
-		world.setBlock(i + 6, j + 1, k + 7, Block.blockGold.blockID);
-		world.setBlock(i + 6, j + 1, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 6, j + 1, k + 9, Block.blockGold.blockID);
-		world.setBlock(i + 6, j + 1, k + 10, Block.blockGold.blockID);
+		world.setBlock(i + 6, j + 1, k + 6, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 6, j + 1, k + 7, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 6, j + 1, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 6, j + 1, k + 9, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 6, j + 1, k + 10, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 6, j + 1, k + 11, Block.stoneBrick.blockID);
 		world.setBlock(i + 6, j + 1, k + 16, Block.stoneBrick.blockID);
 		world.setBlock(i + 6, j + 1, k + 17, Block.grass.blockID);
@@ -357,7 +357,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 7, j + 0, k + 7, Block.stoneBrick.blockID);
 		world.setBlock(i + 7, j + 0, k + 8, Block.stoneBrick.blockID);
 		world.setBlock(i + 7, j + 0, k + 9, Block.stoneBrick.blockID);
-		world.setBlock(i + 7, j + 0, k + 10, Block.blockGold.blockID);
+		world.setBlock(i + 7, j + 0, k + 10, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 7, j + 0, k + 11, Block.dirt.blockID);
 		world.setBlock(i + 7, j + 0, k + 12, Block.dirt.blockID);
 		world.setBlock(i + 7, j + 0, k + 13, Block.dirt.blockID);
@@ -367,10 +367,10 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 7, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 7, j + 1, k + 0, Block.stoneBrick.blockID);
 		world.setBlock(i + 7, j + 1, k + 4, Block.stoneBrick.blockID);
-		world.setBlock(i + 7, j + 1, k + 5, Block.blockGold.blockID);
-		world.setBlock(i + 7, j + 1, k + 6, Block.blockGold.blockID);
-		world.setBlock(i + 7, j + 1, k + 10, Block.blockGold.blockID);
-		world.setBlock(i + 7, j + 1, k + 11, Block.blockGold.blockID);
+		world.setBlock(i + 7, j + 1, k + 5, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 7, j + 1, k + 6, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 7, j + 1, k + 10, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 7, j + 1, k + 11, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 7, j + 1, k + 12, Block.stoneBrick.blockID);
 		world.setBlock(i + 7, j + 1, k + 16, Block.stoneBrick.blockID);
 		world.setBlock(i + 7, j + 1, k + 17, Block.grass.blockID);
@@ -413,19 +413,19 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 8, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 8, j + 1, k + 0, Block.stoneBrick.blockID);
 		world.setBlock(i + 8, j + 1, k + 4, Block.stoneBrick.blockID);
-		world.setBlock(i + 8, j + 1, k + 5, Block.blockGold.blockID);
-		world.setBlock(i + 8, j + 1, k + 6, Block.blockGold.blockID);
-		world.setBlock(i + 8, j + 1, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 8, j + 1, k + 10, Block.blockGold.blockID);
-		world.setBlock(i + 8, j + 1, k + 11, Block.blockGold.blockID);
+		world.setBlock(i + 8, j + 1, k + 5, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 8, j + 1, k + 6, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 8, j + 1, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 8, j + 1, k + 10, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 8, j + 1, k + 11, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 8, j + 1, k + 12, Block.stoneBrick.blockID);
 		world.setBlock(i + 8, j + 1, k + 16, Block.stoneBrick.blockID);
 		world.setBlock(i + 8, j + 1, k + 17, Block.grass.blockID);
 		world.setBlock(i + 8, j + 2, k + 0, Block.glass.blockID);
-		world.setBlock(i + 8, j + 2, k + 8, Block.blockGold.blockID);
+		world.setBlock(i + 8, j + 2, k + 8, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 8, j + 2, k + 16, Block.glass.blockID);
 		world.setBlock(i + 8, j + 3, k + 0, Block.glass.blockID);
-		world.setBlock(i + 8, j + 3, k + 8, Block.blockGold.blockID);
+		world.setBlock(i + 8, j + 3, k + 8, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 8, j + 3, k + 16, Block.glass.blockID);
 		world.setBlock(i + 8, j + 4, k + 1, Block.glass.blockID);
 		world.setBlock(i + 8, j + 4, k + 8, Blocks.blockChestSpawner.blockID);
@@ -464,10 +464,10 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 9, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 9, j + 1, k + 0, Block.stoneBrick.blockID);
 		world.setBlock(i + 9, j + 1, k + 4, Block.stoneBrick.blockID);
-		world.setBlock(i + 9, j + 1, k + 5, Block.blockGold.blockID);
-		world.setBlock(i + 9, j + 1, k + 6, Block.blockGold.blockID);
-		world.setBlock(i + 9, j + 1, k + 10, Block.blockGold.blockID);
-		world.setBlock(i + 9, j + 1, k + 11, Block.blockGold.blockID);
+		world.setBlock(i + 9, j + 1, k + 5, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 9, j + 1, k + 6, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 9, j + 1, k + 10, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 9, j + 1, k + 11, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 9, j + 1, k + 12, Block.stoneBrick.blockID);
 		world.setBlock(i + 9, j + 1, k + 16, Block.stoneBrick.blockID);
 		world.setBlock(i + 9, j + 1, k + 17, Block.grass.blockID);
@@ -510,11 +510,11 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 10, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 10, j + 1, k + 0, Block.stoneBrick.blockID);
 		world.setBlock(i + 10, j + 1, k + 5, Block.stoneBrick.blockID);
-		world.setBlock(i + 10, j + 1, k + 6, Block.blockGold.blockID);
-		world.setBlock(i + 10, j + 1, k + 7, Block.blockGold.blockID);
-		world.setBlock(i + 10, j + 1, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 10, j + 1, k + 9, Block.blockGold.blockID);
-		world.setBlock(i + 10, j + 1, k + 10, Block.blockGold.blockID);
+		world.setBlock(i + 10, j + 1, k + 6, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 10, j + 1, k + 7, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 10, j + 1, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 10, j + 1, k + 9, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 10, j + 1, k + 10, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 10, j + 1, k + 11, Block.stoneBrick.blockID);
 		world.setBlock(i + 10, j + 1, k + 16, Block.stoneBrick.blockID);
 		world.setBlock(i + 10, j + 1, k + 17, Block.grass.blockID);
@@ -557,9 +557,9 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		world.setBlock(i + 11, j + 0, k + 17, Block.dirt.blockID);
 		world.setBlock(i + 11, j + 1, k + 1, Block.stoneBrick.blockID);
 		world.setBlock(i + 11, j + 1, k + 6, Block.stoneBrick.blockID);
-		world.setBlock(i + 11, j + 1, k + 7, Block.blockGold.blockID);
-		world.setBlock(i + 11, j + 1, k + 8, Block.blockGold.blockID);
-		world.setBlock(i + 11, j + 1, k + 9, Block.blockGold.blockID);
+		world.setBlock(i + 11, j + 1, k + 7, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 11, j + 1, k + 8, Blocks.blockLimestone.blockID, 1, 1);
+		world.setBlock(i + 11, j + 1, k + 9, Blocks.blockLimestone.blockID, 1, 1);
 		world.setBlock(i + 11, j + 1, k + 10, Block.stoneBrick.blockID);
 		world.setBlock(i + 11, j + 1, k + 15, Block.stoneBrick.blockID);
 		world.setBlock(i + 11, j + 1, k + 17, Block.grass.blockID);

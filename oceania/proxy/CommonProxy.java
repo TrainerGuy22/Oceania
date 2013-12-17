@@ -17,6 +17,7 @@ import oceania.blocks.tile.TileEntityChestSpawner;
 import oceania.entity.Entities;
 import oceania.gen.WorldGenAtlantite;
 import oceania.gen.WorldGenLimestone;
+import oceania.gen.WorldGenUnderwaterVillage;
 import oceania.items.ItemMulti.ItemMultiType;
 import oceania.items.Items;
 import oceania.util.BoatType;
@@ -36,6 +37,7 @@ public class CommonProxy
 		
 		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 3).getInt(3), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 1).getInt(1)));
 		GameRegistry.registerWorldGenerator(new WorldGenLimestone(Oceania.CONFIG.get("oreConfig", "limestoneVeinSize", 16).getInt(16), Oceania.CONFIG.get("oreConfig", "limestoneVeinsPerChunk", 2).getInt(2)));
+		GameRegistry.registerWorldGenerator(new WorldGenUnderwaterVillage());
 	}
 	
 	public void initEntities()

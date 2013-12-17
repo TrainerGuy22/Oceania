@@ -19,6 +19,36 @@ public class EntityOceaniaBoatNormal extends EntityOceaniaBoat
 	{
 		super(world, x, y, z);
 	}
+
+	@Override
+	public float getBoatWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getBoatLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getBoatHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getMaxSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void dropItemsOnDeath() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public float getBoatWidth()
