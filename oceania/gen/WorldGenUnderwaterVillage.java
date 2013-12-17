@@ -46,7 +46,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		
 		for(int validID : validDirt)
 		{
-			if(!(validID == Block.dirt.blockID && validID == Block.blockClay.blockID && validID == Block.sand.blockID))
+			if(!(validID == Block.dirt.blockID || validID == Block.blockClay.blockID || validID == Block.sand.blockID))
 				return false;
 		}
 		
@@ -70,7 +70,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	    	}
 	    }
 
-	    if(world.getBiomeGenForCoords(chunkX, chunkZ) != BiomeGenBase.ocean || !LocationIsValidSpawn(world, i, j, k) || j == 0)
+	    if(world.getBiomeGenForCoords(i, k) != BiomeGenBase.ocean || !LocationIsValidSpawn(world, i, j, k) || j == 0)
 	    {
 			return;
 	    }
