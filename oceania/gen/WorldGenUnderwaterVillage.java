@@ -77,7 +77,6 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 			return;
 		}
 		
-		System.out.println("New Underwater Village at " + x + " " + y + " " + z + " ");
 		world.setBlock(x + 0, y + 0, z + 0, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 1, Block.dirt.blockID);
 		world.setBlock(x + 0, y + 0, z + 2, Block.dirt.blockID);
