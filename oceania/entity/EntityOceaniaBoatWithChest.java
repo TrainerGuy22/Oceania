@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import oceania.items.Items;
 import oceania.util.BoatType;
 
-public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IInventory
+public class EntityOceaniaBoatWithChest extends EntityOceaniaBoatNormal implements IInventory
 {
 	
 	private ItemStack[]	chestItems	= new ItemStack[36];
@@ -16,29 +16,37 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	public EntityOceaniaBoatWithChest(World world)
 	{
 		super(world);
+		this.waterOffset = 1.5f;
 	}
 	
 	public EntityOceaniaBoatWithChest(World world, double x, double y, double z)
 	{
-		super(world, x, y, z);
+		this(world);
+		setPosition(x, y, z);
 	}
 	
 	public EntityOceaniaBoatWithChest(World world, BoatType type, double x, double y, double z)
 	{
-		super(world, x, y, z);
+		this(world, x, y, z);
 		this.setBoatType(type);
 	}
-
+	
 	@Override
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
-            double xOffset = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * -0.4D;
-            double yOffset = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * -0.4D;
-            this.riddenByEntity.setPosition(this.posX + xOffset, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + yOffset);
-        }
-    }
+	public double getMountedYOffset()
+	{
+		return -0.25f;
+	}
+	
+	@Override
+	public void updateRiderPosition()
+	{
+		if (this.riddenByEntity != null)
+		{
+			double xOffset = Math.cos((double) this.rotationYaw * Math.PI / 180.0D) * -0.4D;
+			double yOffset = Math.sin((double) this.rotationYaw * Math.PI / 180.0D) * -0.4D;
+			this.riddenByEntity.setPosition(this.posX + xOffset, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + yOffset);
+		}
+	}
 	
 	@Override
 	public boolean interactFirst(EntityPlayer player)
@@ -111,15 +119,7 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
 	public String getInvName()
 	{
-		int strength = this.getDataWatcher().getWatchableObjectInt(22);
-		for (int index = 0; index < BoatType.values().length; index++)
-		{
-			if (((Integer) BoatType.values()[index].strength).equals(strength))
-			{
-				return BoatType.values()[index].loc + " with Chest";
-			}
-		}
-		return "";
+		return getBoatType().loc + " with Chest";
 	}
 	
 	@Override
@@ -190,6 +190,36 @@ public class EntityOceaniaBoatWithChest extends EntityOceaniaBoat implements IIn
 	@Override
 	public void closeChest()
 	{
+	}
+	
+	@Override
+	public float getBoatWidth()
+	{
+		return 1.5f;
+	}
+	
+	@Override
+	public float getBoatLength()
+	{
+		return 2.0f;
+	}
+	
+	@Override
+	public float getBoatHeight()
+	{
+		return 1.0f;
+	}
+	
+	@Override
+	public float getMaxSpeed()
+	{
+		return 5.0f;
+	}
+	
+	@Override
+	public void dropItemsOnDeath()
+	{
+		super.dropItemsOnDeath();
 	}
 	
 }

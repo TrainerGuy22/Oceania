@@ -38,8 +38,8 @@ public class RenderOceaniaBoat extends RenderBoat
 		EntityOceaniaBoatNormal boat = (EntityOceaniaBoatNormal) entity;
 		try
 		{
-			//System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
-			return BoatType.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.INDEX_BOAT_TYPE)].worldTexture;
+			// System.out.println("textures/entity/" + BoatTypes.values()[boat.getDataWatcher().getWatchableObjectByte(EntityOceaniaBoat.BYTE_BOAT_TYPE)]._unloc + "Chest.png");
+			return boat.getBoatType().worldTexture;
 		}
 		catch (Exception e)
 		{

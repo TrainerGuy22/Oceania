@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import oceania.entity.EntitySubmarine;
+import oceania.entity.EntityOceaniaBoat;
 import oceania.util.OUtil;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -23,7 +23,7 @@ public class NetworkHandler implements IPacketHandler
 	
 	public static final String		MOD_CHANNEL			= "oceania";
 	
-	public static final int			PACKET_SUB_VELOCITY	= 0;
+	public static final int			PACKET_BOAT_POSITION	= 0;
 	
 	public NetworkHandler()
 	{
@@ -44,16 +44,18 @@ public class NetworkHandler implements IPacketHandler
 			int pID = in.readInt();
 			switch (pID)
 			{
-				case PACKET_SUB_VELOCITY:
+				case PACKET_BOAT_POSITION:
 				{
 					int entID = in.readInt();
-					double velX, velY, velZ;
-					float yawSpeed;
-					velX = in.readDouble();
-					velY = in.readDouble();
-					velZ = in.readDouble();
-					yawSpeed = in.readFloat();
-					onSubmarineVelocity(ePlayer.worldObj, entID, velX, velY, velZ, yawSpeed);
+					float velX, velY, velZ, posX, posY, posZ, yaw;
+					velX = in.readFloat();
+					velY = in.readFloat();
+					velZ = in.readFloat();
+					posX = in.readFloat();
+					posY = in.readFloat();
+					posZ = in.readFloat();
+					yaw = in.readFloat();
+					onBoatPosition(ePlayer.worldObj, entID, velX, velY, velZ, posX, posY, posZ, yaw);
 					break;
 				}
 			}
@@ -87,7 +89,7 @@ public class NetworkHandler implements IPacketHandler
 		}
 	}
 	
-	public void sendSubmarineVelocity(int entityID, double velX, double velY, double velZ, float yawSpeed)
+	public void sendBoatPosition(int entityID, double velX, double velY, double velZ, double posX, double posY, double posZ, float yaw)
 	{
 		if (OUtil.getSide() != Side.SERVER)
 			return;
@@ -97,12 +99,15 @@ public class NetworkHandler implements IPacketHandler
 		
 		try
 		{
-			out.writeInt(PACKET_SUB_VELOCITY); // Packet ID
+			out.writeInt(PACKET_BOAT_POSITION); // Packet ID
 			out.writeInt(entityID);
-			out.writeDouble(velX);
-			out.writeDouble(velY);
-			out.writeDouble(velZ);
-			out.writeFloat(yawSpeed);
+			out.writeFloat((float) velX);
+			out.writeFloat((float) velY);
+			out.writeFloat((float) velZ);
+			out.writeFloat((float) posX);
+			out.writeFloat((float) posY);
+			out.writeFloat((float) posZ);
+			out.writeFloat(yaw);
 			sendPacketData(bos.toByteArray());
 		}
 		catch (Exception ex)
@@ -112,16 +117,15 @@ public class NetworkHandler implements IPacketHandler
 		}
 	}
 	
-	private void onSubmarineVelocity(World world, int entityID, double velX, double velY, double velZ, float yawSpeed)
+	private void onBoatPosition(World world, int entityID, float velX, float velY, float velZ, float posX, float posY, float posZ, float yaw)
 	{
 		Entity ent = world.getEntityByID(entityID);
-		if (ent instanceof EntitySubmarine)
+		if (ent instanceof EntityOceaniaBoat)
 		{
-			EntitySubmarine sub = (EntitySubmarine) ent;
-			sub.motionX = velX;
-			sub.motionY = velY;
-			sub.motionZ = velZ;
-			sub.velTurning = yawSpeed;
+			EntityOceaniaBoat boat = (EntityOceaniaBoat) ent;
+			//boat.setVelocity(velX, velY, velX);
+			//boat.setPosition(posX, posY, posZ);
+			boat.rotationYaw = yaw;
 		}
 	}
 }

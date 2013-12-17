@@ -13,6 +13,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderSubmarine extends Render
 {
+	private static final float X_OFFSET = 0.25f;
+	private static final float Z_OFFSET = 0.5f;
+	
 	private ModelSubmarine		model;
 	private ResourceLocation	texLoc;
 	
@@ -27,7 +30,7 @@ public class RenderSubmarine extends Render
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
 	{
 		glPushMatrix();
-		glTranslatef((float) x, (float) y + EntitySubmarine.ENT_HEIGHT, (float) z);
+		glTranslatef((float) x + X_OFFSET, (float) y + EntitySubmarine.ENT_HEIGHT, (float) z + Z_OFFSET);
 		glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
 		glRotatef(yaw - 90f, 0.0f, 1.0f, 0.0f);
 		if (this.texLoc == null)
