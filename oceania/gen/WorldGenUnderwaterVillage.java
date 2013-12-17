@@ -36,6 +36,7 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 		
 		if(world.rand.nextInt(100) != 1)
 			return false;
+		
 		for(int validID : validIDs)
 		{
 			if(!(validID == Block.waterStill.blockID || validID == Block.waterMoving.blockID))
@@ -52,12 +53,12 @@ public class WorldGenUnderwaterVillage implements IWorldGenerator
 	    int j = 0; // y
 	    int k = (chunkZ * 16) + random.nextInt(16); // z
 	    
-	    for(int count = 20; count <= 55; count++) {
-	    	int blockID = world.getBlockId(i, count + 1, k);
-	    	int blockAboveID = world.getBlockId(i, count + 2, k);
+	    for(int count = 40; count <= 60; count++) {
+	    	int blockID = world.getBlockId(i, count, k);
+	    	int blockAboveID = world.getBlockId(i, count, k);
 	    	if((blockID == Block.sand.blockID || blockID == Block.dirt.blockID) && (blockAboveID == Block.waterStill.blockID || blockAboveID == Block.waterMoving.blockID))
 	    	{
-	    		j = count;
+	    		j = count - 1;
 	    		break;
 	    	}
 	    }

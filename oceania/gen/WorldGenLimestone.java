@@ -51,7 +51,6 @@ public class WorldGenLimestone implements IWorldGenerator
 			while ((world.getBlockId(startX, startY, startZ) == 0 || world.getBlockId(startX, startY, startZ) == Block.waterStill.blockID) && startY > 0)
 				startY--;
 			
-	        System.out.println("New Limestone at "+chunkBlockX+" "+chunkBlockZ);
 			gen.generate(world, random, startX, startY, startZ);
 		}
 	}
