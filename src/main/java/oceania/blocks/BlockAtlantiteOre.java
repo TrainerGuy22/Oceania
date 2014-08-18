@@ -11,10 +11,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 
-public class BlockAtlantiteOre extends Block
-{
+public class BlockAtlantiteOre extends Block {
 
-	public BlockAtlantiteOre(int blockID)
+	public BlockAtlantiteOre()
 	{
 		super(blockID, Material.sand);
 		setHardness(2.8f);

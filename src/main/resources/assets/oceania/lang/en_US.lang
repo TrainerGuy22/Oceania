@@ -1,0 +1,31 @@
+itemGroup.tabOceania=Oceania
+
+item.diving_helmet.name=Diving Helmet
+item.atlantite_trident.name=Atlantite Trident
+item.submarine.name=Submarine
+item.atlantite.name=Raw Atlantite
+item.atlantite.tooltip=Some sort of naturally occuring;alloy...
+item.atlantium.name=Atlantium
+item.atlantium.tooltip=Refined Atlantite. Much harder,;but much duller!
+item.screw.name=Screw
+item.screw.tooltip=Holds things together. Hopefully.
+
+item.boat_wooden.name=Wooden Boat
+item.boat_wooden.tooltip=A boat made of &&esturdy planks&&7.;Doubt it will last long.
+item.boat_iron.name=Iron Boat
+item.boat_iron_name=A boat made of &&fIron&&7, should;last a while.
+item.boat_atlantium.name=Atlantium Boat
+item.boat_atlantium.tooltip=Made of purely &&6Atlantium&&7,;almost indestructable.
+
+item.boat_chest.tooltip=Steve not included.
+item.boat_wooden_chest.name=Wooden Boat with Chest
+item.boat_iron_chest.name=Iron Boat with Chest
+item.boat_atlantium_chest.name=Atlantium Boat with Chest
+
+tile.ore_atlantite=Atlantite Ore
+tile.atlantium_depulsor=Atlantium Depulsor
+tile.limestone.name=Limestone
+tile.limestone.tooltip=A mineral deposit, good for;decoration.
+tile.limestone_bricks.name=Limestone Bricks
+tile.polished_limestone.name=Polished Limestone
+tile.oceania_chest_spawner=Chest Spawner

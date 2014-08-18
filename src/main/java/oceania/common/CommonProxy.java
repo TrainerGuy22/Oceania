@@ -1,4 +1,4 @@
-package oceania.proxy;
+package oceania.common;
 
 import java.util.List;
 
@@ -23,25 +23,22 @@ import oceania.items.Items;
 import oceania.util.BoatType;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class CommonProxy
-{
-	public void init()
-	{
-		Oceania.CREATIVE_TAB = new CreativeTabOceania();
-		Blocks.initBlocks();
-		Items.initItems();
+public class CommonProxy {
+	
+	public void init() {
+		Oceania.TAB = new CreativeTabOceania();
 		Entities.initEntities();
-		initEntities();
+		initTileEntities();
 		initRecipes();
-		Oceania.CREATIVE_TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
+		
+		Oceania.TAB.setIconStack(new ItemStack(Items.itemMulti, 1, 0));
 		
 		GameRegistry.registerWorldGenerator(new WorldGenAtlantite(Oceania.CONFIG.get("oreConfig", "atlantiteVeinSize", 3).getInt(3), Oceania.CONFIG.get("oreConfig", "atlantiteVeinsPerChunk", 1).getInt(1)));
 		GameRegistry.registerWorldGenerator(new WorldGenLimestone(Oceania.CONFIG.get("oreConfig", "limestoneVeinSize", 16).getInt(16), Oceania.CONFIG.get("oreConfig", "limestoneVeinsPerChunk", 2).getInt(2)));
 		GameRegistry.registerWorldGenerator(new WorldGenUnderwaterVillage());
 	}
 	
-	public void initEntities()
-	{
+	public void initTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityAtlantiumDepulsor.class, Oceania.MOD_ID + "AtlantiumDepulsor");
 		GameRegistry.registerTileEntity(TileEntityChestSpawner.class, Oceania.MOD_ID + "ChestSpawner");
 	}
